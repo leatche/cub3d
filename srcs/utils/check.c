@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 18:04:17 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/07 15:04:04 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/09 23:52:54 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,12 @@ int	ft_open(char *file, t_parsing *pars)
 
 int	ft_read_lines(int fd, t_parsing *pars)
 {
+	t_list	**list_tmp;
 	char	*line;
-	int		a;
+	char	*a;
 
 	line = "";
+	list_tmp = NULL;
 	while (line)
 	{
 		line = get_next_line(fd);
@@ -48,13 +50,17 @@ int	ft_read_lines(int fd, t_parsing *pars)
 		if (line && line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		a = ft_pars_the_line(pars, line);
-		printf("%d\n",a);
+		if (a != -1)
+			ft_lstadd_back(list_tmp, ft_lstnew(a));
 		free (line);
+		free (a); //? faut 'il d'abord le malloc ??? 
 	}
+	pars->map = ft_list_to_tab(list_tmp);
+	// ft_free_list();
 	return GOOD;
 }
 
-int	ft_pars_the_line(t_parsing *pars, char *line)
+char	*ft_pars_the_line(t_parsing *pars, char *line)
 {
 	int	i;
 
@@ -74,8 +80,7 @@ int	ft_pars_the_line(t_parsing *pars, char *line)
 		return (4);
 	if ((ft_strncmp(line + i, "EA", 2) == 0) && ft_is_a_space(line[i + 2]))
 		return (5);
-	return (8);
-	
+	return (line);
 }
 
 int	ft_is_a_space(char a)
@@ -83,4 +88,23 @@ int	ft_is_a_space(char a)
 	if (a == ' ' || a == '\t')
 		return (1);
 	return (0);
+}
+
+char	**ft_list_to_tab(t_list **list_tmp)
+{
+	int		i;
+	char	**tmp;
+
+	i = 0;
+	tmp = malloc(sizeof (char *) * (ft_lstsize(*list_tmp) + 1));
+	while ((*list_tmp)->next)
+	{
+		tmp[i] = (*list_tmp)->content;
+		printf ("voic tmi %s\n", tmp[i]);
+		(*list_tmp) = (*list_tmp)->next;
+		i++;
+	}
+	tmp[i] = (*list_tmp)->content;
+	(*list_tmp) = (*list_tmp)->next;
+	return (tmp);
 }
