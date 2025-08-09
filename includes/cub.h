@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/07 11:37:01 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/10 00:34:33 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int	ft_parsing(char *pars);
 int	ft_extension(char *file);
 int	ft_open(char *file, t_parsing *pars);
 int	ft_read_lines(int fd, t_parsing *pars);
-int	ft_pars_the_line(t_parsing *pars, char *line);
+char	*ft_pars_the_line(t_parsing *pars, char *line);
 int	ft_is_a_space(char a);
+char	**ft_list_to_tab(t_list *list_tmp);
+void	ft_add_to_map(char *a, t_list **list_tmp);
 #endif

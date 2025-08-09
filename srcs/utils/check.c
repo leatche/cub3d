@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 18:04:17 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/09 23:52:54 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/10 01:55:22 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	ft_open(char *file, t_parsing *pars)
 
 int	ft_read_lines(int fd, t_parsing *pars)
 {
-	t_list	**list_tmp;
+	t_list	*list_tmp;
 	char	*line;
 	char	*a;
 
@@ -50,14 +50,32 @@ int	ft_read_lines(int fd, t_parsing *pars)
 		if (line && line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		a = ft_pars_the_line(pars, line);
-		if (a != -1)
-			ft_lstadd_back(list_tmp, ft_lstnew(a));
+		ft_add_to_map(a, &list_tmp);
 		free (line);
-		free (a); //? faut 'il d'abord le malloc ??? 
 	}
 	pars->map = ft_list_to_tab(list_tmp);
-	// ft_free_list();
-	return GOOD;
+	ft_lstclear(&list_tmp, free); 
+	return (GOOD);
+}
+
+void	ft_add_to_map(char *a, t_list **list_tmp)
+{
+	t_list	*new_content;
+	char	*copy;
+
+	if (!list_tmp)
+		return ;
+	if (strcmp(a, "1") != 0)
+	{
+		copy = ft_strdup(a);
+		new_content = ft_lstnew(copy);
+		if (!new_content)
+			return ;
+		if (!*list_tmp)
+			*list_tmp = new_content;
+		else
+			ft_lstadd_back(list_tmp, new_content);		
+	}
 }
 
 char	*ft_pars_the_line(t_parsing *pars, char *line)
@@ -69,17 +87,17 @@ char	*ft_pars_the_line(t_parsing *pars, char *line)
 	while (line[i] && ft_is_a_space(line[i]))
 		i++;
 	if (!line[i])
-		return (55);
+		return ("1");
 	if (((line[i] == 'F' ) | (line[i] == 'C')) && ft_is_a_space(line[i + 1]))
-		return (1);
+		return ("1");
 	if ((ft_strncmp(line + i, "NO", 2) == 0) && ft_is_a_space(line[i + 2]))
-		return (2);
+		return ("1");
 	if ((ft_strncmp(line + i, "SO", 2) == 0) && ft_is_a_space(line[i + 2]))
-		return (3);
+		return ("1");
 	if ((ft_strncmp(line + i, "WE", 2) == 0) && ft_is_a_space(line[i + 2]))
-		return (4);
+		return ("1");
 	if ((ft_strncmp(line + i, "EA", 2) == 0) && ft_is_a_space(line[i + 2]))
-		return (5);
+		return ("1");
 	return (line);
 }
 
@@ -90,21 +108,23 @@ int	ft_is_a_space(char a)
 	return (0);
 }
 
-char	**ft_list_to_tab(t_list **list_tmp)
+char	**ft_list_to_tab(t_list *list_tmp)
 {
 	int		i;
+	t_list	*move;
 	char	**tmp;
 
 	i = 0;
-	tmp = malloc(sizeof (char *) * (ft_lstsize(*list_tmp) + 1));
-	while ((*list_tmp)->next)
+	if (!list_tmp)
+		return (NULL);
+	tmp = malloc(sizeof (char *) * (ft_lstsize(list_tmp) + 1));
+	move = list_tmp;
+	while (move)
 	{
-		tmp[i] = (*list_tmp)->content;
-		printf ("voic tmi %s\n", tmp[i]);
-		(*list_tmp) = (*list_tmp)->next;
+		tmp[i] = move->content;
+		move = move->next;
 		i++;
 	}
-	tmp[i] = (*list_tmp)->content;
-	(*list_tmp) = (*list_tmp)->next;
+	tmp[i] = NULL;
 	return (tmp);
 }
