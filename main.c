@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/07 11:46:16 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/10 02:03:15 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ int	main(int ac, char **av)
 	pars = malloc(sizeof(t_parsing));
 	if (ac == 2 && (ft_extension(av[1]) == GOOD) && (ft_open(av[1], pars) != -1))
 	{
-		// if (ft_parsing(pars) == -1);
-		// 	return (-1);
+		if (ft_parsing(pars) == -1);
+			return (-1);
 	}
 	else
 	{
