@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/11 19:08:25 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/11 21:29:30 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,15 @@ int	ft_good_characters(char *line);
 int	ft_free_parsing(t_parsing *pars);
 int	ft_open(char *file, t_parsing *pars);
 int	ft_read_lines(int fd, t_parsing *pars);
-int	ft_norm_color(t_color color, char *line);
+int	ft_norm_color(char *line, t_color *color);
 int	ft_checker_wall(char *line, int i, int size);
-int	ft_pars_color(char *line, t_parsing *pars, char place);
-int	ft_value_color(char *line, int i, t_color color, int coco);
+int	ft_value_color(char *line, unsigned char *color);
 
 char	*ft_pars_the_line(t_parsing *pars, char *line);
+char	*ft_pars_color(char *line, t_parsing *pars);
 
 char	**ft_list_to_tab(t_list *list_tmp);
+
+void	ft_initialize_pars(t_parsing *pars);
 
 #endif

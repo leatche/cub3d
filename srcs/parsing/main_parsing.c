@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:03:31 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/10 19:31:04 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/11 21:57:17 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_conform_map(char **tmp)
 	int	i;
 
 	i = 0;
-	while (tmp[i])
+	while (tmp && tmp[i])
 	{
 		if (ft_checker_wall(tmp[i], i, ft_size_tab(tmp)) == BAD
 			|| ft_good_characters(tmp[i]) == BAD)
@@ -54,7 +54,7 @@ int	ft_checker_wall(char *line, int i, int size)
 		result = ft_check_side_wall(line);
 	if (result == -1)
 	{
-		ft_print("there is a hole in your map...");
+		printf("line %s\nthere is a hole in your map...\n", line);
 		return (BAD);
 	}
 	return (GOOD);

@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 19:30:19 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/10 19:30:40 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/11 21:57:37 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_size_tab(char **tab)
 
 	i = 0;
 	if (!tab || !(*tab))
-		return (-1);
+		return (0);
 	while (tab[i])
 		i++;
 	return (i);

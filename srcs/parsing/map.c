@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:00:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/11 19:08:00 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/11 21:56:23 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,89 +14,92 @@
 
 char	*ft_pars_the_line(t_parsing *pars, char *line)
 {
-	int	i;
-
-	i = 0;
-	while (line[i] && ft_is_a_space(line[i]))
-		i++;
-	if (!line[i])
+	if (!line[0])
 		return ("1");
-	if (((line[i] == 'F' ) | (line[i] == 'C')) && ft_is_a_space(line[i + 1]))
-		return (ft_pars_color(line, pars, line[i]));
-	if ((ft_strncmp(line + i, "NO", 2) == 0) && ft_is_a_space(line[i + 2]))
+	if (((line[0] == 'F' ) || (line[0] == 'C')) && ft_is_a_space(line[1]))
+		return (ft_pars_color(line, pars));
+	if ((ft_strncmp(line, "NO", 2) == 0) && ft_is_a_space(line[2]))
 		return ("1");
-	if ((ft_strncmp(line + i, "SO", 2) == 0) && ft_is_a_space(line[i + 2]))
+	if ((ft_strncmp(line, "SO", 2) == 0) && ft_is_a_space(line[2]))
 		return ("1");
-	if ((ft_strncmp(line + i, "WE", 2) == 0) && ft_is_a_space(line[i + 2]))
+	if ((ft_strncmp(line, "WE", 2) == 0) && ft_is_a_space(line[2]))
 		return ("1");
-	if ((ft_strncmp(line + i, "EA", 2) == 0) && ft_is_a_space(line[i + 2]))
+	if ((ft_strncmp(line, "EA", 2) == 0) && ft_is_a_space(line[2]))
 		return ("1");
 	return (line);
 }
 
-int	ft_pars_color(char *line, t_parsing *pars, char place)
+char	*ft_pars_color(char *line, t_parsing *pars)
 {
-	t_color	tmp;
+	t_color	*tmp;
 
-	if (place == 'F')
-		tmp = pars->floor;
+	if (line[0] == 'F')
+		tmp = &pars->floor;
 	else
-		tmp =pars->wall;
-	if (tmp.b != 0 && tmp.r != 0 && tmp.g != 0)
+		tmp = &pars->wall;
+	if (tmp->b != 0 && tmp->r != 0 && tmp->g != 0)
 	{
 		ft_print("you declare two times color ! Pay attention pleaseeee.");
-		return (-1);
+		return ("-1");
 	}
-	if (ft_norm_color(tmp, line) == -1)
+	if (ft_norm_color(line, tmp) == -1)
 	{
 		ft_print("Check again your definition of color... where are we ?");
-		return (-1);
+		return ("-1");
 	}
-	return (0);
+	return ("1");
 }
 
-int	ft_norm_color(t_color color, char *line)
+int	ft_norm_color(char *line, t_color *tmp)
 {
 	int	i;
 	int	count;
+	unsigned char *colors;
 
+	colors = (unsigned char *)tmp;
 	i = 2;
 	count = 0;
 	while (line[i])
 	{
 		while (ft_is_a_space(line[i]))
 			i++;
-		i = ft_value_color(line, i, color, count);
-		if (i == -1)
-			return (-1);
+		if (ft_value_color(line + i, colors + 2 - count) == BAD)
+			return (BAD);
 		count++;
-		while (ft_is_a_space(line[i]))
+		while (ft_isdigit(line[i]))
 			i++;
-		if (line[i] != ',' && count < 2)
-			return (-1);
-		else
+		while (line[i] == ' ' || line[i] == '\t')
 			i++;
+		if (line[i] != ',' || count > 2)
+			break ;
+		i++;
 	}
-	if (count != 2)
-		return (-1);
+	if (count != 3 || line[i])
+		return (BAD);
+	return (GOOD);
 }
 
-int	ft_value_color(char *line, int i, t_color color, int coco)
+int	ft_value_color(char *line, unsigned char *color)
 {
-	int	count;
+	int	result;
+	int i;
 
-	count = 0;
-	if (!line[i] || !ft_isdigit(line[i]))
-		return (-1);
-	while (line[i] && ft_isdigit(line[i]))
-		count++;
-	if (coco == 0)
-		ft_memcpy(color.r, line + i - count, count);
-	if (coco == 1)
-		ft_memcpy(color.g, line + i - count, count);
-	if (coco == 2)
-		ft_memcpy(color.b, line + i - count, count);
-	if (color.r > 255)
-		return (-1);
-	return (i);
+	if (!*line || !ft_isdigit(*line))
+		return (BAD);
+	result = ft_atoi(line);
+	if (result < 0 || result > 255)
+	{
+		printf("Number must be between 0 and 255\n");
+		return (BAD);
+	}
+	i = 0;
+	while (ft_isdigit(line[i]))
+		i++;
+	if (i > 3)
+	{
+		printf("Number has more than 3 digits\n");
+		return (BAD);
+	}
+	*color = (unsigned char)result;
+	return (GOOD);
 }
