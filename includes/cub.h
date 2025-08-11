@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/10 00:34:33 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/11 19:08:25 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,22 +29,44 @@
 #define YES 1
 #define NO -1
 
+typedef struct s_color
+{
+	unsigned char	b;
+	unsigned char	g;
+	unsigned char	r;
+	unsigned char	a;
+}					t_color;
+
 typedef struct s_parsing
 {
-	int	fd;
-	char *sky_color;
-	char *floor_color;
-	char **map;
+	t_color	floor;
+	t_color	wall;
+	char	**map;
 }					t_parsing;
 
 
 void	ft_print(char *a);
-int	ft_parsing(char *pars);
+void	ft_free_tab(char **tab);
+void	ft_add_to_map(char *a, t_list **list_tmp, t_parsing *pars);
+
+int	ft_is_a_space(char a);
+int	ft_size_tab(char **tab);
 int	ft_extension(char *file);
+int	ft_conform_map(char **tmp);
+int	ft_parsing(t_parsing *pars);
+int	ft_check_wall_top(char *line);
+int	ft_check_side_wall(char *line);
+int	ft_good_characters(char *line);
+int	ft_free_parsing(t_parsing *pars);
 int	ft_open(char *file, t_parsing *pars);
 int	ft_read_lines(int fd, t_parsing *pars);
+int	ft_norm_color(t_color color, char *line);
+int	ft_checker_wall(char *line, int i, int size);
+int	ft_pars_color(char *line, t_parsing *pars, char place);
+int	ft_value_color(char *line, int i, t_color color, int coco);
+
 char	*ft_pars_the_line(t_parsing *pars, char *line);
-int	ft_is_a_space(char a);
+
 char	**ft_list_to_tab(t_list *list_tmp);
-void	ft_add_to_map(char *a, t_list **list_tmp);
+
 #endif

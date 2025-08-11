@@ -1,34 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform.c                                        :+:      :+:    :+:   */
+/*   calculate.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/10 02:01:24 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/10 18:30:26 by tcherepoff       ###   ########.fr       */
+/*   Created: 2025/08/10 19:30:19 by tcherepoff        #+#    #+#             */
+/*   Updated: 2025/08/10 19:30:40 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-char	**ft_list_to_tab(t_list *list_tmp)
+int	ft_size_tab(char **tab)
 {
-	int		i;
-	t_list	*move;
-	char	**tmp;
+	int	i;
 
 	i = 0;
-	if (!list_tmp)
-		return (NULL);
-	tmp = malloc(sizeof (char *) * (ft_lstsize(list_tmp) + 1));
-	move = list_tmp;
-	while (move)
-	{
-		tmp[i] = ft_strdup(move->content);
-		move = move->next;
+	if (!tab || !(*tab))
+		return (-1);
+	while (tab[i])
 		i++;
-	}
-	tmp[i] = NULL;
-	return (tmp);
+	return (i);
 }

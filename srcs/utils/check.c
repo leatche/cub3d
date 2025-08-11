@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 18:04:17 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/10 02:23:33 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/11 18:28:33 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int	ft_open(char *file, t_parsing *pars)
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (BAD);
+	ft_initialize_pars(pars);
 	return (ft_read_lines(fd, pars));
 }
 
@@ -41,10 +42,13 @@ int	ft_is_a_space(char a)
 	return (0);
 }
 
-int	ft_check_letter_map(t_parsing *pars)
+void	ft_initialize_pars(t_parsing *pars)
 {
-	int	i;
-	int	j;
-
-	
+	pars->map = NULL;
+	pars->floor.r = 0;
+	pars->floor.b = 0;
+	pars->floor.g = 0;
+	pars->wall.r = 0;
+	pars->wall.b = 0;
+	pars->wall.g = 0;
 }
