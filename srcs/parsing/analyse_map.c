@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 01:58:54 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/11 22:00:53 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/14 16:50:54 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,29 +50,27 @@ int	ft_read_lines(int fd, t_parsing *pars)
 		if (line && line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		a = ft_pars_the_line(pars, line);
+		if (pars->start == 0 && a == line)
+			pars->start = -1;
+		if (pars->start != -1)
+			pars->start++;
 		if (a == line)
 			ft_add_to_map(line, &list_tmp, pars);
 		free (line);
 	}
 	pars->map = ft_list_to_tab(list_tmp);
 	ft_lstclear(&list_tmp, free);
-	return (GOOD);
+	return (ft_map_start(pars));
 }
 
-int	ft_check_wall_top(char *line)
+int	ft_map_start(t_parsing *pars)
 {
-	int	i;
-
-	i = 0;
-	if (!line || !*line)
-		return (-1);
-	while (line[i])
+	if (pars->start == -1)
 	{
-		if (line[i] != '1' && line[i] != ' ')
-			return (-1);
-		i++;
+		ft_print("your map is a the start ... that is a problem ...");
+		return (BAD);
 	}
-	return (0);
+	return (GOOD);
 }
 
 int	ft_check_side_wall(char *line)
@@ -89,6 +87,22 @@ int	ft_check_side_wall(char *line)
 		i--;
 	if (line[i] != '1')
 		return (-1);
+	return (0);
+}
+
+int	ft_check_wall_top(char *line)
+{
+	int	i;
+
+	i = 0;
+	if (!line || !*line)
+		return (-1);
+	while (line[i])
+	{
+		if (line[i] != '1' && line[i] != ' ')
+			return (-1);
+		i++;
+	}
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/11 19:09:13 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/14 16:17:39 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ int	main(int ac, char **av)
 	}
 	else
 	{
-		ft_print("Check again your file and the number of arguments !");
-		free(pars);
+		ft_print("Check again your file or the number of arguments !");
+		ft_free_parsing(pars);
 		return (-1);
 	}
 	ft_free_parsing(pars);
@@ -36,7 +36,8 @@ int	ft_free_parsing(t_parsing *pars)
 {
 	if (!pars)
 		return (-1);
-	ft_free_tab(pars->map);
+	if (pars->map)
+		ft_free_tab(pars->map);
 	free(pars);
 	return (-1);
 }
