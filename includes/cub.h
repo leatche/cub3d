@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/14 17:23:07 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/16 22:18:58 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,16 @@ typedef struct s_color
 	unsigned char	g;
 	unsigned char	r;
 	unsigned char	a;
-}					t_color;
+}				t_color;
 
 typedef struct s_parsing
 {
 	t_color	floor;
 	t_color	wall;
-	int	start;
+	int		start;
+	long unsigned int		size_line;
 	char	**map;
-}					t_parsing;
+}				t_parsing;
 
 
 void	ft_print(char *a);
@@ -56,23 +57,24 @@ int		ft_extension(char *file);
 int		ft_conform_map(char **tmp);
 int		ft_checker_wall(char **tmp);
 int		ft_parsing(t_parsing *pars);
-int	ft_map_start(t_parsing *pars);
-int	ft_check_wall_top(char *line);
-int	ft_check_side_wall(char *line);
-int	ft_good_characters(char *line);
-int	ft_free_parsing(t_parsing *pars);
-int	ft_check_wall(char **tmp);
-int	ft_check_sides(char **tmp, int size);
-int	ft_open(char *file, t_parsing *pars);
-int	ft_read_lines(int fd, t_parsing *pars);
-int	ft_check_zero(char **tmp, int i, int j);
-int	ft_norm_color(char *line, t_color *color);
-int	ft_value_color(char *line, unsigned char *color);
+int		ft_map_start(t_parsing *pars);
+int		ft_check_wall_top(char *line);
+int		ft_check_side_wall(char *line);
+int		ft_good_characters(char *line);
+int		ft_free_parsing(t_parsing *pars);
+int		ft_check_wall(char **tmp);
+int		ft_check_sides(char **tmp, int size);
+int		ft_open(char *file, t_parsing *pars);
+int		ft_read_lines(int fd, t_parsing *pars);
+int		ft_check_zero(char **tmp, int i, int j);
+int		ft_norm_color(char *line, t_color *color);
+int		ft_value_color(char *line, unsigned char *color);
 
+char	*ft_strdup_space(char *s, int size_line);
 char	*ft_pars_the_line(t_parsing *pars, char *line);
 char	*ft_pars_color(char *line, t_parsing *pars);
 
-char	**ft_list_to_tab(t_list *list_tmp);
+char	**ft_list_to_tab(t_list *list_tmp, t_parsing *pars);
 
 void	ft_initialize_pars(t_parsing *pars);
 

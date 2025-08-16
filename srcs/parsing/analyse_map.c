@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 01:58:54 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/14 16:50:54 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/16 22:18:20 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	ft_add_to_map(char *a, t_list **list_tmp, t_parsing *pars)
 		new_content = ft_lstnew(copy);
 		if (!new_content)
 			return ;
+		if(ft_strlen(new_content->content) > pars->size_line)
+			pars->size_line = ft_strlen(new_content->content);
 		if (!*list_tmp)
 			*list_tmp = new_content;
 		else
@@ -58,7 +60,7 @@ int	ft_read_lines(int fd, t_parsing *pars)
 			ft_add_to_map(line, &list_tmp, pars);
 		free (line);
 	}
-	pars->map = ft_list_to_tab(list_tmp);
+	pars->map = ft_list_to_tab(list_tmp, pars);
 	ft_lstclear(&list_tmp, free);
 	return (ft_map_start(pars));
 }

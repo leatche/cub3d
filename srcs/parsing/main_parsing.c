@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:03:31 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/14 17:23:36 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/16 22:20:16 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,13 +50,13 @@ int	ft_checker_wall(char **tmp)
 	result = ft_check_sides(tmp, ft_size_tab(tmp));
 	if (result == -1)
 	{
-		ft_print("line %s\nthere is a hole in your map...\n");
+		ft_print("there is a hole in your map...");
 		return (-1);
 	}
 	result = ft_check_wall(tmp);
 	if (result == -1)
 	{
-		ft_print("line %s\nthere is a hole in your map...\n");
+		ft_print("there is a hole in your map...");
 		return (-1);
 	}
 	return (1);

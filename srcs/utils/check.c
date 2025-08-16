@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 18:04:17 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/14 16:01:36 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/16 13:26:23 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void	ft_initialize_pars(t_parsing *pars)
 {
 	pars->map = NULL;
 	pars->start = 0;
+	pars->size_line = 0;
 	pars->floor.r = 0;
 	pars->floor.b = 0;
 	pars->floor.g = 0;
