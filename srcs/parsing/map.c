@@ -5,101 +5,78 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/10 02:00:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/11 21:56:23 by tcherepoff       ###   ########.fr       */
+/*   Created: 2025/08/10 01:58:54 by tcherepoff        #+#    #+#             */
+/*   Updated: 2025/08/20 13:24:48 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-char	*ft_pars_the_line(t_parsing *pars, char *line)
+void	ft_add_to_map(char *a, t_list **list_tmp, t_parsing *pars)
 {
-	if (!line[0])
-		return ("1");
-	if (((line[0] == 'F' ) || (line[0] == 'C')) && ft_is_a_space(line[1]))
-		return (ft_pars_color(line, pars));
-	if ((ft_strncmp(line, "NO", 2) == 0) && ft_is_a_space(line[2]))
-		return ("1");
-	if ((ft_strncmp(line, "SO", 2) == 0) && ft_is_a_space(line[2]))
-		return ("1");
-	if ((ft_strncmp(line, "WE", 2) == 0) && ft_is_a_space(line[2]))
-		return ("1");
-	if ((ft_strncmp(line, "EA", 2) == 0) && ft_is_a_space(line[2]))
-		return ("1");
-	return (line);
+	t_list	*new_content;
+	char	*copy;
+
+	if (!list_tmp || a == 0)
+		return ;
+	if (pars->map != NULL)
+		return (ft_print("two times a map ... are you serious !!!"));
+	if (strcmp(a, "1") != 0)
+	{
+		copy = ft_strdup(a);
+		new_content = ft_lstnew(copy);
+		if (!new_content)
+			return ;
+		if(ft_strlen(new_content->content) > pars->size_line)
+			pars->size_line = ft_strlen(new_content->content);
+		if (!*list_tmp)
+			*list_tmp = new_content;
+		else
+			ft_lstadd_back(list_tmp, new_content);
+	}
 }
 
-char	*ft_pars_color(char *line, t_parsing *pars)
-{
-	t_color	*tmp;
-
-	if (line[0] == 'F')
-		tmp = &pars->floor;
-	else
-		tmp = &pars->wall;
-	if (tmp->b != 0 && tmp->r != 0 && tmp->g != 0)
-	{
-		ft_print("you declare two times color ! Pay attention pleaseeee.");
-		return ("-1");
-	}
-	if (ft_norm_color(line, tmp) == -1)
-	{
-		ft_print("Check again your definition of color... where are we ?");
-		return ("-1");
-	}
-	return ("1");
-}
-
-int	ft_norm_color(char *line, t_color *tmp)
+int	ft_conform_map(char **tmp)
 {
 	int	i;
-	int	count;
-	unsigned char *colors;
 
-	colors = (unsigned char *)tmp;
-	i = 2;
-	count = 0;
-	while (line[i])
+	i = 0;
+	while (tmp && tmp[i])
 	{
-		while (ft_is_a_space(line[i]))
-			i++;
-		if (ft_value_color(line + i, colors + 2 - count) == BAD)
-			return (BAD);
-		count++;
-		while (ft_isdigit(line[i]))
-			i++;
-		while (line[i] == ' ' || line[i] == '\t')
-			i++;
-		if (line[i] != ',' || count > 2)
-			break ;
+		if (ft_checker_wall(tmp) == -1 || ft_good_characters(tmp[i]) == -1)
+			return (-1);
 		i++;
 	}
-	if (count != 3 || line[i])
-		return (BAD);
+	if (i != ft_size_tab(tmp))
+	{
+		ft_print("there is an empty line in the map ");
+		return (-1);
+	}
 	return (GOOD);
 }
 
-int	ft_value_color(char *line, unsigned char *color)
+int	ft_map_start(t_parsing *pars)
 {
-	int	result;
-	int i;
-
-	if (!*line || !ft_isdigit(*line))
-		return (BAD);
-	result = ft_atoi(line);
-	if (result < 0 || result > 255)
+	if (pars->start == -1)
 	{
-		printf("Number must be between 0 and 255\n");
+		ft_print("your map is a the start ... that is a problem ...");
 		return (BAD);
 	}
-	i = 0;
-	while (ft_isdigit(line[i]))
-		i++;
-	if (i > 3)
-	{
-		printf("Number has more than 3 digits\n");
-		return (BAD);
-	}
-	*color = (unsigned char)result;
 	return (GOOD);
+}
+
+int	ft_check_wall_top(char *line)
+{
+	int	i;
+
+	i = 0;
+	if (!line || !*line)
+		return (-1);
+	while (line[i])
+	{
+		if (line[i] != '1' && line[i] != ' ')
+			return (-1);
+		i++;
+	}
+	return (0);
 }

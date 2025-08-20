@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 18:04:17 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/16 13:26:23 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/20 13:25:37 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,6 @@ int	ft_extension(char *file)
 	return (BAD);
 }
 
-int	ft_open(char *file, t_parsing *pars)
-{
-	int	fd;
-
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		return (BAD);
-	ft_initialize_pars(pars);
-	return (ft_read_lines(fd, pars));
-}
-
 int	ft_is_a_space(char a)
 {
 	if (a == ' ' || a == '\t')
@@ -42,15 +31,21 @@ int	ft_is_a_space(char a)
 	return (0);
 }
 
-void	ft_initialize_pars(t_parsing *pars)
+int	ft_good_characters(char *line)
 {
-	pars->map = NULL;
-	pars->start = 0;
-	pars->size_line = 0;
-	pars->floor.r = 0;
-	pars->floor.b = 0;
-	pars->floor.g = 0;
-	pars->wall.r = 0;
-	pars->wall.b = 0;
-	pars->wall.g = 0;
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] != '1' && line[i] != '0' && line[i] != 'N'
+			&& line[i] != 'W' && line[i] != 'E' && line[i] != 'S'
+			&& line[i] != ' ')
+		{
+			ft_print("Be careful, there is a wrong chacracter !");
+			return (BAD);
+		}
+		i++;
+	}
+	return (GOOD);
 }
