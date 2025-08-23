@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/20 17:21:14 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/23 23:31:39 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int ac, char **av)
 	{
 		if (ft_parsing(value->parsing) == -1)
 			return (ft_free_parsing(pars));
-		printf("Player: [%.2f, %.2f] | %.2f deg\n", pars->player->pos_x, pars->player->pos_y, pars->player->orientation);
+		printf("Player: [%.2f, %.2f] | %.2f deg\n", pars->player->pos.x, pars->player->pos.y, pars->player->orientation);
 		ft_make_cub(value);
 	}
 	else
@@ -38,7 +38,6 @@ void	ft_make_cub(t_value *value)
 {
 	ft_init(value);
 	draw_map(value);
-	mlx_put_image_to_window(value->mlx, value->window, value->img, 0, 0);
 	mlx_loop(value->mlx);
 	ft_free_value(value);
 }
@@ -54,7 +53,8 @@ void	ft_init(t_value *value)
 			value->height, "cub3d");
 	value->img = mlx_new_image(value->mlx, value->width, value->height);
 	value->draw = (t_color *)mlx_get_data_addr(value->img, &t, &t, &t);
-	mlx_key_hook(value->window, key_press, value->mlx);
+	mlx_do_key_autorepeaton(value->mlx);
+	mlx_key_hook(value->window, key_release, value);
 	mlx_hook(value->window, 33, 1L << 17, mlx_loop_end, value->mlx);
 }
 

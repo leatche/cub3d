@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 11:07:03 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/20 16:14:02 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/23 22:04:34 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ t_player *create_player(int x, int y, char dir)
 
 	tmp = ft_strchr(DIR, dir);
 	player = malloc(sizeof(t_player));
-	player->pos_x = x + 0.5;
-	player->pos_y = y + 0.5;
+	player->pos.x = x + 0.5;
+	player->pos.y = y + 0.5;
 	player->orientation = (tmp - DIR) * 90;
 	return (player);
 }

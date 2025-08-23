@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 16:23:17 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/20 17:10:10 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/23 23:35:12 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,16 @@ t_color color(int r, int g, int b)
 	dest.r = r;
 	dest.g = g;
 	dest.b = b;
+	return (dest);
+}
+
+
+t_point point(int x, int y)
+{
+	t_point dest;
+
+	dest.x = x;
+	dest.y = y;
 	return (dest);
 }
 
@@ -41,14 +51,14 @@ t_color green()
 	return (dest);
 }
 
-void ft_put_pixel(t_value *value, int x, int y, t_color color)
+void ft_put_pixel(t_value *value, t_point pos, t_color color)
 {
-	if (x < 0 || x >= value->width || y < 0 || y >= value->height)
+	if (pos.x < 0 || pos.x >= value->width || pos.y < 0 || pos.y >= value->height)
 		return ;
-	value->draw[x + y * value->width] = color;
+	value->draw[(int)pos.x + (int)pos.y * value->width] = color;
 }
 
-void ft_put_square(t_value *value, int x, int y, int size, t_color color)
+void ft_put_square(t_value *value, t_point pos, int size, t_color color)
 {
 	int i;
 	int j;
@@ -59,30 +69,56 @@ void ft_put_square(t_value *value, int x, int y, int size, t_color color)
 		j = 0;
 		while (j < size)
 		{
-			ft_put_pixel(value, x + j, y + i, color);
+			ft_put_pixel(value, point(pos.x + j, pos.y + i), color);
 			j++;
 		}
 		i++;
 	}
 }
-#define PI 3.1415
 
-void ft_put_circle(t_value *value, int x, int y, int size, t_color color)
+void ft_put_circle(t_value *value, t_point pos, int size, t_color color, int fi)
 {
-	double angle = 0;
+	double angle;
 	double i;
 	double j;
+	double x;
 
-	(void)size;
-	(void)x;
-	(void)y;
-	x += size / 2;
-	y += size / 2;
-	while (angle < 360)
+	x = (!fi) * (size - 1);
+	angle = 0;
+	while (x <= size)
 	{
-		angle += 0.5;
-		i = cos((angle / 360) * (2 * PI)) * size;
-		j = sin((angle / 360) * (2 * PI)) * size;
-		ft_put_pixel(value, x + i, y + j, color);
+		angle = 0;
+		while (angle < 360)
+		{
+			angle += (1.0 / size);
+			i = cos((angle / 360) * (2 * PI)) * x;
+			j = sin((angle / 360) * (2 * PI)) * x;
+			ft_put_pixel(value, point(pos.x + i, pos.y + j), color);
+		}
+		x++;
+	}
+}
+
+void ft_put_line(t_value *value, t_point start, t_point end, t_color color)
+{
+	double dx;
+	double dy;
+	int step;
+	int i;
+
+	dx = end.x - start.x;
+	dy = end.y - start.y;
+	if (abs((int)dx) > abs((int)dy))
+		step = abs((int)dx);
+	else
+		step = abs((int)dy);
+	dx /= step;
+	dy /= step;
+	i = 0;
+	while (i < step)
+	{
+		ft_put_pixel(value, point(round(start.x + (dx * i)),
+			round(start.y + (dy * i))), color);
+		i++;
 	}
 }

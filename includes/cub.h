@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/20 17:04:44 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/23 23:27:42 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 #define WIDTH 1400
 #define HEIGHT 800
 
+#define PI 3.14159265359
+
 typedef struct s_color
 {
 	unsigned char	b;
@@ -41,17 +43,21 @@ typedef struct s_color
 	unsigned char	a;
 }				t_color;
 
+typedef struct s_point
+{
+	double	x;
+	double	y;
+}				t_point;
+
 typedef struct s_player
 {
 	double	orientation;
-	double	pos_x;
-	double	pos_y;
+	t_point	pos;
 }				t_player;
 
 typedef struct s_parsing
 {
 	int					start;
-	int					already_player;
 	char				**map;
 	t_color				floor;
 	t_color				wall;
@@ -94,7 +100,7 @@ int		ft_free_parsing(t_parsing *pars);
 int		ft_check_sides(char **tmp, int size);
 int		ft_open(char *file, t_parsing *pars);
 int		ft_read_lines(int fd, t_parsing *pars);
-int		key_press(int keycode, t_value *value);
+int		key_release(int keycode, t_value *value);
 int		ft_check_zero(char **tmp, int i, int j);
 int		ft_norm_color(char *line, t_color *color);
 int		ft_value_color(char *line, unsigned char *color);
@@ -106,12 +112,16 @@ char	*ft_pars_color(char *line, t_parsing *pars);
 char	**ft_list_to_tab(t_list *list_tmp, t_parsing *pars);
 int		ft_has_a_player(t_parsing *pars);
 
-void ft_put_pixel(t_value *value, int x, int y, t_color color);
-void ft_put_square(t_value *value, int x, int y, int size, t_color color);
-void ft_put_circle(t_value *value, int x, int y, int size, t_color color);
+void ft_put_pixel(t_value *value, t_point pos, t_color color);
+void ft_put_square(t_value *value, t_point pos, int size, t_color color);
+void ft_put_circle(t_value *value, t_point pos, int size, t_color color, int f);
+void ft_put_line(t_value *value, t_point start, t_point end, t_color color);
+
 t_color color(int r, int g, int b);
 void draw_map(t_value *value);
 
 t_color yellow();
 t_color green();
+
+t_point point(int x, int y);
 #endif
