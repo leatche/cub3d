@@ -6,62 +6,24 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 16:23:17 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/23 23:35:12 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/25 22:42:16 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-t_color color(int r, int g, int b)
+void	ft_put_pixel(t_value *value, t_point pos, t_color color)
 {
-	t_color dest;
-
-	dest.r = r;
-	dest.g = g;
-	dest.b = b;
-	return (dest);
-}
-
-
-t_point point(int x, int y)
-{
-	t_point dest;
-
-	dest.x = x;
-	dest.y = y;
-	return (dest);
-}
-
-t_color yellow()
-{
-	t_color dest;
-
-	dest.r = 255;
-	dest.g = 255;
-	dest.b = 0;
-	return (dest);
-}
-t_color green()
-{
-	t_color dest;
-
-	dest.r = 0;
-	dest.g = 255;
-	dest.b = 0;
-	return (dest);
-}
-
-void ft_put_pixel(t_value *value, t_point pos, t_color color)
-{
-	if (pos.x < 0 || pos.x >= value->width || pos.y < 0 || pos.y >= value->height)
+	if (pos.x < 0 || pos.x >= value->width || pos.y < 0
+		|| pos.y >= value->height)
 		return ;
 	value->draw[(int)pos.x + (int)pos.y * value->width] = color;
 }
 
-void ft_put_square(t_value *value, t_point pos, int size, t_color color)
+void	ft_put_square(t_value *value, t_point pos, int size, t_color color)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	while (i < size)
@@ -76,14 +38,14 @@ void ft_put_square(t_value *value, t_point pos, int size, t_color color)
 	}
 }
 
-void ft_put_circle(t_value *value, t_point pos, int size, t_color color, int fi)
+void	ft_put_circle(t_value *value, t_point pos, int size, t_color color)
 {
-	double angle;
-	double i;
-	double j;
-	double x;
+	double	angle;
+	double	i;
+	double	j;
+	double	x;
 
-	x = (!fi) * (size - 1);
+	x = -size - 1;
 	angle = 0;
 	while (x <= size)
 	{
@@ -99,12 +61,12 @@ void ft_put_circle(t_value *value, t_point pos, int size, t_color color, int fi)
 	}
 }
 
-void ft_put_line(t_value *value, t_point start, t_point end, t_color color)
+void	ft_put_line(t_value *value, t_point start, t_point end, t_color color)
 {
-	double dx;
-	double dy;
-	int step;
-	int i;
+	double	dx;
+	double	dy;
+	int		step;
+	int		i;
 
 	dx = end.x - start.x;
 	dy = end.y - start.y;
@@ -118,7 +80,7 @@ void ft_put_line(t_value *value, t_point start, t_point end, t_color color)
 	while (i < step)
 	{
 		ft_put_pixel(value, point(round(start.x + (dx * i)),
-			round(start.y + (dy * i))), color);
+				round(start.y + (dy * i))), color);
 		i++;
 	}
 }

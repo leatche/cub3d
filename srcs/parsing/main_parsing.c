@@ -6,15 +6,15 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:03:31 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/23 22:02:36 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/25 22:20:36 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	ft_parsing(t_parsing *pars)
+int	ft_parsing(t_value *value, t_parsing *pars)
 {
-	if (ft_has_a_player(pars) == BAD)
+	if (ft_has_a_player(value, pars) == BAD)
 	{
 		ft_print("there is too much or no player in the map !!");
 		return (-1);

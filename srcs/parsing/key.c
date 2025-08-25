@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 23:39:53 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/23 23:27:42 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/25 22:32:26 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 #define RIGHT 65363
 #define ESC 65307
 
-int key_release(int keycode, t_value *value)
+int	key_release(int keycode, t_value *value)
 {
 	(void)value;
 	// value->parsing->start = 0;
@@ -37,9 +37,9 @@ int key_release(int keycode, t_value *value)
 	if (keycode == ESC)
 		exit(0);
 	if (keycode == RIGHT)
-		value->parsing->player->orientation -= 1.5;
+		value->player->orientation -= 1.5;
 	if (keycode == LEFT)
-		value->parsing->player->orientation += 1.5;
-	draw_map(value);
+		value->player->orientation += 1.5;
+	ft_draw_map(value);
 	return (0);
 }

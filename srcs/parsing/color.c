@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:20:09 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/20 13:21:11 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/25 22:32:47 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ char	*ft_pars_color(char *line, t_parsing *pars)
 
 int	ft_norm_color(char *line, t_color *tmp)
 {
-	int	i;
-	int	count;
-	unsigned char *colors;
+	int				i;
+	int				count;
+	unsigned char	*colors;
 
 	colors = (unsigned char *)tmp;
 	i = 2;
@@ -65,7 +65,7 @@ int	ft_norm_color(char *line, t_color *tmp)
 int	ft_value_color(char *line, unsigned char *color)
 {
 	int	result;
-	int i;
+	int	i;
 
 	if (!*line || !ft_isdigit(*line))
 		return (BAD);

@@ -6,12 +6,11 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:24:11 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/20 13:24:53 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/25 22:33:09 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-
 
 int	ft_checker_wall(char **tmp)
 {
@@ -50,6 +49,7 @@ int	ft_check_sides(char **tmp, int size)
 	}
 	return (result);
 }
+
 int	ft_check_wall(char **tmp)
 {
 	int	i;

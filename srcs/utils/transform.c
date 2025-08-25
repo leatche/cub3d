@@ -44,4 +44,4 @@ char	*ft_strdup_space(char *s, int size_line)
 	ft_memset(result + ft_strlen(s), ' ', size_line - ft_strlen(s));
 	result[size_line] = '\0';
 	return (result);
-} 
+}

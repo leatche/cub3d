@@ -1,27 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print.c                                            :+:      :+:    :+:   */
+/*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/08/04 17:32:36 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/25 22:37:40 by tcherepoff       ###   ########.fr       */
+/*   Created: 2025/08/25 22:35:28 by tcherepoff        #+#    #+#             */
+/*   Updated: 2025/08/25 22:39:44 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	ft_print(char *a)
+t_color	color(int r, int g, int b)
 {
-	printf("Error\n" "%s\n", a);
+	t_color	dest;
+
+	dest.r = r;
+	dest.g = g;
+	dest.b = b;
+	return (dest);
 }
 
-t_point	point(int x, int y)
+t_color	yellow(void)
 {
-	t_point	dest;
+	t_color	dest;
 
-	dest.x = x;
-	dest.y = y;
+	dest.r = 255;
+	dest.g = 255;
+	dest.b = 0;
+	return (dest);
+}
+
+t_color	green(void)
+{
+	t_color	dest;
+
+	dest.r = 0;
+	dest.g = 255;
+	dest.b = 0;
 	return (dest);
 }

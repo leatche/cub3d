@@ -6,7 +6,7 @@
 #    By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/04 16:21:20 by tcherepoff        #+#    #+#              #
-#    Updated: 2025/08/20 17:31:56 by tcherepoff       ###   ########.fr        #
+#    Updated: 2025/08/25 22:38:48 by tcherepoff       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS_UTILS		=	srcs/utils/calculate.c			\
 					srcs/utils/free.c				\
 					srcs/utils/print.c				\
 					srcs/utils/transform.c			\
+					srcs/utils/color.c				\
 					main.c							\
 
 SRCS = $(SRCS_PARSING) $(SRCS_UTILS) $(SRCS_DRAW)
