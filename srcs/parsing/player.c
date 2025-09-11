@@ -6,14 +6,12 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 11:07:03 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/25 22:32:01 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/09/11 15:45:20 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 #include <math.h>
-
-#define DIR "ENWS"
 
 t_player	*create_player(int x, int y, char dir)
 {
@@ -50,5 +48,13 @@ int	ft_has_a_player(t_value *value, t_parsing *pars)
 		}
 		y++;
 	}
+	if (value->player == NULL)
+		return (ft_no_player());
 	return (GOOD);
+}
+
+int	ft_no_player()
+{
+	ft_print("there is no player in the map, where are you ???");
+	return (BAD);
 }

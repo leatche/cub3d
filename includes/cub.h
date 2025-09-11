@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/28 16:00:48 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/09/11 15:46:20 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@
 #define KEY_RELEASE_ID 03
 #define KEY_RELEASE_MASK (1L<<1)
 
+#define DIR "ENWS"
 
 typedef struct s_color
 {
@@ -126,6 +127,7 @@ void	ft_put_square(t_value *value, t_point pos, int size, t_color color);
 void	ft_put_line(t_value *value, t_point start, t_point end, t_color color);
 void	ft_put_circle(t_value *value, t_point pos, int size, t_color color);
 
+int		ft_no_player();
 int		ft_is_a_space(char a);
 int		ft_size_tab(char **tab);
 int		ft_extension(char *file);

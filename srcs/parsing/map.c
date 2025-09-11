@@ -6,24 +6,24 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 01:58:54 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/25 22:32:16 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/09/11 15:15:54 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-void	ft_add_to_map(char *a, t_list **list_tmp, t_parsing *pars)
+void	ft_add_to_map(char *line, t_list **list_tmp, t_parsing *pars)
 {
 	t_list	*new_content;
 	char	*copy;
 
-	if (!list_tmp || a == 0)
+	if (!list_tmp || line == 0)
 		return ;
 	if (pars->map != NULL)
 		return (ft_print("two times a map ... are you serious !!!"));
-	if (strcmp(a, "1") != 0)
+	if (strcmp(line, "1") != 0)
 	{
-		copy = ft_strdup(a);
+		copy = ft_strdup(line);
 		new_content = ft_lstnew(copy);
 		if (!new_content)
 			return ;
@@ -59,7 +59,7 @@ int	ft_map_start(t_parsing *pars)
 {
 	if (pars->start == -1)
 	{
-		ft_print("your map is a the start ... that is a problem ...");
+		ft_print("your map is at the start ... that is a problem ...");
 		return (BAD);
 	}
 	return (GOOD);
