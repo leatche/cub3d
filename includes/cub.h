@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/25 22:25:02 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/28 16:00:48 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,27 @@
 
 # define PI 3.14159265359
 
+#define Z 122
+#define W 119
+
+#define Q 113
+#define A 97
+
+#define S 115
+#define D 100
+#define UP 65362
+#define LEFT 65361
+#define DOWN 65364
+#define RIGHT 65363
+#define ESC 65307
+
+#define KEY_PRESS_ID 02
+#define KEY_PRESS_MASK (1L<<0)
+
+#define KEY_RELEASE_ID 03
+#define KEY_RELEASE_MASK (1L<<1)
+
+
 typedef struct s_color
 {
 	unsigned char	b;
@@ -54,6 +75,7 @@ typedef struct s_player
 {
 	double	orientation;
 	t_point	pos;
+	t_color color;
 }				t_player;
 
 typedef struct s_parsing
@@ -66,6 +88,16 @@ typedef struct s_parsing
 	t_player			*player;
 }				t_parsing;
 
+typedef struct s_key
+{
+	int go_forward;
+	int go_backward;
+	int go_left;
+	int go_right;
+	int turn_left;
+	int turn_right;
+}	t_key;
+
 typedef struct s_value
 {
 	int			height;
@@ -76,6 +108,7 @@ typedef struct s_value
 	t_color		*draw;
 	t_player	*player;
 	t_parsing	*parsing;
+	t_key		keys;
 }				t_value;
 
 void	ft_print(char *a);
@@ -108,6 +141,7 @@ int		ft_check_sides(char **tmp, int size);
 int		ft_open(char *file, t_parsing *pars);
 int		ft_read_lines(int fd, t_parsing *pars);
 int		key_release(int keycode, t_value *value);
+int		key_press(int keycode, t_value *value);
 int		ft_check_zero(char **tmp, int i, int j);
 int		ft_norm_color(char *line, t_color *color);
 int		ft_parsing(t_value *value, t_parsing *pars);

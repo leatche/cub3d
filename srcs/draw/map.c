@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 16:42:58 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/25 22:34:58 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/28 16:06:35 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ void	ft_print_map(t_value *value)
 	int		x;
 	int		y;
 	t_color	col;
+	(void)col;
 
 	y = 0;
 	while (value->parsing->map[y])
@@ -38,7 +39,7 @@ void	ft_print_map(t_value *value)
 			else
 				col = color(100, 100, 100);
 			ft_put_square(value, point(x * GRID_SIZE, y * GRID_SIZE),
-				GRID_SIZE - 1, col);
+			GRID_SIZE - 1, col);
 			x++;
 		}
 		y++;
@@ -51,7 +52,7 @@ void	ft_print_player(t_value *value)
 	double	y;
 
 	ft_put_circle(value, point(value->player->pos.x * GRID_SIZE,
-			value->player->pos.y * GRID_SIZE), 10, color(255, 0, 0));
+			value->player->pos.y * GRID_SIZE), 5, value->player->color);
 	x = (cos(value->player->orientation / 360 * (2 * PI)));
 	y = -(sin(value->player->orientation / 360 * (2 * PI)));
 	x *= GRID_SIZE;
@@ -60,5 +61,5 @@ void	ft_print_player(t_value *value)
 	y += value->player->pos.y * GRID_SIZE;
 	ft_put_line(value, point(value->player->pos.x * GRID_SIZE,
 			value->player->pos.y * GRID_SIZE),
-		point(x, y), color(255, 0, 0));
+		point(x, y), value->player->color);
 }

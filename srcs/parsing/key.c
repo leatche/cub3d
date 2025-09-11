@@ -6,40 +6,44 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 23:39:53 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/25 22:32:26 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/08/28 15:58:52 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-#define Z 122
-#define W 119
-
-#define Q 113
-#define A 97
-
-#define S 115
-#define D 100
-#define UP 65362
-#define LEFT 65361
-#define DOWN 65364
-#define RIGHT 65363
-#define ESC 65307
+int	key_press(int keycode, t_value *value)
+{
+	if (keycode == LEFT)
+		value->keys.turn_left = 1;
+	if (keycode == RIGHT)
+		value->keys.turn_right = 1;
+	if (keycode == Z)
+		value->keys.go_forward = 1;
+	if (keycode == S)
+		value->keys.go_backward = 1;
+	if (keycode == Q)
+		value->keys.go_left = 1;
+	if (keycode == D)
+		value->keys.go_right = 1;
+	if (keycode == ESC)
+		mlx_loop_end(value->mlx);
+	return (1);
+}
 
 int	key_release(int keycode, t_value *value)
 {
-	(void)value;
-	// value->parsing->start = 0;
-	// if (keycode == 123)
-	// 	;
-	// if (keycode == 124)
-	// 	;
-	if (keycode == ESC)
-		exit(0);
-	if (keycode == RIGHT)
-		value->player->orientation -= 1.5;
 	if (keycode == LEFT)
-		value->player->orientation += 1.5;
-	ft_draw_map(value);
+		value->keys.turn_left = 0;
+	if (keycode == RIGHT)
+		value->keys.turn_right = 0;
+	if (keycode == Z)
+		value->keys.go_forward = 0;
+	if (keycode == S)
+		value->keys.go_backward = 0;
+	if (keycode == Q)
+		value->keys.go_left = 0;
+	if (keycode == D)
+		value->keys.go_right = 0;
 	return (0);
 }
