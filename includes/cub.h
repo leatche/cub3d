@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
+/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/09/11 15:46:20 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/09/17 04:29:43 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ void	ft_init(t_value *value);
 void	ft_free_tab(char **tab);
 void	ft_draw_map(t_value *value);
 void	ft_make_cub(t_value *value);
+void	ft_draw_rays(t_value *value);
 void	ft_print_map(t_value *value);
 void	ft_free_value(t_value *value);
 void	ft_print_player(t_value *value);
@@ -124,8 +125,9 @@ void	ft_initialize_pars(t_parsing *pars);
 void	ft_put_pixel(t_value *value, t_point pos, t_color color);
 void	ft_add_to_map(char *a, t_list **list_tmp, t_parsing *pars);
 void	ft_put_square(t_value *value, t_point pos, int size, t_color color);
-void	ft_put_line(t_value *value, t_point start, t_point end, t_color color);
 void	ft_put_circle(t_value *value, t_point pos, int size, t_color color);
+void	ft_put_line(t_value *value, t_point start, t_point end, t_color color);
+void	ft_draw_one_ray(t_value *v, t_point origin, double angle_deg, double l);
 
 int		ft_no_player();
 int		ft_is_a_space(char a);
@@ -161,5 +163,10 @@ t_color	yellow(void);
 t_color	color(int r, int g, int b);
 
 t_point	point(int x, int y);
+t_point	ft_ray_target_point(t_point origin, double angle_rad, double length);
+
+double	ft_deg_to_rad(double angle_deg);
+double	ft_ray_angle(double player_orientation, double fov, int rays, int i);
+
 
 #endif

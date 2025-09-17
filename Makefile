@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+         #
+#    By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/04 16:21:20 by tcherepoff        #+#    #+#              #
-#    Updated: 2025/08/25 22:38:48 by tcherepoff       ###   ########.fr        #
+#    Updated: 2025/09/17 04:31:16 by sbehar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRCS_PARSING	=	srcs/parsing/map.c				\
 
 SRCS_DRAW		=	srcs/draw/pixel.c				\
 					srcs/draw/map.c					\
+					srcs/draw/ray.c					\
 
 SRCS_UTILS		=	srcs/utils/calculate.c			\
 					srcs/utils/check.c				\
