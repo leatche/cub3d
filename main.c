@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/28 16:07:23 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/09/11 17:10:24 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	main(int ac, char **av)
 	{
 		if (ft_parsing(value, value->parsing) == -1)
 			return (ft_free_parsing(value->parsing));
-		printf("Player: [%.2f, %.2f] | %.2f deg\n", value->player->pos.x, value->player->pos.y, value->player->orientation);
 		ft_make_cub(value);
 	}
 	else

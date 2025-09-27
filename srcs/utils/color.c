@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/25 22:35:28 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/25 22:39:44 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/09/11 16:30:03 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,8 @@ t_color	green(void)
 {
 	t_color	dest;
 
-	dest.r = 0;
+	dest.r = 32;
 	dest.g = 255;
-	dest.b = 0;
+	dest.b = 68;
 	return (dest);
 }
