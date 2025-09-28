@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 23:39:53 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/28 15:58:52 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/09/28 12:49:05 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,58 @@ int	key_release(int keycode, t_value *value)
 	if (keycode == D)
 		value->keys.go_right = 0;
 	return (0);
+}
+
+void	ft_handle_rotation(t_value *value)
+{
+	if (value->keys.turn_left)
+		value->player->orientation += 5;
+	if (value->keys.turn_right)
+		value->player->orientation -= 5;
+}
+
+void	ft_handle_up_and_down(t_value *value)
+{
+	double	angle_rad;
+	double	speed;
+	double	dx;
+	double	dy;
+
+	angle_rad = value->player->orientation / 360 * (2 * PI);
+	speed = 1.0 / 30.0;
+	if (value->keys.go_forward)
+	{
+		dx = cos(angle_rad) * speed;
+		dy = -sin(angle_rad) * speed;
+		ft_move_player(value, dx, dy);
+	}
+	if (value->keys.go_backward)
+	{
+		dx = -cos(angle_rad) * speed;
+		dy = sin(angle_rad) * speed;
+		ft_move_player(value, dx, dy);
+	}
+}
+
+void	ft_handle_right_and_left(t_value *value)
+{
+	double	angle_rad;
+	double	speed;
+	double	dx;
+	double	dy;
+
+	angle_rad = value->player->orientation / 360 * (2 * PI);
+	speed = 1.0 / 30.0;
+	if (value->keys.go_left)
+	{
+		dx = cos(angle_rad + PI / 2) * speed;
+		dy = -sin(angle_rad + PI / 2) * speed;
+		ft_move_player(value, dx, dy);
+	}
+	if (value->keys.go_right)
+	{
+		dx = cos(angle_rad - PI / 2) * speed;
+		dy = -sin(angle_rad - PI / 2) * speed;
+		ft_move_player(value, dx, dy);
+	}
 }

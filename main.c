@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/28 16:07:23 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/09/28 12:51:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,32 +49,42 @@ t_color random_color()
 	return dest;
 }
 
-int ft_loop(t_value *value)
+int	ft_loop(t_value *value)
 {
-	if (value->keys.turn_left)
-		value->player->orientation += 5;
-	if (value->keys.turn_right)
-		value->player->orientation -= 5;
-	if (value->keys.go_forward) {
-		value->player->pos.x += cos(value->player->orientation / 360 * (2 * PI)) / 30;
-		value->player->pos.y += -sin(value->player->orientation / 360 * (2 * PI)) / 30;
-	}
-	if (value->keys.go_backward) {
-		value->player->pos.x -= cos(value->player->orientation / 360 * (2 * PI)) / 30;
-		value->player->pos.y -= -sin(value->player->orientation / 360 * (2 * PI)) / 30;
-	}
-	if (value->keys.go_left) {
-		value->player->pos.x += cos((value->player->orientation + 90) / 360 * (2 * PI)) / 30;
-		value->player->pos.y += -sin((value->player->orientation + 90) / 360 * (2 * PI)) / 30;
-	}
-	if (value->keys.go_right) {
-		value->player->pos.x += cos((value->player->orientation - 90) / 360 * (2 * PI)) / 30;
-		value->player->pos.y += -sin((value->player->orientation - 90) / 360 * (2 * PI)) / 30;
-	}
+	ft_handle_rotation(value);
+	ft_handle_up_and_down(value);
+	ft_handle_right_and_left(value);
 	value->player->color = random_color();
 	ft_draw_map(value);
 	return (1);
 }
+
+// int ft_loop(t_value *value)
+// {
+// 	if (value->keys.turn_left)
+// 		value->player->orientation += 5;
+// 	if (value->keys.turn_right)
+// 		value->player->orientation -= 5;
+// 	if (value->keys.go_forward) {
+// 		value->player->pos.x += cos(value->player->orientation / 360 * (2 * PI)) / 30;
+// 		value->player->pos.y += -sin(value->player->orientation / 360 * (2 * PI)) / 30;
+// 	}
+// 	if (value->keys.go_backward) {
+// 		value->player->pos.x -= cos(value->player->orientation / 360 * (2 * PI)) / 30;
+// 		value->player->pos.y -= -sin(value->player->orientation / 360 * (2 * PI)) / 30;
+// 	}
+// 	if (value->keys.go_left) {
+// 		value->player->pos.x += cos((value->player->orientation + 90) / 360 * (2 * PI)) / 30;
+// 		value->player->pos.y += -sin((value->player->orientation + 90) / 360 * (2 * PI)) / 30;
+// 	}
+// 	if (value->keys.go_right) {
+// 		value->player->pos.x += cos((value->player->orientation - 90) / 360 * (2 * PI)) / 30;
+// 		value->player->pos.y += -sin((value->player->orientation - 90) / 360 * (2 * PI)) / 30;
+// 	}
+// 	value->player->color = random_color();
+// 	ft_draw_map(value);
+// 	return (1);
+// }
 
 void	ft_init(t_value *value)
 {

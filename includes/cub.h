@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/09/17 04:29:43 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/09/28 12:50:40 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,9 +121,13 @@ void	ft_draw_rays(t_value *value);
 void	ft_print_map(t_value *value);
 void	ft_free_value(t_value *value);
 void	ft_print_player(t_value *value);
+void	ft_handle_rotation(t_value *value);
 void	ft_initialize_pars(t_parsing *pars);
+void	ft_handle_up_and_down(t_value *value);
+void	ft_handle_right_and_left(t_value *value);
 void	ft_put_pixel(t_value *value, t_point pos, t_color color);
 void	ft_add_to_map(char *a, t_list **list_tmp, t_parsing *pars);
+void	ft_move_player(t_value *value, double delta_x, double delta_y);
 void	ft_put_square(t_value *value, t_point pos, int size, t_color color);
 void	ft_put_circle(t_value *value, t_point pos, int size, t_color color);
 void	ft_put_line(t_value *value, t_point start, t_point end, t_color color);
