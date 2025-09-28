@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/09/28 12:50:40 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/28 13:55:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,9 +112,30 @@ typedef struct s_value
 	t_key		keys;
 }				t_value;
 
+typedef struct s_dda
+{
+	int		map_x;
+	int		map_y;
+	int		step_x;
+	int		step_y;
+	int		hit;
+	int		side;
+	double	player_x;
+	double	player_y;
+	double	ray_dir_x;
+	double	ray_dir_y;
+	double	side_dist_x;
+	double	side_dist_y;
+	double	delta_dist_x;
+	double	delta_dist_y;
+	double	dist;
+}	t_dda;
+
 void	ft_print(char *a);
 void	ft_init(t_value *value);
 void	ft_free_tab(char **tab);
+void	ft_dda_init_x(t_dda *param);
+void	ft_dda_init_y(t_dda *param);
 void	ft_draw_map(t_value *value);
 void	ft_make_cub(t_value *value);
 void	ft_draw_rays(t_value *value);
@@ -127,6 +148,7 @@ void	ft_handle_up_and_down(t_value *value);
 void	ft_handle_right_and_left(t_value *value);
 void	ft_put_pixel(t_value *value, t_point pos, t_color color);
 void	ft_add_to_map(char *a, t_list **list_tmp, t_parsing *pars);
+void	ft_dda_init(t_value *value, double ray_angle, t_dda *param);
 void	ft_move_player(t_value *value, double delta_x, double delta_y);
 void	ft_put_square(t_value *value, t_point pos, int size, t_color color);
 void	ft_put_circle(t_value *value, t_point pos, int size, t_color color);
