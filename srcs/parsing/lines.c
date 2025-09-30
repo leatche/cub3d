@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lines.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:00:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/20 13:25:27 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/09/29 13:53:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,28 @@ char	*ft_pars_the_line(t_parsing *pars, char *line)
 	if ((ft_strncmp(line, "EA", 2) == 0) && ft_is_a_space(line[2]))
 		return ("1");
 	return (line);
+}
+
+void ft_rectangularize_map(char **map)
+{
+    int height = ft_size_tab(map);
+    size_t max_width = 0;  // changer int en size_t
+    for (int i = 0; i < height; i++)
+        if (ft_strlen(map[i]) > max_width)
+            max_width = ft_strlen(map[i]);
+    for (int i = 0; i < height; i++)
+    {
+        size_t curr_len = ft_strlen(map[i]);
+        if (curr_len < max_width)
+        {
+            char *new_line = malloc(max_width + 1);
+            strcpy(new_line, map[i]);
+            memset(new_line + curr_len, '1', max_width - curr_len);
+            new_line[max_width] = '\0';
+            free(map[i]);
+            map[i] = new_line;
+        }
+    }
 }
 
 int	ft_read_lines(int fd, t_parsing *pars)
@@ -54,6 +76,7 @@ int	ft_read_lines(int fd, t_parsing *pars)
 		free (line);
 	}
 	pars->map = ft_list_to_tab(list_tmp, pars);
+	ft_rectangularize_map(pars->map);
 	ft_lstclear(&list_tmp, free);
 	return (ft_map_start(pars));
 }

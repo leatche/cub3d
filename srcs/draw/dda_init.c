@@ -17,16 +17,18 @@ void	ft_dda_init_x(t_dda *param)
 	if (param->ray_dir_x == 0)
 		param->delta_dist_x = 1e30;
 	else
-		param->delta_dist_x = fabs(1 /param->ray_dir_x);
+		param->delta_dist_x = fabs(1 / param->ray_dir_x);
 	if (param->ray_dir_x < 0)
 	{
 		param->step_x = -1;
-		param->side_dist_x = (param->player_x - param->map_x) * param->delta_dist_x;
+		param->side_dist_x = (param->player_x - param->map_x)
+			* param->delta_dist_x;
 	}
 	else
 	{
 		param->step_x = 1;
-		param->side_dist_x = (param->map_x + 1.0 - param->player_x) * param->delta_dist_x;
+		param->side_dist_x = (param->map_x + 1.0 - param->player_x)
+			* param->delta_dist_x;
 	}
 }
 
@@ -39,12 +41,14 @@ void	ft_dda_init_y(t_dda *param)
 	if (param->ray_dir_y < 0)
 	{
 		param->step_y = -1;
-		param->side_dist_y = (param->player_y - param->map_y) * param->delta_dist_y;
+		param->side_dist_y = (param->player_y - param->map_y)
+			* param->delta_dist_y;
 	}
 	else
 	{
 		param->step_y = 1;
-		param->side_dist_y = (param->map_y + 1.0 - param->player_y) * param->delta_dist_y;
+		param->side_dist_y = (param->map_y + 1.0 - param->player_y)
+			* param->delta_dist_y;
 	}
 }
 

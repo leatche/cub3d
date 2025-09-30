@@ -1,4 +1,3 @@
-•̶ ̶A̶f̶f̶i̶c̶h̶e̶r̶ ̶t̶o̶u̶t̶ ̶l̶e̶s̶ ̶r̶a̶y̶o̶n̶s̶ ̶v̶u̶s̶ ̶p̶a̶r̶ ̶l̶e̶ ̶p̶l̶a̶y̶e̶r̶ ̶(̶1̶8̶0̶°̶)̶
 • Gérer les divers segfault du parsing (map invalide, argc = 1, etc...)
 • Gérer l'expansion de la fenêtre par rapport à la taille de l'écran
-• Optimiser l'affichage des rayons en précalculant COS et SIN
+• Normer le code de l'affichage 3d

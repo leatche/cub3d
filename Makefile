@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/04 16:21:20 by tcherepoff        #+#    #+#              #
-#    Updated: 2025/09/28 13:56:27 by marvin           ###   ########.fr        #
+#    Updated: 2025/10/01 00:11:36 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,10 @@ SRCS_DRAW		=	srcs/draw/pixel.c				\
 					srcs/draw/map.c					\
 					srcs/draw/ray.c					\
 					srcs/draw/dda.c					\
-					srcs/draw/dda_init.c					\
+					srcs/draw/dda_init.c			\
+					srcs/draw/setup.c				\
+					srcs/draw/calc.c				\
+					srcs/draw/render.c				\
 
 SRCS_UTILS		=	srcs/utils/calculate.c			\
 					srcs/utils/check.c				\

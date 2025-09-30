@@ -6,11 +6,13 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/09/28 12:51:11 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/30 23:24:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
+
+int	ft_loop(t_value *value);
 
 int	main(int ac, char **av)
 {
@@ -35,7 +37,8 @@ int	main(int ac, char **av)
 void	ft_make_cub(t_value *value)
 {
 	ft_init(value);
-	ft_draw_map(value);
+	//ft_draw_map(value);
+	mlx_loop_hook(value->mlx, ft_loop, value);
 	mlx_loop(value->mlx);
 }
 
@@ -54,8 +57,9 @@ int	ft_loop(t_value *value)
 	ft_handle_rotation(value);
 	ft_handle_up_and_down(value);
 	ft_handle_right_and_left(value);
-	value->player->color = random_color();
-	ft_draw_map(value);
+	//value->player->color = random_color();
+	ft_draw_walls(value);
+	mlx_put_image_to_window(value->mlx, value->window, value->img, 0, 0);
 	return (1);
 }
 

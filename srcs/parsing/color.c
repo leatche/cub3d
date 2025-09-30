@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:20:09 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/25 22:32:47 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/09/28 19:14:52 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ char	*ft_pars_color(char *line, t_parsing *pars)
 	t_color	*tmp;
 
 	if (line[0] == 'F')
-		tmp = &pars->floor;
+		tmp = &pars->floor_color;
 	else
-		tmp = &pars->wall;
+		tmp = &pars->ceiling_color;
 	if (tmp->b != 0 && tmp->r != 0 && tmp->g != 0)
 	{
 		ft_print("you declare two times color ! Pay attention pleaseeee.");

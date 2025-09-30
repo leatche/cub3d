@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/09/28 13:55:51 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/01 00:03:53 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,12 @@
 
 #define DIR "ENWS"
 
+#define WIN_WIDTH 800
+#define WIN_HEIGHT 600
+#define COLOR_WALL 0xFFAA00
+#define COLOR_SKY  0x87CEEB
+#define COLOR_FLOOR 0x228B22
+
 typedef struct s_color
 {
 	unsigned char	b;
@@ -84,8 +90,8 @@ typedef struct s_parsing
 	int					start;
 	char				**map;
 	long unsigned int	size_line;
-	t_color				floor;
-	t_color				wall;
+	t_color				floor_color;
+	t_color				ceiling_color;
 	t_player			*player;
 }				t_parsing;
 
@@ -130,6 +136,23 @@ typedef struct s_dda
 	double	delta_dist_y;
 	double	dist;
 }	t_dda;
+
+typedef struct s_render3d
+{
+	int		rays;
+	int		win_height;
+	int		x;
+	double	fov;
+	double	start_angle;
+	double	player_angle_rad;
+	t_color	wall_color;
+	t_color	floor_color;
+	t_color	ceiling_color;
+}	t_render3d;
+
+t_color int_to_t_color(int rgb);
+void ft_draw_walls(t_value *value);
+void	ft_draw_v_line(t_value *v, int draw_start, int draw_end, t_render3d *r);
 
 void	ft_print(char *a);
 void	ft_init(t_value *value);
@@ -193,6 +216,6 @@ t_point	ft_ray_target_point(t_point origin, double angle_rad, double length);
 
 double	ft_deg_to_rad(double angle_deg);
 double	ft_ray_angle(double player_orientation, double fov, int rays, int i);
-
+double	ft_dda_ray(t_value *value, double ray_angle, double *hit_x, double *hit_y);
 
 #endif

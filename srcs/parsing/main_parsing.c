@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:03:31 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/25 22:20:36 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/09/28 19:16:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ void	ft_initialize_pars(t_parsing *pars)
 	pars->map = NULL;
 	pars->start = 0;
 	pars->size_line = 0;
-	pars->floor.r = 0;
-	pars->floor.b = 0;
-	pars->floor.g = 0;
-	pars->wall.r = 0;
-	pars->wall.b = 0;
-	pars->wall.g = 0;
+	pars->floor_color.r = 0;
+	pars->floor_color.b = 0;
+	pars->floor_color.g = 0;
+	pars->ceiling_color.r = 0;
+	pars->ceiling_color.b = 0;
+	pars->ceiling_color.g = 0;
 }

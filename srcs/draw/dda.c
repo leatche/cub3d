@@ -26,8 +26,8 @@ void	ft_dda_step(t_value *value, t_dda *param)
 		param->map_y += param->step_y;
 		param->side = 1;
 	}
-	if (param->map_y < 0 || param->map_y >= (int)value->parsing->size_line
-		|| param->map_x < 0 
+	if (param->map_y < 0 || param->map_y >= ft_size_tab(value->parsing->map)
+		|| param->map_x < 0
 		|| param->map_x >= (int)ft_strlen(value->parsing->map[0]))
 		param->hit = 1;
 	else if (value->parsing->map[param->map_y][param->map_x] == '1')
@@ -37,17 +37,20 @@ void	ft_dda_step(t_value *value, t_dda *param)
 double	ft_dda_calc_dist(t_dda *param)
 {
 	if (param->side == 0)
-		return ((param->map_x - param->player_x + (1 - param->step_x) / 2) / param->ray_dir_x);
+		return ((param->map_x - param->player_x
+				+ (1 - param->step_x) / 2) / param->ray_dir_x);
 	else
-		return ((param->map_y - param->player_y + (1 - param->step_y) / 2) / param->ray_dir_y);
+		return ((param->map_y - param->player_y
+				+ (1 - param->step_y) / 2) / param->ray_dir_y);
 }
 
-double	ft_dda_ray(t_value *value, double ray_angle, double *hit_x, double *hit_y)
+double	ft_dda_ray(t_value *va, double ray_angle, double *hit_x, double *hit_y)
 {
 	t_dda	dda;
-	ft_dda_init(value, ray_angle, &dda);
+
+	ft_dda_init(va, ray_angle, &dda);
 	while (!dda.hit)
-		ft_dda_step(value, &dda);
+		ft_dda_step(va, &dda);
 	dda.dist = ft_dda_calc_dist(&dda);
 	*hit_x = dda.player_x + dda.ray_dir_x * dda.dist;
 	*hit_y = dda.player_y + dda.ray_dir_y * dda.dist;
