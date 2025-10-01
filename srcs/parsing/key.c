@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 23:39:53 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/09/28 12:49:05 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/01 15:52:41 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,9 @@ int	key_release(int keycode, t_value *value)
 
 void	ft_handle_rotation(t_value *value)
 {
-	if (value->keys.turn_left)
-		value->player->orientation += 5;
 	if (value->keys.turn_right)
+		value->player->orientation += 5;
+	if (value->keys.turn_left)
 		value->player->orientation -= 5;
 }
 
@@ -88,13 +88,13 @@ void	ft_handle_right_and_left(t_value *value)
 
 	angle_rad = value->player->orientation / 360 * (2 * PI);
 	speed = 1.0 / 30.0;
-	if (value->keys.go_left)
+	if (value->keys.go_right)
 	{
 		dx = cos(angle_rad + PI / 2) * speed;
 		dy = -sin(angle_rad + PI / 2) * speed;
 		ft_move_player(value, dx, dy);
 	}
-	if (value->keys.go_right)
+	if (value->keys.go_left)
 	{
 		dx = cos(angle_rad - PI / 2) * speed;
 		dy = -sin(angle_rad - PI / 2) * speed;
