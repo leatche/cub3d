@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/10 11:32:15 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/10 12:30:54 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,27 +36,27 @@
 
 # define PI 3.14159265359
 
-#define Z 122
-#define W 119
+# define Z 122
+# define W 119
 
-#define Q 113
-#define A 97
+# define Q 113
+# define A 97
 
-#define S 115
-#define D 100
-#define UP 65362
-#define LEFT 65361
-#define DOWN 65364
-#define RIGHT 65363
-#define ESC 65307
+# define S 115
+# define D 100
+# define UP 65362
+# define LEFT 65361
+# define DOWN 65364
+# define RIGHT 65363
+# define ESC 65307
 
-#define KEY_PRESS_ID 02
-#define KEY_PRESS_MASK (1L<<0)
+# define KEY_PRESS_ID 02
+# define KEY_PRESS_MASK (1L<<0)
 
-#define KEY_RELEASE_ID 03
-#define KEY_RELEASE_MASK (1L<<1)
+# define KEY_RELEASE_ID 03
+# define KEY_RELEASE_MASK (1L<<1)
 
-#define DIR "ENWS"
+# define DIR "ENWS"
 
 typedef struct s_color
 {
@@ -76,7 +76,7 @@ typedef struct s_player
 {
 	double	orientation;
 	t_point	pos;
-	t_color color;
+	t_color	color;
 }				t_player;
 
 typedef struct s_parsing
@@ -92,12 +92,12 @@ typedef struct s_parsing
 
 typedef struct s_key
 {
-	int go_forward;
-	int go_backward;
-	int go_left;
-	int go_right;
-	int turn_left;
-	int turn_right;
+	int	go_forward;
+	int	go_backward;
+	int	go_left;
+	int	go_right;
+	int	turn_left;
+	int	turn_right;
 }	t_key;
 
 typedef struct s_value
@@ -126,10 +126,10 @@ void	ft_put_pixel(t_value *value, t_point pos, t_color color);
 void	ft_add_to_map(char *a, t_list **list_tmp, t_parsing *pars);
 void	ft_put_square(t_value *value, t_point pos, int size, t_color color);
 void	ft_put_circle(t_value *value, t_point pos, int size, t_color color);
-void	ft_check_trap(t_parsing *pars, char	*a, char *line, t_list *list_tmp);
 void	ft_put_line(t_value *value, t_point start, t_point end, t_color color);
 
 int		ft_is_a_space(char a);
+int		ft_loop(t_value *value);
 int		ft_size_tab(char **tab);
 int		ft_extension(char *file);
 int		ft_check_wall(char **tmp);
@@ -151,6 +151,7 @@ int		ft_norm_color(char *line, t_color *color);
 int		ft_parsing(t_value *value, t_parsing *pars);
 int		ft_has_a_player(t_value *value, t_parsing *pars);
 int		ft_value_color(char *line, unsigned char *color);
+int		ft_check_trap(t_parsing *pars, char	*a, char *line, t_list *list_tmp);
 
 char	*ft_strdup_space(char *s, int size_line);
 char	*ft_pars_the_line(t_parsing *pars, char *line);

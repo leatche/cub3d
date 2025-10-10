@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/08 00:58:21 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/10 12:31:33 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +39,6 @@ int	main(int ac, char **av)
 	return (0);
 }
 
-int	ft_free_error(t_value *value)
-{
-	ft_free_parsing(value->parsing);
-	free(value->player);
-	free(value);
-	return (-1);
-}
 void	ft_make_cub(t_value *value)
 {
 	ft_init(value);
@@ -53,46 +46,9 @@ void	ft_make_cub(t_value *value)
 	mlx_loop(value->mlx);
 }
 
-t_color random_color()
-{
-	t_color dest;
-
-	dest.r = rand() % 255;
-	dest.g = rand() % 255;
-	dest.b = rand() % 255;
-	return dest;
-}
-
-int ft_loop(t_value *value)
-{
-	if (value->keys.turn_left)
-		value->player->orientation += 5;
-	if (value->keys.turn_right)
-		value->player->orientation -= 5;
-	if (value->keys.go_forward) {
-		value->player->pos.x += cos(value->player->orientation / 360 * (2 * PI)) / 30;
-		value->player->pos.y += -sin(value->player->orientation / 360 * (2 * PI)) / 30;
-	}
-	if (value->keys.go_backward) {
-		value->player->pos.x -= cos(value->player->orientation / 360 * (2 * PI)) / 30;
-		value->player->pos.y -= -sin(value->player->orientation / 360 * (2 * PI)) / 30;
-	}
-	if (value->keys.go_left) {
-		value->player->pos.x += cos((value->player->orientation + 90) / 360 * (2 * PI)) / 30;
-		value->player->pos.y += -sin((value->player->orientation + 90) / 360 * (2 * PI)) / 30;
-	}
-	if (value->keys.go_right) {
-		value->player->pos.x += cos((value->player->orientation - 90) / 360 * (2 * PI)) / 30;
-		value->player->pos.y += -sin((value->player->orientation - 90) / 360 * (2 * PI)) / 30;
-	}
-	value->player->color = random_color();
-	ft_draw_map(value);
-	return (1);
-}
-
 void	ft_init(t_value *value)
 {
-	int t;
+	int	t;
 
 	value->mlx = mlx_init();
 	value->width = 1199;
@@ -104,18 +60,7 @@ void	ft_init(t_value *value)
 	mlx_do_key_autorepeatoff(value->mlx);
 	mlx_hook(value->window, 33, 1L << 17, mlx_loop_end, value->mlx);
 	mlx_hook(value->window, KEY_PRESS_ID, KEY_PRESS_MASK, key_press, value);
-	mlx_hook(value->window, KEY_RELEASE_ID, KEY_RELEASE_MASK, key_release, value);
+	mlx_hook(value->window, KEY_RELEASE_ID,
+		KEY_RELEASE_MASK, key_release, value);
 	mlx_loop_hook(value->mlx, ft_loop, value);
-}
-
-void	ft_free_value(t_value *value)
-{
-	mlx_do_key_autorepeaton(value->mlx);
-	mlx_destroy_image(value->mlx, value->img);
-	mlx_destroy_window(value->mlx, value->window);
-	mlx_destroy_display(value->mlx);
-	// ft_free_tab((void **)value->tab);
-	free(value->mlx);
-	free(value->player);
-	free(value);
 }

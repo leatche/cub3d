@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:00:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/08 01:00:44 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/10 12:17:23 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,16 @@ char	*ft_pars_the_line(t_parsing *pars, char *line)
 
 int	ft_transfer_map(int fd, t_parsing *pars)
 {
-	t_list	*list_tmp = ft_read_lines(fd, pars);
+	t_list	*list_tmp;
+
+	list_tmp = ft_read_lines(fd, pars);
 	if (!list_tmp)
 		return (-1);
 	pars->map = ft_list_to_tab(list_tmp, pars);
 	ft_lstclear(&list_tmp, free);
 	return (ft_map_start(pars));
 }
+
 t_list	*ft_read_lines(int fd, t_parsing *pars)
 {
 	t_list	*list_tmp;
@@ -54,23 +57,20 @@ t_list	*ft_read_lines(int fd, t_parsing *pars)
 		if (line && line[ft_strlen(line) - 1] == '\n')
 			line[ft_strlen(line) - 1] = '\0';
 		a = ft_pars_the_line(pars, line);
-		ft_check_trap(pars, a, line, list_tmp);
-		if (a == line)
+		if (ft_check_trap(pars, a, line, list_tmp) == BAD)
 		{
-			if (pars->space == 1)
-			{
-				free(line);
-				ft_lstclear(&list_tmp, free);
-				return (NULL);
-			}
-			ft_add_to_map(line, &list_tmp, pars);
+			free(line);
+			ft_lstclear(&list_tmp, free);
+			return (NULL);
 		}
+		if (a == line)
+			ft_add_to_map(line, &list_tmp, pars);
 		free (line);
 	}
 	return (list_tmp);
 }
 
-void	ft_check_trap(t_parsing *pars, char	*a, char *line, t_list	*list_tmp)
+int	ft_check_trap(t_parsing *pars, char	*a, char *line, t_list	*list_tmp)
 {
 	if (pars->start == 0 && a == line)
 		pars->start = -1;
@@ -78,4 +78,7 @@ void	ft_check_trap(t_parsing *pars, char	*a, char *line, t_list	*list_tmp)
 		pars->start++;
 	if (a == NULL && list_tmp)
 		pars->space = 1;
+	if (a == line && pars->space == 1)
+		return (BAD);
+	return (GOOD);
 }

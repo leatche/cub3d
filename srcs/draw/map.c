@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 16:42:58 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/09/11 17:19:22 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/10 12:06:35 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_print_map(t_value *value)
 			else
 				col = color(100, 100, 100);
 			ft_put_square(value, point(x * GRID_SIZE, y * GRID_SIZE),
-			GRID_SIZE - 1, col);
+				GRID_SIZE - 1, col);
 			x++;
 		}
 		y++;
@@ -61,5 +61,4 @@ void	ft_print_player(t_value *value)
 	ft_put_line(value, point(value->player->pos.x * GRID_SIZE,
 			value->player->pos.y * GRID_SIZE),
 		point(x, y), value->player->color);
-	
 }
