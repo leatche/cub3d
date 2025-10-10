@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/10 12:44:12 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/10 13:02:00 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@
 # define YES 1
 # define NO -1
 
-# define WIDTH 1400
-# define HEIGHT 800
-# define GRID_SIZE 100
+# define GRID_SIZE 150
 
 # define PI 3.14159265359
 

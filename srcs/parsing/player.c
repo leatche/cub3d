@@ -6,12 +6,11 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 11:07:03 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/10 11:31:33 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/10 13:01:50 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
-#include <math.h>
 
 t_player	*create_player(int x, int y, char dir)
 {

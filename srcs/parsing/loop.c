@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/10 12:26:33 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/10 12:34:25 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/10 13:04:20 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ void	ft_go_left_right(t_value *value)
 int	ft_loop(t_value *value)
 {
 	if (value->keys.turn_left)
-		value->player->orientation += 5;
+		value->player->orientation += 6;
 	if (value->keys.turn_right)
-		value->player->orientation -= 5;
+		value->player->orientation -= 6;
 	ft_go_for_backward(value);
 	ft_go_left_right(value);
 	value->player->color = color(54, 87, 74);
