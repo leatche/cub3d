@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/10 12:31:33 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/10 12:46:42 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,7 @@ void	ft_init(t_value *value)
 	int	t;
 
 	value->mlx = mlx_init();
-	value->width = 1199;
-	value->height = 599;
+	mlx_get_screen_size(value->mlx, &value->width, &value->height);
 	value->window = mlx_new_window(value->mlx, value->width,
 			value->height, "cub3d");
 	value->img = mlx_new_image(value->mlx, value->width, value->height);

@@ -6,7 +6,7 @@
 #    By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/04 16:21:20 by tcherepoff        #+#    #+#              #
-#    Updated: 2025/08/25 22:38:48 by tcherepoff       ###   ########.fr        #
+#    Updated: 2025/10/10 12:48:55 by tcherepoff       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS_PARSING	=	srcs/parsing/map.c				\
 					srcs/parsing/main_parsing.c		\
 					srcs/parsing/player.c			\
 					srcs/parsing/color.c			\
+					srcs/parsing/loop.c				\
 					srcs/parsing/checker_map.c		\
 
 SRCS_DRAW		=	srcs/draw/pixel.c				\
