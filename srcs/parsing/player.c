@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 11:07:03 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/09/11 15:45:20 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/10 11:31:33 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,12 +49,6 @@ int	ft_has_a_player(t_value *value, t_parsing *pars)
 		y++;
 	}
 	if (value->player == NULL)
-		return (ft_no_player());
+		return (BAD);
 	return (GOOD);
-}
-
-int	ft_no_player()
-{
-	ft_print("there is no player in the map, where are you ???");
-	return (BAD);
 }

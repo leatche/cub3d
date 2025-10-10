@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/09/11 15:46:20 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/10 11:32:15 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ typedef struct s_player
 typedef struct s_parsing
 {
 	int					start;
+	int					space;
 	char				**map;
 	long unsigned int	size_line;
 	t_color				floor;
@@ -124,16 +125,17 @@ void	ft_initialize_pars(t_parsing *pars);
 void	ft_put_pixel(t_value *value, t_point pos, t_color color);
 void	ft_add_to_map(char *a, t_list **list_tmp, t_parsing *pars);
 void	ft_put_square(t_value *value, t_point pos, int size, t_color color);
-void	ft_put_line(t_value *value, t_point start, t_point end, t_color color);
 void	ft_put_circle(t_value *value, t_point pos, int size, t_color color);
+void	ft_check_trap(t_parsing *pars, char	*a, char *line, t_list *list_tmp);
+void	ft_put_line(t_value *value, t_point start, t_point end, t_color color);
 
-int		ft_no_player();
 int		ft_is_a_space(char a);
 int		ft_size_tab(char **tab);
 int		ft_extension(char *file);
 int		ft_check_wall(char **tmp);
 int		ft_conform_map(char **tmp);
 int		ft_checker_wall(char **tmp);
+int		ft_free_error(t_value *value);
 int		ft_map_start(t_parsing *pars);
 int		ft_check_wall_top(char *line);
 int		ft_check_side_wall(char *line);
@@ -141,10 +143,10 @@ int		ft_good_characters(char *line);
 int		ft_free_parsing(t_parsing *pars);
 int		ft_check_sides(char **tmp, int size);
 int		ft_open(char *file, t_parsing *pars);
-int		ft_read_lines(int fd, t_parsing *pars);
 int		key_release(int keycode, t_value *value);
 int		key_press(int keycode, t_value *value);
 int		ft_check_zero(char **tmp, int i, int j);
+int		ft_transfer_map(int fd, t_parsing *pars);
 int		ft_norm_color(char *line, t_color *color);
 int		ft_parsing(t_value *value, t_parsing *pars);
 int		ft_has_a_player(t_value *value, t_parsing *pars);
@@ -159,6 +161,8 @@ char	**ft_list_to_tab(t_list *list_tmp, t_parsing *pars);
 t_color	green(void);
 t_color	yellow(void);
 t_color	color(int r, int g, int b);
+
+t_list	*ft_read_lines(int fd, t_parsing *pars);
 
 t_point	point(int x, int y);
 

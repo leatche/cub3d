@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/09/11 17:10:24 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/08 00:58:21 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,36 @@ int	main(int ac, char **av)
 {
 	t_value		*value;
 
+	if (ac != 2)
+	{
+		ft_print("Check again the number of arguments !");
+		return (-1);
+	}
 	value = calloc(1, sizeof(t_value));
 	value->parsing = calloc(1, sizeof(t_parsing));
-	if (ac == 2 && ft_extension(av[1]) == GOOD && (ft_open(av[1], value->parsing) != -1))
+	if (ft_extension(av[1]) == GOOD && (ft_open(av[1], value->parsing) != -1))
 	{
 		if (ft_parsing(value, value->parsing) == -1)
-			return (ft_free_parsing(value->parsing));
+			return (ft_free_error(value));
 		ft_make_cub(value);
 	}
 	else
-		ft_print("Check again your file or the number of arguments !");
+	{
+		ft_print("Check again your file !");
+		return (ft_free_error(value));
+	}
 	ft_free_parsing(value->parsing);
 	ft_free_value(value);
 	return (0);
 }
 
+int	ft_free_error(t_value *value)
+{
+	ft_free_parsing(value->parsing);
+	free(value->player);
+	free(value);
+	return (-1);
+}
 void	ft_make_cub(t_value *value)
 {
 	ft_init(value);

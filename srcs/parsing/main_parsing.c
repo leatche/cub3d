@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:03:31 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/25 22:20:36 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/05 16:52:46 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	ft_open(char *file, t_parsing *pars)
 	if (fd == -1)
 		return (BAD);
 	ft_initialize_pars(pars);
-	return (ft_read_lines(fd, pars));
+	return (ft_transfer_map(fd, pars));
 }
 
 void	ft_initialize_pars(t_parsing *pars)
