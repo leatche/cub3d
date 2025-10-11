@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/09/30 23:24:28 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/11 17:39:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,18 +90,35 @@ int	ft_loop(t_value *value)
 // 	return (1);
 // }
 
+void	load_textures(t_value *value, t_render3d *r)
+{
+	r->texture_north.img_ptr = mlx_xpm_file_to_image(value->mlx, "textures/texture_nord.xpm", &r->texture_north.width, &r->texture_north.height);
+	r->texture_north.data = (int *)mlx_get_data_addr(r->texture_north.img_ptr, &r->texture_north.bpp, &r->texture_north.size_line, &r->texture_north.endian);
+	r->texture_south.img_ptr = mlx_xpm_file_to_image(value->mlx, "textures/texture_sud.xpm", &r->texture_south.width, &r->texture_south.height);
+	r->texture_south.data = (int *)mlx_get_data_addr(r->texture_south.img_ptr, &r->texture_south.bpp, &r->texture_south.size_line, &r->texture_south.endian);
+	r->texture_east.img_ptr = mlx_xpm_file_to_image(value->mlx, "textures/texture_east.xpm", &r->texture_east.width, &r->texture_east.height);
+	r->texture_east.data = (int *)mlx_get_data_addr(r->texture_east.img_ptr, &r->texture_east.bpp, &r->texture_east.size_line, &r->texture_east.endian);
+	r->texture_west.img_ptr = mlx_xpm_file_to_image(value->mlx, "textures/texture_west.xpm", &r->texture_west.width, &r->texture_west.height);
+	r->texture_west.data = (int *)mlx_get_data_addr(r->texture_west.img_ptr, &r->texture_west.bpp, &r->texture_west.size_line, &r->texture_west.endian);
+}
 void	ft_init(t_value *value)
 {
-	int t;
+	int bits_per_pixel;
+	int	size_line;
+	int	endian;
+	t_render3d	*r;
 
+	r = &value->render3d;
 	value->mlx = mlx_init();
-	value->width = 1199;
-	value->height = 599;
+	value->width = 1920;
+	value->height = 1080;
 	value->window = mlx_new_window(value->mlx, value->width,
 			value->height, "cub3d");
 	value->img = mlx_new_image(value->mlx, value->width, value->height);
-	value->draw = (t_color *)mlx_get_data_addr(value->img, &t, &t, &t);
+	value->draw = (t_color *)mlx_get_data_addr(value->img, &bits_per_pixel, &size_line, &endian);
+	load_textures(value, r);
 	mlx_do_key_autorepeatoff(value->mlx);
+	//mlx_hook(value->window, 22, 0, mlx_resize_handler, value);
 	mlx_hook(value->window, 33, 1L << 17, mlx_loop_end, value->mlx);
 	mlx_hook(value->window, KEY_PRESS_ID, KEY_PRESS_MASK, key_press, value);
 	mlx_hook(value->window, KEY_RELEASE_ID, KEY_RELEASE_MASK, key_release, value);
@@ -112,6 +129,10 @@ void	ft_free_value(t_value *value)
 {
 	mlx_do_key_autorepeaton(value->mlx);
 	mlx_destroy_image(value->mlx, value->img);
+	 mlx_destroy_image(value->mlx, value->render3d.texture_north.img_ptr);
+    mlx_destroy_image(value->mlx, value->render3d.texture_south.img_ptr);
+    mlx_destroy_image(value->mlx, value->render3d.texture_east.img_ptr);
+    mlx_destroy_image(value->mlx, value->render3d.texture_west.img_ptr);
 	mlx_destroy_window(value->mlx, value->window);
 	mlx_destroy_display(value->mlx);
 	// ft_free_tab((void **)value->tab);

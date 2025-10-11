@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/01 00:03:53 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/11 17:15:23 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,43 @@ typedef struct s_key
 	int turn_right;
 }	t_key;
 
+typedef struct s_texture
+{
+	void	*img_ptr;
+	int		*data;
+	int		width;
+	int		height;
+	int		bpp;
+	int		size_line;
+	int		endian;
+}	t_texture;
+
+typedef struct s_render3d
+{
+	int		rays;
+	int		win_height;
+	int		x;
+	double	fov;
+	double	start_angle;
+	double	player_angle_rad;
+	t_color	wall_color;
+	t_color	floor_color;
+	t_color	ceiling_color;
+	t_texture	texture_north;
+	t_texture	texture_south;
+	t_texture	texture_east;
+	t_texture	texture_west;
+}	t_render3d;
+
+typedef struct s_setup
+{
+	int	draw_start;
+	int	draw_end;
+	int	tex_x;
+	t_render3d	*r;
+	t_texture	texture;
+}	t_setup;
+
 typedef struct s_value
 {
 	int			height;
@@ -116,7 +153,30 @@ typedef struct s_value
 	t_player	*player;
 	t_parsing	*parsing;
 	t_key		keys;
+	t_render3d	render3d;
 }				t_value;
+
+typedef struct s_rayhit
+{
+	double	x;
+	double	y;
+	double	dist;
+	int		side;
+}	t_rayhit;
+
+typedef struct s_draw
+{
+	t_value 	value;
+	t_render3d	*r;
+	int			i;
+	int			draw_start;
+	int			draw_end;
+	int			tex_x;
+	t_texture	texture;
+	t_rayhit	hit;
+	double		ray_angle;
+	double		corrected_dist;
+}	t_draw;
 
 typedef struct s_dda
 {
@@ -137,23 +197,9 @@ typedef struct s_dda
 	double	dist;
 }	t_dda;
 
-typedef struct s_render3d
-{
-	int		rays;
-	int		win_height;
-	int		x;
-	double	fov;
-	double	start_angle;
-	double	player_angle_rad;
-	t_color	wall_color;
-	t_color	floor_color;
-	t_color	ceiling_color;
-}	t_render3d;
-
 t_color int_to_t_color(int rgb);
 void ft_draw_walls(t_value *value);
-void	ft_draw_v_line(t_value *v, int draw_start, int draw_end, t_render3d *r);
-
+void	ft_draw_v_line(t_value *v, t_setup *set);
 void	ft_print(char *a);
 void	ft_init(t_value *value);
 void	ft_free_tab(char **tab);
@@ -169,6 +215,7 @@ void	ft_handle_rotation(t_value *value);
 void	ft_initialize_pars(t_parsing *pars);
 void	ft_handle_up_and_down(t_value *value);
 void	ft_handle_right_and_left(t_value *value);
+void	ft_setup_render3d(t_value *v, t_render3d *r);
 void	ft_put_pixel(t_value *value, t_point pos, t_color color);
 void	ft_add_to_map(char *a, t_list **list_tmp, t_parsing *pars);
 void	ft_dda_init(t_value *value, double ray_angle, t_dda *param);
@@ -176,7 +223,6 @@ void	ft_move_player(t_value *value, double delta_x, double delta_y);
 void	ft_put_square(t_value *value, t_point pos, int size, t_color color);
 void	ft_put_circle(t_value *value, t_point pos, int size, t_color color);
 void	ft_put_line(t_value *value, t_point start, t_point end, t_color color);
-void	ft_draw_one_ray(t_value *v, t_point origin, double angle_deg, double l);
 
 int		ft_no_player();
 int		ft_is_a_space(char a);
@@ -216,6 +262,6 @@ t_point	ft_ray_target_point(t_point origin, double angle_rad, double length);
 
 double	ft_deg_to_rad(double angle_deg);
 double	ft_ray_angle(double player_orientation, double fov, int rays, int i);
-double	ft_dda_ray(t_value *value, double ray_angle, double *hit_x, double *hit_y);
+double	ft_dda_ray(t_value *va, double ray_angle, t_rayhit *res);
 
 #endif

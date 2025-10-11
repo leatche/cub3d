@@ -44,7 +44,7 @@ double	ft_dda_calc_dist(t_dda *param)
 				+ (1 - param->step_y) / 2) / param->ray_dir_y);
 }
 
-double	ft_dda_ray(t_value *va, double ray_angle, double *hit_x, double *hit_y)
+double	ft_dda_ray(t_value *va, double ray_angle, t_rayhit *res)
 {
 	t_dda	dda;
 
@@ -52,7 +52,9 @@ double	ft_dda_ray(t_value *va, double ray_angle, double *hit_x, double *hit_y)
 	while (!dda.hit)
 		ft_dda_step(va, &dda);
 	dda.dist = ft_dda_calc_dist(&dda);
-	*hit_x = dda.player_x + dda.ray_dir_x * dda.dist;
-	*hit_y = dda.player_y + dda.ray_dir_y * dda.dist;
+	res->x = dda.player_x + dda.ray_dir_x * dda.dist;
+	res->y = dda.player_y + dda.ray_dir_y * dda.dist;
+	res->side = dda.side;
+	res->dist = dda.dist;
 	return (dda.dist);
 }

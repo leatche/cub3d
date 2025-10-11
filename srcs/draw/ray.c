@@ -12,6 +12,8 @@
 
 #include "cub.h"
 
+double	ft_cast_ray(t_value *v, double ray_angle, t_rayhit *hit);
+
 double	ft_ray_angle(double player_orientation, double fov, int rays, int i)
 {
 	double	start_angle;
@@ -37,19 +39,13 @@ t_point	ft_ray_target_point(t_point origin, double angle_rad, double length)
 	return (point(origin.x + dx, origin.y + dy));
 }
 
-void	ft_draw_one_ray(t_value *v, t_point origin, double angle_deg, double l)
+void	ft_draw_one_ray(t_value *v, t_point origin, double angle_deg)
 {
-	double	angle_rad;
-	double	hit_x;
-	double	hit_y;
-	double	dist;
-	t_point	end;
+	t_rayhit	hit;
+	t_point		end;
 
-	(void)l;
-	angle_rad = ft_deg_to_rad(angle_deg);
-	dist = ft_dda_ray(v, angle_rad, &hit_x, &hit_y);
-	(void)dist;
-	end = point(hit_x * GRID_SIZE, hit_y * GRID_SIZE);
+	ft_cast_ray(v, angle_deg, &hit);
+	end = point(hit.x * GRID_SIZE, hit.y * GRID_SIZE);
 	ft_put_line(v, origin, end, color(255, 200, 0));
 }
 
@@ -69,7 +65,7 @@ void	ft_draw_rays(t_value *value)
 	while (i < rays)
 	{
 		angle_deg = ft_ray_angle(value->player->orientation, fov, rays, i);
-		ft_draw_one_ray(value, player_center, angle_deg, GRID_SIZE);
+		ft_draw_one_ray(value, player_center, angle_deg);
 		i++;
 	}
 }

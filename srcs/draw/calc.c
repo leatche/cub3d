@@ -17,12 +17,9 @@ double	ft_calc_ray_angle(t_render3d *r, int i)
 	return (r->start_angle + ((double)i / (r->rays - 1)) * r->fov);
 }
 
-double	ft_cast_ray(t_value *v, double ray_angle)
+double	ft_cast_ray(t_value *v, double ray_angle, t_rayhit *hit)
 {
-	double	hit_x;
-	double	hit_y;
-
-	return (ft_dda_ray(v, ft_deg_to_rad(ray_angle), &hit_x, &hit_y));
+	return (ft_dda_ray(v, ft_deg_to_rad(ray_angle), hit));
 }
 
 double	ft_calc_corr_dist(double dist, double ray_angle_rad, double player_ang)

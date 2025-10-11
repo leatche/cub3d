@@ -13,9 +13,13 @@
 #include "cub.h"
 
 double	ft_calc_ray_angle(t_render3d *r, int i);
-double	ft_cast_ray(t_value *v, double ray_angle);
 double	ft_calc_corr_dist(double dist, double ray_angle_rad, double player_ang);
 void	ft_calc_draw_lim(t_render3d *r, double c_dst, int *draw_s, int *draw_e);
+double	ft_cast_ray(t_value *v, double ray_angle, t_rayhit *hit);
+void	ft_select_texture(t_render3d *r, double ray_an, int side, t_texture *t);
+void	ft_calc_draw_params(t_draw *d);
+void	ft_calc_ray_params(t_draw *d);
+int		ft_calc_tex_x(t_render3d *r, t_rayhit *hit);
 
 t_color	int_to_t_color(int rgb)
 {
@@ -30,42 +34,54 @@ t_color	int_to_t_color(int rgb)
 void	ft_setup_render3d(t_value *v, t_render3d *r)
 {
 	r->fov = 60.0;
-	r->rays = WIN_WIDTH;
+	r->rays = v->width;
 	r->start_angle = v->player->orientation - r->fov / 2.0;
 	r->player_angle_rad = ft_deg_to_rad(v->player->orientation);
-	r->win_height = WIN_HEIGHT;
+	r->win_height = v->height;
 	r->wall_color = int_to_t_color(COLOR_WALL);
 	r->floor_color = v->parsing->floor_color;
 	r->ceiling_color = v->parsing->ceiling_color;
 }
 
+double	ft_normalize_angle(double angle_deg)
+{
+	while (angle_deg < 0)
+		angle_deg += 360;
+	while (angle_deg >= 360)
+		angle_deg -= 360;
+	return (angle_deg);
+}
+
 void	ft_draw_wall_column(t_value *v, t_render3d *r, int i)
 {
-	double	ray_angle;
-	double	dist;
-	double	corrected_dist;
-	int		draw_start;
-	int		draw_end;
+	t_draw	d;
+	t_setup	set;
 
-	ray_angle = ft_calc_ray_angle(r, i);
-	dist = ft_cast_ray(v, ray_angle);
-	corrected_dist = ft_calc_corr_dist(dist, ft_deg_to_rad(ray_angle),
-			r->player_angle_rad);
-	ft_calc_draw_lim(r, corrected_dist, &draw_start, &draw_end);
-	ft_draw_v_line(v, draw_start, draw_end, r);
+	d.value = *v;
+	d.r = r;
+	d.i = i;
+	ft_calc_ray_params(&d);
+	ft_calc_draw_params(&d);
+	set.draw_start = d.draw_start;
+	set.draw_end = d.draw_end;
+	set.r = r;
+	set.tex_x = d.tex_x;
+	set.texture = d.texture;
+	ft_draw_v_line(v, &set);
 }
 
 void	ft_draw_walls(t_value *v)
 {
-	t_render3d	r;
+	t_render3d	*r;
 	int			i;
 
+	r = &v->render3d;
 	i = 0;
-	ft_setup_render3d(v, &r);
-	while (i < r.rays)
+	ft_setup_render3d(v, r);
+	while (i < r->rays)
 	{
-		r.x = i;
-		ft_draw_wall_column(v, &r, i);
+		r->x = i;
+		ft_draw_wall_column(v, r, i);
 		i++;
 	}
 }
