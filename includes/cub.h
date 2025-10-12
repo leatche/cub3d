@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/12 16:22:01 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/12 17:30:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -221,6 +221,8 @@ void	draw_minimap_circle(t_value *value, t_minimap *minimap, int color);
 void	draw_minimap_map(t_value *value, t_minimap *minimap);
 void	draw_minimap_compass(t_value *value, t_minimap *minimap);
 void	update_map_size(t_minimap *minimap, char **map);
+void	minimap_zoom_in(t_minimap *minimap);
+void	minimap_zoom_out(t_minimap *minimap);
 
 void ft_draw_walls(t_value *value);
 void	ft_draw_v_line(t_value *v, t_setup *set);

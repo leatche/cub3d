@@ -60,8 +60,8 @@ void	draw_minimap_player(t_value *value, t_minimap *minimap)
 int	get_minimap_cell_color(char c)
 {
 	if (c == '1')
-		return (0xAAAAAA);
-	return (0x333333);
+		return (0x2408fc);
+	return (0xfc0808);
 }
 
 
@@ -173,4 +173,16 @@ void	draw_minimap_compass(t_value *value, t_minimap *minimap)
 	mlx_string_put(value->mlx, value->window, cx - (int)(sin(a) * r), cy + (int)(cos(a) * r), 0xFFFFFF, "S");
 	mlx_string_put(value->mlx, value->window, cx - (int)(cos(a) * r), cy - (int)(sin(a) * r), 0xFFFFFF, "w");
 	mlx_string_put(value->mlx, value->window, cx + (int)(cos(a) * r), cy + (int)(sin(a) * r), 0xFFFFFF, "E");
+}
+
+void	minimap_zoom_in(t_minimap *minimap)
+{
+	if (minimap->scale > 1)
+		minimap->scale--;
+}
+
+void	minimap_zoom_out(t_minimap *minimap)
+{
+	if (minimap->scale < 20)
+		minimap->scale++;
 }

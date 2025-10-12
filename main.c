@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/12 16:21:02 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/12 17:29:57 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,21 @@ void	load_textures(t_value *value, t_render3d *r)
 	r->texture_west.img_ptr = mlx_xpm_file_to_image(value->mlx, "textures/texture_west.xpm", &r->texture_west.width, &r->texture_west.height);
 	r->texture_west.data = (int *)mlx_get_data_addr(r->texture_west.img_ptr, &r->texture_west.bpp, &r->texture_west.size_line, &r->texture_west.endian);
 }
+
+int	mouse_hook(int button, int x, int y, void *param)
+{
+	t_value *value;
+
+	value = (t_value *)param;
+	(void)x;
+	(void)y;
+	if (button == 4)
+		minimap_zoom_in(&value->minimap);
+	else if (button == 5)
+		minimap_zoom_out(&value->minimap);
+	return (0);
+}
+
 void	ft_init(t_value *value)
 {
 	int bits_per_pixel;
@@ -123,6 +138,7 @@ void	ft_init(t_value *value)
 	value->minimap.cy = 110;
 	value->minimap.radius = 80;
 	value->minimap.scale = 6;
+	mlx_mouse_hook(value->window, mouse_hook, value);
 	update_map_size(&value->minimap, value->parsing->map);
 	load_textures(value, r);
 	mlx_do_key_autorepeatoff(value->mlx);
