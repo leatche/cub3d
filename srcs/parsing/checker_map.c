@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:24:11 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/09/29 14:24:34 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/12 17:07:04 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int	ft_check_side_wall(char *line)
 {
 	int	i;
 
-	i = 0;
+	i = 0;z
 	while (ft_is_a_space(line[i]))
 		i++;
 	if (line[i] != '1')

@@ -6,7 +6,7 @@
 #    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/04 16:21:20 by tcherepoff        #+#    #+#              #
-#    Updated: 2025/10/11 17:12:16 by marvin           ###   ########.fr        #
+#    Updated: 2025/10/12 15:46:13 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS_DRAW		=	srcs/draw/pixel.c				\
 					srcs/draw/calc.c				\
 					srcs/draw/render.c				\
 					srcs/draw/texture.c				\
+					srcs/draw/minimap.c				\
 
 SRCS_UTILS		=	srcs/utils/calculate.c			\
 					srcs/utils/check.c				\

@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/11 17:15:23 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/12 16:22:01 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,18 @@ typedef struct s_setup
 	t_texture	texture;
 }	t_setup;
 
+typedef struct s_minimap
+{
+	int	cx;
+	int	cy;
+	int	radius;
+	int	scale;
+	int	map_width;
+	int	map_height;
+	int	px;
+	int	py;
+}	t_minimap;
+
 typedef struct s_value
 {
 	int			height;
@@ -154,6 +166,7 @@ typedef struct s_value
 	t_parsing	*parsing;
 	t_key		keys;
 	t_render3d	render3d;
+	t_minimap	minimap;
 }				t_value;
 
 typedef struct s_rayhit
@@ -197,7 +210,18 @@ typedef struct s_dda
 	double	dist;
 }	t_dda;
 
+typedef struct s_vec2
+{
+	float	x;
+	float	y;
+}	t_vec2;
+
 t_color int_to_t_color(int rgb);
+void	draw_minimap_circle(t_value *value, t_minimap *minimap, int color);
+void	draw_minimap_map(t_value *value, t_minimap *minimap);
+void	draw_minimap_compass(t_value *value, t_minimap *minimap);
+void	update_map_size(t_minimap *minimap, char **map);
+
 void ft_draw_walls(t_value *value);
 void	ft_draw_v_line(t_value *v, t_setup *set);
 void	ft_print(char *a);

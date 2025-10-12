@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/11 17:39:42 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/12 16:21:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,10 @@ int	ft_loop(t_value *value)
 	ft_handle_right_and_left(value);
 	//value->player->color = random_color();
 	ft_draw_walls(value);
+	draw_minimap_circle(value, &value->minimap, 0x222222);
+	draw_minimap_map(value, &value->minimap);
 	mlx_put_image_to_window(value->mlx, value->window, value->img, 0, 0);
+	draw_minimap_compass(value, &value->minimap);
 	return (1);
 }
 
@@ -116,6 +119,11 @@ void	ft_init(t_value *value)
 			value->height, "cub3d");
 	value->img = mlx_new_image(value->mlx, value->width, value->height);
 	value->draw = (t_color *)mlx_get_data_addr(value->img, &bits_per_pixel, &size_line, &endian);
+	value->minimap.cx = 110;
+	value->minimap.cy = 110;
+	value->minimap.radius = 80;
+	value->minimap.scale = 6;
+	update_map_size(&value->minimap, value->parsing->map);
 	load_textures(value, r);
 	mlx_do_key_autorepeatoff(value->mlx);
 	//mlx_hook(value->window, 22, 0, mlx_resize_handler, value);
