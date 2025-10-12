@@ -4,8 +4,8 @@ SO ./path_to_the_south_texture
 WE ./path_to_the_west_texture
 EA ./path_to_the_east_texture
 
-F      29     ,    77  ,     236   
-C 236,29,29
+F 236,29,29  
+C 29     ,    77  ,     236 
 
 
 
