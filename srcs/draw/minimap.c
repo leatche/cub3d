@@ -90,18 +90,16 @@ void	draw_minimap_compass(t_value *value, t_minimap *minimap)
 	int		cx;
 	int		cy;
 	int		r;
-	float	a;
 
 	cx = minimap->cx;
 	cy = minimap->cy;
 	r = minimap->radius + 12;
-	a = value->player->orientation * PI / 180.0f;
-	mlx_string_put(value->mlx, value->window, cx + (int)(sin(a) * r),
-		cy - (int)(cos(a) * r), 0xFFFFFF, "N");
-	mlx_string_put(value->mlx, value->window, cx - (int)(sin(a) * r),
-		cy + (int)(cos(a) * r), 0xFFFFFF, "S");
-	mlx_string_put(value->mlx, value->window, cx - (int)(cos(a) * r),
-		cy - (int)(sin(a) * r), 0xFFFFFF, "W");
-	mlx_string_put(value->mlx, value->window, cx + (int)(cos(a) * r),
-		cy + (int)(sin(a) * r), 0xFFFFFF, "E");
+	mlx_string_put(value->mlx, value->window, cx,
+		cy - r, 0xFFFFFF, "N");
+	mlx_string_put(value->mlx, value->window, cx,
+		cy + r, 0xFFFFFF, "S");
+	mlx_string_put(value->mlx, value->window, cx - r,
+		cy, 0xFFFFFF, "W");
+	mlx_string_put(value->mlx, value->window, cx + r,
+		cy, 0xFFFFFF, "E");
 }
