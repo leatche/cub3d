@@ -6,7 +6,7 @@
 /*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/13 09:23:06 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/13 13:40:27 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,42 @@ int	mouse_hook(int button, int x, int y, void *param)
 	return (0);
 }
 
+void	update_player_orientation(t_value *value, int xoffset)
+{
+	float	sensitivity;
+	float	rotation;
+
+	sensitivity = 0.003f;
+	rotation = xoffset * sensitivity;
+	value->player->orientation += rotation;
+	if (value->player->orientation < 0)
+		value->player->orientation += 2 * PI;
+	else if (value->player->orientation > 2 * PI)
+		value->player->orientation -= 2 * PI;
+	value->player->dir.x = cos(value->player->orientation);
+	value->player->dir.y = sin (value->player->orientation);
+	value->player->plane.x = -sin(value->player->orientation) * FOV;
+	value->player->plane.y = cos(value->player->orientation) * FOV;
+}
+
+int	mouse_move(int x, int y, t_value *value)
+{
+	int	offset;
+
+	if (value->first_mouse)
+	{
+		value->last_mouse_x = x;
+		value->last_mouse_y = y;
+		value->first_mouse = 0;
+		return (0);
+	}
+	offset = x - value->last_mouse_x;
+	value->last_mouse_x = x;
+	value->last_mouse_y = y;
+	update_player_orientation(value, offset);
+	return (0);
+}
+
 void	ft_init(t_value *value)
 {
 	int bits_per_pixel;
@@ -142,7 +178,8 @@ void	ft_init(t_value *value)
 	update_map_size(&value->minimap, value->parsing->map);
 	load_textures(value, r);
 	mlx_do_key_autorepeatoff(value->mlx);
-	//mlx_hook(value->window, 22, 0, mlx_resize_handler, value);
+	value->first_mouse = 1;
+	mlx_hook(value->window, 6, 1L << 6, mouse_move, value);
 	mlx_hook(value->window, 33, 1L << 17, mlx_loop_end, value->mlx);
 	mlx_hook(value->window, KEY_PRESS_ID, KEY_PRESS_MASK, key_press, value);
 	mlx_hook(value->window, KEY_RELEASE_ID, KEY_RELEASE_MASK, key_release, value);

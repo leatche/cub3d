@@ -14,9 +14,9 @@
 
 void	draw_minimap_circle(t_value *value, t_minimap *minimap, int color)
 {
-	int	x;
-	int	y;
 	t_color	c_color;
+	int		x;
+	int		y;
 
 	c_color = int_to_t_color(color);
 	y = -minimap->radius;
@@ -38,8 +38,8 @@ void	draw_minimap_circle(t_value *value, t_minimap *minimap, int color)
 
 void	draw_minimap_player(t_value *value, t_minimap *minimap)
 {
-	int	dx;
-	int	dy;
+	int		dx;
+	int		dy;
 	t_color	color;
 
 	color = int_to_t_color(0xFFFF00);
@@ -50,84 +50,13 @@ void	draw_minimap_player(t_value *value, t_minimap *minimap)
 		while (dy <= 2)
 		{
 			if (dx * dx + dy * dy < 9)
-				value->draw[(minimap->cy + dy) * value->width + minimap->cx + dx] = color;
+				value->draw[(minimap->cy + dy)
+					* value->width + minimap->cx + dx] = color;
 			dy++;
 		}
 		dx++;
 	}
 }
-
-t_color	get_minimap_cell_color(t_value *value, char c)
-{
-	if (c == '1')
-		return (value->parsing->ceiling_color);
-	return (value->parsing->floor_color);
-}
-
-
-void	update_map_size(t_minimap *minimap, char **map)
-{
-	int	height;
-
-	height = 0;
-	while (map[height])
-		height++;
-	minimap->map_height = height;
-	if (height > 0)
-		minimap->map_width = (int)ft_strlen(map[0]);
-	else
-		minimap->map_width = 0;
-}
-
-void	update_map_pos(t_player *player, t_minimap *minimap, int offset_x, int offset_y)
-{
-	minimap->px = (int)(player->pos.x + offset_x / (float)minimap->scale);
-	minimap->py = (int)(player->pos.y + offset_y / (float)minimap->scale);
-}
-
-void	draw_one_minimap_cell(t_value *value, t_minimap *minimap, int x, int y)
-{
-	t_color	color;
-
-	update_map_pos(value->player, minimap, x, y);
-	if (minimap->py >= 0 && minimap->py < minimap->map_height
-		&& minimap->px >= 0 && minimap->px < minimap->map_width)
-	{
-		if (value->parsing->map[minimap->py][minimap->px])
-		{
-			color = get_minimap_cell_color(value, value->parsing->map[minimap->py][minimap->px]);
-			value->draw[(minimap->cy + y) * value->width + minimap->cx + x] = color;
-		}
-	}
-}
-
-// void	draw_one_minimap_cell(t_value *value, t_minimap *minimap, int x, int y)
-// {
-// 	int	px;
-// 	int	py;
-// 	int	col;
-// 	t_color	color;
-// 	int	map_height;
-// 	int	map_width;
-
-// 	map_height = 0;
-// 	map_width = 0;
-// 	while (value->parsing->map[map_height])
-// 		map_height++;
-// 	if (map_height > 0)
-// 		map_width = (int)ft_strlen(value->parsing->map[0]);
-// 	px = (int)(value->player->pos.x + x / (float)minimap->scale);
-// 	py = (int)(value->player->pos.y + y / (float)minimap->scale);
-// 	if (py >= 0 && py < map_height && px >= 0 && px < map_width)
-// 	{
-// 		if (value->parsing->map[py][px])
-// 		{
-// 			col = get_minimap_cell_color(value->parsing->map[py][px]);
-// 			color = int_to_t_color(col);
-// 			value->draw[(minimap->cy + y) * value->width + minimap->cx + x] = color;
-// 		}
-// 	}
-// }
 
 void	draw_minimap_cells(t_value *value, t_minimap *minimap)
 {
@@ -158,29 +87,21 @@ void	draw_minimap_map(t_value *value, t_minimap *minimap)
 
 void	draw_minimap_compass(t_value *value, t_minimap *minimap)
 {
-	int	cx;
-	int	cy;
-	int	r;
+	int		cx;
+	int		cy;
+	int		r;
 	float	a;
 
 	cx = minimap->cx;
 	cy = minimap->cy;
 	r = minimap->radius + 12;
 	a = value->player->orientation * PI / 180.0f;
-	mlx_string_put(value->mlx, value->window, cx + (int)(sin(a) * r), cy - (int)(cos(a) * r), 0xFFFFFF, "N");
-	mlx_string_put(value->mlx, value->window, cx - (int)(sin(a) * r), cy + (int)(cos(a) * r), 0xFFFFFF, "S");
-	mlx_string_put(value->mlx, value->window, cx - (int)(cos(a) * r), cy - (int)(sin(a) * r), 0xFFFFFF, "w");
-	mlx_string_put(value->mlx, value->window, cx + (int)(cos(a) * r), cy + (int)(sin(a) * r), 0xFFFFFF, "E");
-}
-
-void	minimap_zoom_in(t_minimap *minimap)
-{
-	if (minimap->scale > 1)
-		minimap->scale--;
-}
-
-void	minimap_zoom_out(t_minimap *minimap)
-{
-	if (minimap->scale < 20)
-		minimap->scale++;
+	mlx_string_put(value->mlx, value->window, cx + (int)(sin(a) * r),
+		cy - (int)(cos(a) * r), 0xFFFFFF, "N");
+	mlx_string_put(value->mlx, value->window, cx - (int)(sin(a) * r),
+		cy + (int)(cos(a) * r), 0xFFFFFF, "S");
+	mlx_string_put(value->mlx, value->window, cx - (int)(cos(a) * r),
+		cy - (int)(sin(a) * r), 0xFFFFFF, "w");
+	mlx_string_put(value->mlx, value->window, cx + (int)(cos(a) * r),
+		cy + (int)(sin(a) * r), 0xFFFFFF, "E");
 }

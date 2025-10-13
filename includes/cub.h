@@ -6,7 +6,7 @@
 /*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/13 09:22:54 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/13 13:35:48 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@
 
 #define DIR "ENWS"
 
+#define FOV 60.0
+
 #define WIN_WIDTH 800
 #define WIN_HEIGHT 600
 #define COLOR_WALL 0xFFAA00
@@ -82,7 +84,9 @@ typedef struct s_player
 {
 	double	orientation;
 	t_point	pos;
-	t_color color;
+	t_color	color;
+	t_point	dir;
+	t_point	plane;
 }				t_player;
 
 typedef struct s_parsing
@@ -161,6 +165,9 @@ typedef struct s_value
 	void		*mlx;
 	void		*window;
 	void		*img;
+	int			last_mouse_x;
+	int			last_mouse_y;
+	int			first_mouse;
 	t_color		*draw;
 	t_player	*player;
 	t_parsing	*parsing;
@@ -223,8 +230,11 @@ void	draw_minimap_compass(t_value *value, t_minimap *minimap);
 void	update_map_size(t_minimap *minimap, char **map);
 void	minimap_zoom_in(t_minimap *minimap);
 void	minimap_zoom_out(t_minimap *minimap);
+void	update_map_pos(t_player *player, t_minimap *minimap, int offset_x, int offset_y);
+t_color	get_minimap_cell_color(t_value *value, char c);
+void	draw_one_minimap_cell(t_value *value, t_minimap *minimap, int x, int y);
 
-void ft_draw_walls(t_value *value);
+void	ft_draw_walls(t_value *value);
 void	ft_draw_v_line(t_value *v, t_setup *set);
 void	ft_print(char *a);
 void	ft_init(t_value *value);

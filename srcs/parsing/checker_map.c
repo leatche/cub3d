@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:24:11 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/12 17:11:56 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/13 13:16:20 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ int	ft_check_sides(char **tmp, int size)
 	int	result;
 
 	i = 0;
+	result = 0;
 	while (tmp[i])
 	{
 		if (i == 0 || i == (size - 1))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lines.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:00:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/12 17:07:21 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/13 13:15:56 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,24 @@ char	*ft_pars_the_line(t_parsing *pars, char *line)
 
 void ft_rectangularize_map(char **map)
 {
-    int height = ft_size_tab(map);
-    size_t max_width = 0;  // changer int en size_t
-    for (int i = 0; i < height; i++)
-        if (ft_strlen(map[i]) > max_width)
-            max_width = ft_strlen(map[i]);
-    for (int i = 0; i < height; i++)
-    {
-        size_t curr_len = ft_strlen(map[i]);
-        if (curr_len < max_width)
-        {
-            char *new_line = malloc(max_width + 1);
-            strcpy(new_line, map[i]);
-            memset(new_line + curr_len, '1', max_width - curr_len);
-            new_line[max_width] = '\0';
-            free(map[i]);
-            map[i] = new_line;
-        }
-    }
+	int height = ft_size_tab(map);
+	size_t max_width = 0;  // changer int en size_t
+	for (int i = 0; i < height; i++)
+		if (ft_strlen(map[i]) > max_width)
+			max_width = ft_strlen(map[i]);
+	for (int i = 0; i < height; i++)
+	{
+		size_t curr_len = ft_strlen(map[i]);
+		if (curr_len < max_width)
+		{
+			char *new_line = malloc(max_width + 1);
+			strcpy(new_line, map[i]);
+			memset(new_line + curr_len, '1', max_width - curr_len);
+			new_line[max_width] = '\0';
+			free(map[i]);
+			map[i] = new_line;
+		}
+	}
 }
 
 int	ft_read_lines(int fd, t_parsing *pars)
