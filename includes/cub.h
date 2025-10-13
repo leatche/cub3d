@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/10 13:02:00 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/13 02:02:30 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ typedef struct s_parsing
 	char				**map;
 	long unsigned int	size_line;
 	t_color				floor;
-	t_color				wall;
+	t_color				ceiling;
+	int					hasFloor;
+	int					hasCeiling;
 	t_player			*player;
 }				t_parsing;
 
@@ -140,12 +142,13 @@ int		ft_check_side_wall(char *line);
 int		ft_good_characters(char *line);
 int		ft_free_parsing(t_parsing *pars);
 int		ft_check_sides(char **tmp, int size);
-int		ft_open(char *file, t_parsing *pars);
-int		key_release(int keycode, t_value *value);
 int		key_press(int keycode, t_value *value);
+int		ft_open(char *file, t_parsing *parsing);
 int		ft_check_zero(char **tmp, int i, int j);
+int		key_release(int keycode, t_value *value);
 int		ft_transfer_map(int fd, t_parsing *pars);
 int		ft_norm_color(char *line, t_color *color);
+int 	ft_final_pars_map(t_parsing *pars, int a);
 int		ft_parsing(t_value *value, t_parsing *pars);
 int		ft_has_a_player(t_value *value, t_parsing *pars);
 int		ft_value_color(char *line, unsigned char *color);

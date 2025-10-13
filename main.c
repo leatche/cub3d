@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/10 12:53:22 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/12 23:06:12 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ int	main(int ac, char **av)
 		ft_make_cub(value);
 	}
 	else
-	{
-		ft_print("Check again your file !");
 		return (ft_free_error(value));
-	}
 	ft_free_parsing(value->parsing);
 	ft_free_value(value);
 	return (0);

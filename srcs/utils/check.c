@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 18:04:17 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/08/20 13:25:37 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/13 00:51:11 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,13 @@ int	ft_extension(char *file)
 
 	i = ft_strlen(file);
 	if (i < 5)
+	{
+		ft_print("that's not a good file typo :)");
 		return (BAD);
+	}
 	if (strcmp(file + i - 4, ".cub") == 0)
 		return (GOOD);
+	ft_print("there is no .cub at the end :)");
 	return (BAD);
 }
 

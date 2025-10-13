@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:03:31 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/05 16:52:46 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/13 02:30:19 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,19 @@ int	ft_parsing(t_value *value, t_parsing *pars)
 	return (0);
 }
 
-int	ft_open(char *file, t_parsing *pars)
+int	ft_open(char *file, t_parsing *parsing)
 {
 	int	fd;
+	int	a;
 
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
 		return (BAD);
-	ft_initialize_pars(pars);
-	return (ft_transfer_map(fd, pars));
+	ft_initialize_pars(parsing);
+	a = ft_transfer_map(fd, parsing);
+	if (ft_final_pars_map(parsing, a) == BAD)
+		return (BAD);
+	return (GOOD);
 }
 
 void	ft_initialize_pars(t_parsing *pars)
@@ -40,10 +44,31 @@ void	ft_initialize_pars(t_parsing *pars)
 	pars->map = NULL;
 	pars->start = 0;
 	pars->size_line = 0;
-	pars->floor.r = 0;
-	pars->floor.b = 0;
-	pars->floor.g = 0;
-	pars->wall.r = 0;
-	pars->wall.b = 0;
-	pars->wall.g = 0;
+	pars->hasCeiling = 0;
+	pars->hasFloor = 0;
+}
+
+int	ft_here(t_parsing *pars)
+{
+	if (pars->hasFloor == 0)
+	{
+		ft_print("there is no floor color :)");
+		return (BAD);
+	}
+	if (pars->hasCeiling == 0)
+	{
+		ft_print("there is no ceiling color :(");
+		return (BAD);
+	}
+	return (GOOD);
+}
+
+int	ft_final_pars_map(t_parsing *pars, int a)
+{
+	if (a == -1)
+		return (BAD);
+	// présence de tout
+	if (ft_here(pars) == BAD)
+		return (BAD);
+	return (GOOD);
 }
