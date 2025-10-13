@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 23:39:53 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/01 15:52:41 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/13 08:17:27 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	key_press(int keycode, t_value *value)
 		value->keys.turn_left = 1;
 	if (keycode == RIGHT)
 		value->keys.turn_right = 1;
-	if (keycode == Z)
+	if (keycode == Z || keycode == W)
 		value->keys.go_forward = 1;
 	if (keycode == S)
 		value->keys.go_backward = 1;
-	if (keycode == Q)
+	if (keycode == Q || keycode == A)
 		value->keys.go_left = 1;
 	if (keycode == D)
 		value->keys.go_right = 1;
@@ -37,11 +37,11 @@ int	key_release(int keycode, t_value *value)
 		value->keys.turn_left = 0;
 	if (keycode == RIGHT)
 		value->keys.turn_right = 0;
-	if (keycode == Z)
+	if (keycode == Z || keycode == W)
 		value->keys.go_forward = 0;
 	if (keycode == S)
 		value->keys.go_backward = 0;
-	if (keycode == Q)
+	if (keycode == Q || keycode == A)
 		value->keys.go_left = 0;
 	if (keycode == D)
 		value->keys.go_right = 0;
