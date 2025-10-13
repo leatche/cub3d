@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+         #
+#    By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/04 16:21:20 by tcherepoff        #+#    #+#              #
-#    Updated: 2025/10/10 12:48:55 by tcherepoff       ###   ########.fr        #
+#    Updated: 2025/10/13 14:11:57 by sbehar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,16 @@ SRCS_PARSING	=	srcs/parsing/map.c				\
 
 SRCS_DRAW		=	srcs/draw/pixel.c				\
 					srcs/draw/map.c					\
+					srcs/draw/ray.c					\
+					srcs/draw/dda.c					\
+					srcs/draw/dda_init.c			\
+					srcs/draw/setup.c				\
+					srcs/draw/calc.c				\
+					srcs/draw/render.c				\
+					srcs/draw/texture.c				\
+					srcs/draw/minimap.c				\
+					srcs/draw/minimap_utils.c		\
+					srcs/draw/minimap_setup.c		\
 
 SRCS_UTILS		=	srcs/utils/calculate.c			\
 					srcs/utils/check.c				\
@@ -37,7 +47,8 @@ SRCS = $(SRCS_PARSING) $(SRCS_UTILS) $(SRCS_DRAW)
 OBJS = $(SRCS:.c=.o)
 LDFLAGS	= -L./extern_files/mlx -lbsd -lmlx -lXext -lm -lX11
 LDFLAG = ./extern_files/libft/libft.a
-FLAG = -Wall -Werror -Wextra -Ilibft -Iincludes -Imlx -Ilibft/get_next_line -I. -fsanitize=address -g3
+FLAG = -Wall -Werror -Wextra -Ilibft -Iincludes -Imlx -Ilibft/get_next_line -I. -fsanitize=address -g3 
+# -Ofast
 RM = @rm -f
 AR = ar rcs
 CC = gcc

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
+/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 01:58:54 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/12 22:34:01 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/13 14:03:36 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,17 @@ int	ft_check_wall_top(char *line)
 		i++;
 	}
 	return (0);
+}
+
+void	ft_move_player(t_value *value, double delta_x, double delta_y)
+{
+	double	nx;
+	double	ny;
+
+	nx = value->player->pos.x + delta_x;
+	ny = value->player->pos.y + delta_y;
+	if (value->parsing->map[(int)value->player->pos.y][(int)nx] != '1')
+		value->player->pos.x = nx;
+	if (value->parsing->map[(int)ny][(int)value->player->pos.x] != '1')
+		value->player->pos.y = ny;
 }

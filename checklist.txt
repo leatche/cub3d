@@ -1,0 +1,4 @@
+• Gérer les divers segfault du parsing (map invalide, argc = 1, etc...)
+• Gérer l'expansion de la fenêtre par rapport à la taille de l'écran
+• Afficher le joueur comme un triangle qui tourne 
+par rapport à son orientation (minimap)

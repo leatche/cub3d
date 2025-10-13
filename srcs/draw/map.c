@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
+/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 16:42:58 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/10 12:06:35 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/13 14:02:21 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,7 @@ void	ft_print_player(t_value *value)
 	double	x;
 	double	y;
 
-	ft_put_circle(value, point(value->player->pos.x * GRID_SIZE,
-			value->player->pos.y * GRID_SIZE), 5, value->player->color);
+	ft_draw_rays(value);
 	x = (cos(value->player->orientation / 360 * (2 * PI)));
 	y = -(sin(value->player->orientation / 360 * (2 * PI)));
 	x *= GRID_SIZE;
@@ -61,4 +60,6 @@ void	ft_print_player(t_value *value)
 	ft_put_line(value, point(value->player->pos.x * GRID_SIZE,
 			value->player->pos.y * GRID_SIZE),
 		point(x, y), value->player->color);
+	ft_put_circle(value, point(value->player->pos.x * GRID_SIZE,
+			value->player->pos.y * GRID_SIZE), 5, value->player->color);
 }

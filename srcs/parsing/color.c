@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
+/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:20:09 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/13 02:05:20 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/13 14:06:18 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_pars_color(char *line, t_parsing *pars)
 	t_color	*tmp;
 
 	if (line[0] == 'F')
-		tmp = &pars->floor;
+		tmp = &pars->floor_color;
 	else
 		tmp = &pars->ceiling;
 	if (ft_norm_color(line, tmp) == -1)
