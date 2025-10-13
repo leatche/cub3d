@@ -6,7 +6,7 @@
 /*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:05:58 by sbehar            #+#    #+#             */
-/*   Updated: 2025/10/13 13:13:46 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/13 14:19:49 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ void	update_map_pos(t_player *player, t_minimap *mmap, int off_x, int off_y)
 t_color	get_minimap_cell_color(t_value *value, char c)
 {
 	if (c == '1')
-		return (value->parsing->ceiling_color);
-	return (value->parsing->floor_color);
+		return (value->parsing->ceiling);
+	return (value->parsing->floor);
 }

@@ -6,7 +6,7 @@
 /*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/13 14:16:23 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/13 14:22:04 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,6 @@ void	ft_make_cub(t_value *value)
 	mlx_loop(value->mlx);
 }
 
-int	ft_loop(t_value *value)
-{
-	ft_handle_rotation(value);
-	ft_handle_up_and_down(value);
-	ft_handle_right_and_left(value);
-	//value->player->color = random_color();
-	ft_draw_walls(value);
-	draw_minimap_circle(value, &value->minimap, 0x222222);
-	draw_minimap_map(value, &value->minimap);
-	mlx_put_image_to_window(value->mlx, value->window, value->img, 0, 0);
-	draw_minimap_compass(value, &value->minimap);
-	return (1);
-}
 
 void	load_textures(t_value *value, t_render3d *r)
 {
@@ -124,7 +111,6 @@ int	mouse_move(int x, int y, t_value *value)
 
 void	ft_init(t_value *value)
 {
-	int	t;
 	int bits_per_pixel;
 	int	size_line;
 	int	endian;
@@ -152,20 +138,4 @@ void	ft_init(t_value *value)
 	mlx_hook(value->window, KEY_RELEASE_ID,
 		KEY_RELEASE_MASK, key_release, value);
 	mlx_loop_hook(value->mlx, ft_loop, value);
-}
-
-void	ft_free_value(t_value *value)
-{
-	mlx_do_key_autorepeaton(value->mlx);
-	mlx_destroy_image(value->mlx, value->img);
-	mlx_destroy_image(value->mlx, value->render3d.texture_north.img_ptr);
-	mlx_destroy_image(value->mlx, value->render3d.texture_south.img_ptr);
-	mlx_destroy_image(value->mlx, value->render3d.texture_east.img_ptr);
-	mlx_destroy_image(value->mlx, value->render3d.texture_west.img_ptr);
-	mlx_destroy_window(value->mlx, value->window);
-	mlx_destroy_display(value->mlx);
-	// ft_free_tab((void **)value->tab);
-	free(value->mlx);
-	free(value->player);
-	free(value);
 }

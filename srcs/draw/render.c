@@ -39,8 +39,8 @@ void	ft_setup_render3d(t_value *v, t_render3d *r)
 	r->player_angle_rad = ft_deg_to_rad(v->player->orientation);
 	r->win_height = v->height;
 	r->wall_color = int_to_t_color(COLOR_WALL);
-	r->floor_color = v->parsing->floor_color;
-	r->ceiling_color = v->parsing->ceiling_color;
+	r->floor_color = v->parsing->floor;
+	r->ceiling_color = v->parsing->ceiling;
 }
 
 double	ft_normalize_angle(double angle_deg)

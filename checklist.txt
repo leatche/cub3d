@@ -2,3 +2,11 @@
 • Gérer l'expansion de la fenêtre par rapport à la taille de l'écran
 • Afficher le joueur comme un triangle qui tourne 
 par rapport à son orientation (minimap)
+// avoir fini d'enregister les textures pour s'occuper de la place de la map dans le fichier 
+
+// // b.h: Error!
+// Error: PREPROC_CONSTANT     (line:  54, col:  25):      Preprocessor statement must only contain constant defines
+// Error: PREPROC_CONSTANT     (line:  57, col:  27):      Preprocessor statement must only contain constant defines
+//norminette
+
+Gérer la sortie des murs 

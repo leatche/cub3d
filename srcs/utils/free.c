@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
+/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 23:10:35 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/10 12:23:04 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/13 14:21:52 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,10 @@ void	ft_free_value(t_value *value)
 {
 	mlx_do_key_autorepeaton(value->mlx);
 	mlx_destroy_image(value->mlx, value->img);
+	mlx_destroy_image(value->mlx, value->render3d.texture_north.img_ptr);
+	mlx_destroy_image(value->mlx, value->render3d.texture_south.img_ptr);
+	mlx_destroy_image(value->mlx, value->render3d.texture_east.img_ptr);
+	mlx_destroy_image(value->mlx, value->render3d.texture_west.img_ptr);
 	mlx_destroy_window(value->mlx, value->window);
 	mlx_destroy_display(value->mlx);
 	free(value->mlx);
