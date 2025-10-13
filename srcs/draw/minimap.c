@@ -57,11 +57,11 @@ void	draw_minimap_player(t_value *value, t_minimap *minimap)
 	}
 }
 
-int	get_minimap_cell_color(char c)
+t_color	get_minimap_cell_color(t_value *value, char c)
 {
 	if (c == '1')
-		return (0x2408fc);
-	return (0xfc0808);
+		return (value->parsing->ceiling_color);
+	return (value->parsing->floor_color);
 }
 
 
@@ -87,7 +87,6 @@ void	update_map_pos(t_player *player, t_minimap *minimap, int offset_x, int offs
 
 void	draw_one_minimap_cell(t_value *value, t_minimap *minimap, int x, int y)
 {
-	int	col;
 	t_color	color;
 
 	update_map_pos(value->player, minimap, x, y);
@@ -96,8 +95,7 @@ void	draw_one_minimap_cell(t_value *value, t_minimap *minimap, int x, int y)
 	{
 		if (value->parsing->map[minimap->py][minimap->px])
 		{
-			col = get_minimap_cell_color(value->parsing->map[minimap->py][minimap->px]);
-			color = int_to_t_color(col);
+			color = get_minimap_cell_color(value, value->parsing->map[minimap->py][minimap->px]);
 			value->draw[(minimap->cy + y) * value->width + minimap->cx + x] = color;
 		}
 	}
