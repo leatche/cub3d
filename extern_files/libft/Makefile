@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: marvin <marvin@student.42.fr>              +#+  +:+       +#+         #
+#    By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/19 21:15:19 by tcherepoff        #+#    #+#              #
-#    Updated: 2025/10/12 16:43:44 by marvin           ###   ########.fr        #
+#    Updated: 2025/10/13 08:14:39 by sbehar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ SRCSBONUS = ft_lstnew_bonus.c     ft_lstadd_front_bonus.c     ft_lstsize_bonus.c
 OBJS = $(SRCS:.c=.o)
 OBJSBONUS = $(SRCSBONUS:.c=.o)
 BONUS = $(OBJS) $(OBJSBONUS)
-FLAG = -Wall -Werror -Wextra -Iget_next_line
+FLAG = -Wall -Werror -Wextra -Iget_next_line -fPIE
 RM = rm -f
 AR = ar rcs
 
