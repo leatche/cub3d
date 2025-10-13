@@ -101,7 +101,7 @@ void	draw_minimap_compass(t_value *value, t_minimap *minimap)
 	mlx_string_put(value->mlx, value->window, cx - (int)(sin(a) * r),
 		cy + (int)(cos(a) * r), 0xFFFFFF, "S");
 	mlx_string_put(value->mlx, value->window, cx - (int)(cos(a) * r),
-		cy - (int)(sin(a) * r), 0xFFFFFF, "w");
+		cy - (int)(sin(a) * r), 0xFFFFFF, "W");
 	mlx_string_put(value->mlx, value->window, cx + (int)(cos(a) * r),
 		cy + (int)(sin(a) * r), 0xFFFFFF, "E");
 }

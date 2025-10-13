@@ -38,7 +38,6 @@ void	ft_setup_render3d(t_value *v, t_render3d *r)
 	r->start_angle = v->player->orientation - r->fov / 2.0;
 	r->player_angle_rad = ft_deg_to_rad(v->player->orientation);
 	r->win_height = v->height;
-	r->wall_color = int_to_t_color(COLOR_WALL);
 	r->floor_color = v->parsing->floor;
 	r->ceiling_color = v->parsing->ceiling;
 }
