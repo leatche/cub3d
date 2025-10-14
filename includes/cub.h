@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/13 16:56:11 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/14 17:08:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,12 +163,13 @@ typedef struct s_value
 {
 	int			height;
 	int			width;
+	int			window_center_x;
+	int			window_center_y;
 	void		*mlx;
 	void		*window;
 	void		*img;
-	int			last_mouse_x;
-	int			last_mouse_y;
 	int			first_mouse;
+	int			last_mouse_x;
 	t_color		*draw;
 	t_player	*player;
 	t_parsing	*parsing;

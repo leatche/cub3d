@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/13 15:37:10 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/14 17:12:28 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	update_player_orientation(t_value *value, int xoffset)
 	float	sensitivity;
 	float	rotation;
 
-	sensitivity = 0.003f;
+	sensitivity = 0.1f;
 	rotation = xoffset * sensitivity;
 	value->player->orientation += rotation;
 	if (value->player->orientation < 0)
@@ -95,17 +95,19 @@ int	mouse_move(int x, int y, t_value *value)
 {
 	int	offset;
 
+	(void)y;
 	if (value->first_mouse)
 	{
 		value->last_mouse_x = x;
-		value->last_mouse_y = y;
 		value->first_mouse = 0;
 		return (0);
 	}
 	offset = x - value->last_mouse_x;
 	value->last_mouse_x = x;
-	value->last_mouse_y = y;
-	update_player_orientation(value, offset);
+	if (offset != 0)
+		update_player_orientation(value, offset);
+	mlx_mouse_move(value->mlx, value->window, value->window_center_x, value->window_center_y);
+	value->last_mouse_x = value->window_center_x;
 	return (0);
 }
 
@@ -121,6 +123,8 @@ void	ft_init(t_value *value)
 	mlx_get_screen_size(value->mlx, &value->width, &value->height);
 	value->window = mlx_new_window(value->mlx, value->width,
 			value->height, "cub3d");
+	value->window_center_x = value->width / 2;
+	value->window_center_y = value->height / 2;
 	value->img = mlx_new_image(value->mlx, value->width, value->height);
 	value->draw = (t_color *)mlx_get_data_addr(value->img, &bits_per_pixel, &size_line, &endian);
 	value->minimap.cx = 110;
@@ -138,4 +142,6 @@ void	ft_init(t_value *value)
 	mlx_hook(value->window, KEY_RELEASE_ID,
 		KEY_RELEASE_MASK, key_release, value);
 	mlx_loop_hook(value->mlx, ft_loop, value);
+	mlx_mouse_hide(value->mlx, value->window);
+	mlx_mouse_move(value->mlx, value->window, value->window_center_x, value->window_center_y);
 }

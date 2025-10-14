@@ -1,4 +1,4 @@
-- Fixer le compas de la minimap
+FAIT - Fixer le compas de la minimap
 
 Gérer la souris :
 - mettre le curseur au centre (fonction mlx) pour pouvoir bouger en sortant de lecran (mlx_mouse_move)
