@@ -39,8 +39,9 @@ void	ft_draw_v_wall(t_value *v, t_setup *set)
 	y = set->draw_start;
 	while (y <= set->draw_end && y < set->r->win_height)
 	{
-		tex_y = (double)(y - set->draw_start)
-			/ wall_height * set->texture.height;
+		tex_y = (int)(((double)(y - set->draw_start) / wall_height) * set->texture.height);
+		if (tex_y < 0)
+			tex_y = 0;
 		if (tex_y >= set->texture.height)
 			tex_y = set->texture.height - 1;
 		color = set->texture.data[tex_y * set->texture.width + set->tex_x];
