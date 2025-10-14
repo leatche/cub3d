@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/14 17:12:28 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/14 17:23:43 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,8 @@ int	mouse_move(int x, int y, t_value *value)
 	int	offset;
 
 	(void)y;
+	if (!value->mouse_on)
+		return (0);
 	if (value->first_mouse)
 	{
 		value->last_mouse_x = x;
@@ -125,6 +127,7 @@ void	ft_init(t_value *value)
 			value->height, "cub3d");
 	value->window_center_x = value->width / 2;
 	value->window_center_y = value->height / 2;
+	value->mouse_on = 1;
 	value->img = mlx_new_image(value->mlx, value->width, value->height);
 	value->draw = (t_color *)mlx_get_data_addr(value->img, &bits_per_pixel, &size_line, &endian);
 	value->minimap.cx = 110;

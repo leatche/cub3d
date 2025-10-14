@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 23:39:53 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/13 08:17:27 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/14 17:20:02 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	key_press(int keycode, t_value *value)
 		value->keys.go_left = 1;
 	if (keycode == D)
 		value->keys.go_right = 1;
+	if (keycode == M)
+		value->mouse_on = !value->mouse_on;
 	if (keycode == ESC)
 		mlx_loop_end(value->mlx);
 	return (1);

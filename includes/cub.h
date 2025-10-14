@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/14 17:08:56 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/14 17:21:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <unistd.h>
 # include <stdio.h>
 # include <stdarg.h>
+# include <stdbool.h>
 # include <pthread.h>
 # include <stdlib.h>
 # include <sys/time.h>
@@ -42,6 +43,7 @@
 
 # define S 115
 # define D 100
+# define M 109
 # define UP 65362
 # define LEFT 65361
 # define DOWN 65364
@@ -170,6 +172,7 @@ typedef struct s_value
 	void		*img;
 	int			first_mouse;
 	int			last_mouse_x;
+	bool		mouse_on;
 	t_color		*draw;
 	t_player	*player;
 	t_parsing	*parsing;
