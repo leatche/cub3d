@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 23:39:53 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/15 23:55:29 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/16 21:29:06 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ int	key_press(int keycode, t_value *value)
 		value->keys.go_left = 1;
 	if (keycode == D)
 		value->keys.go_right = 1;
+	if (keycode == M)
+		value->mouse_on = !value->mouse_on;
 	if (keycode == ESC)
 		mlx_loop_end(value->mlx);
 	return (1);

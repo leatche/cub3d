@@ -39,8 +39,8 @@ void	ft_calc_draw_lim(t_render3d *r, double c_dst, int *draw_s, int *draw_e)
 	wall_height = (int)(r->win_height / c_dst);
 	*draw_s = (r->win_height / 2) - (wall_height / 2);
 	*draw_e = *draw_s + wall_height;
-	if (*draw_s < 0)
-		*draw_s = 0;
-	if (*draw_e >= r->win_height)
-		*draw_e = r->win_height - 1;
+	// if (*draw_s < 0)
+	// 	*draw_s = 0;
+	// if (*draw_e >= r->win_height)
+	// 	*draw_e = r->win_height - 1;
 }

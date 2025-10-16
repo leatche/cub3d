@@ -18,7 +18,7 @@ void	ft_calc_draw_lim(t_render3d *r, double c_dst, int *draw_s, int *draw_e);
 double	ft_cast_ray(t_value *v, double ray_angle, t_rayhit *hit);
 double	ft_normalize_angle(double angle_deg);
 
-int	ft_calc_tex_x(t_render3d *r, t_rayhit *hit)
+int	ft_calc_tex_x(t_texture *texture, t_rayhit *hit)
 {
 	double	wall_hit;
 	int		tex_x;
@@ -27,11 +27,11 @@ int	ft_calc_tex_x(t_render3d *r, t_rayhit *hit)
 		wall_hit = hit->y - floor(hit->y);
 	else
 		wall_hit = hit->x - floor(hit->x);
-	tex_x = (int)(wall_hit * r->texture_north.width);
+	tex_x = (int)(wall_hit * texture->width);
 	if (tex_x < 0)
 		tex_x = 0;
-	if (tex_x >= r->texture_north.width)
-		tex_x = r->texture_north.width - 1;
+	if (tex_x >= texture->width)
+		tex_x = texture->width - 1;
 	return (tex_x);
 }
 
@@ -66,7 +66,7 @@ void	ft_calc_ray_params(t_draw *d)
 void	ft_calc_draw_params(t_draw *d)
 {
 	ft_calc_draw_lim(d->r, d->corrected_dist, &d->draw_start, &d->draw_end);
-	d->tex_x = ft_calc_tex_x(d->r, &d->hit);
 	d->ray_angle = ft_normalize_angle(d->ray_angle);
 	ft_select_texture(d->r, d->ray_angle, d->hit.side, &d->texture);
+	d->tex_x = ft_calc_tex_x(&d->texture, &d->hit);
 }

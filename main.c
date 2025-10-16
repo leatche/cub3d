@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/16 21:21:41 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/16 21:28:55 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,37 +86,25 @@ int	mouse_hook(int button, int x, int y, void *param)
 
 void	update_player_orientation(t_value *value, int xoffset)
 {
-	float	sensitivity;
-	float	rotation;
+	double	sensitivity;
+	double	rotation;
 
-	sensitivity = 0.003f;
+	sensitivity = 0.01f;
 	rotation = xoffset * sensitivity;
 	value->player->orientation += rotation;
-	if (value->player->orientation < 0)
-		value->player->orientation += 2 * PI;
-	else if (value->player->orientation > 2 * PI)
-		value->player->orientation -= 2 * PI;
-	value->player->dir.x = cos(value->player->orientation);
-	value->player->dir.y = sin (value->player->orientation);
-	value->player->plane.x = -sin(value->player->orientation) * FOV;
-	value->player->plane.y = cos(value->player->orientation) * FOV;
 }
 
 int	mouse_move(int x, int y, t_value *value)
 {
 	int	offset;
 
-	if (value->first_mouse)
-	{
-		value->last_mouse_x = x;
-		value->last_mouse_y = y;
-		value->first_mouse = 0;
+	(void)y;
+	if (!value->mouse_on)
 		return (0);
-	}
-	offset = x - value->last_mouse_x;
-	value->last_mouse_x = x;
-	value->last_mouse_y = y;
-	update_player_orientation(value, offset);
+	offset = x - value->window_center_x;
+	if (offset != 0)
+		update_player_orientation(value, offset);
+	mlx_mouse_move(value->mlx, value->window, value->window_center_x, value->window_center_y);
 	return (0);
 }
 
@@ -132,6 +120,9 @@ int	ft_init(t_value *value)
 	mlx_get_screen_size(value->mlx, &value->width, &value->height);
 	value->window = mlx_new_window(value->mlx, value->width,
 			value->height, "cub3d");
+	value->window_center_x = value->width / 2;
+	value->window_center_y = value->height / 2;
+	value->mouse_on = 1;
 	value->img = mlx_new_image(value->mlx, value->width, value->height);
 	value->draw = (t_color *)mlx_get_data_addr(value->img, &bits_per_pixel, &size_line, &endian);
 	value->minimap.cx = 110;
@@ -150,5 +141,7 @@ int	ft_init(t_value *value)
 	mlx_hook(value->window, KEY_RELEASE_ID,
 		KEY_RELEASE_MASK, key_release, value);
 	mlx_loop_hook(value->mlx, ft_loop, value);
+	mlx_mouse_hide(value->mlx, value->window);
+	mlx_mouse_move(value->mlx, value->window, value->window_center_x, value->window_center_y);
 	return (GOOD);
 }
