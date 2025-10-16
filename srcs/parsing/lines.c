@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:00:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/16 21:12:20 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/16 21:37:49 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,20 @@
 
 int	ft_pars_texture(t_parsing *pars, char *line, int direction)
 {
-	int i = 2;
+	int	i;
 
+	i = 2;
 	if (pars->textures[direction] != NULL)
 	{
 		ft_print("At least one texture is defined twice");
-		return (free(line), LINE_ERROR); // Print?
+		return (free(line), LINE_ERROR);
 	}
 	while (line[i] == ' ')
 		i++;
 	if (line[i] == '\0')
 	{
 		ft_print("No file found after texture identifier");
-		return (free(line), LINE_ERROR); // Print?
+		return (free(line), LINE_ERROR);
 	}
 	pars->textures[direction] = ft_strdup(line + i);
 	while (line[i] && line[i] != ' ')
@@ -40,9 +41,9 @@ int	ft_pars_texture(t_parsing *pars, char *line, int direction)
 	return (LINE_INFO);
 }
 
-int ft_pars_the_line(t_parsing *pars, char *line)
+int	ft_pars_the_line(t_parsing *pars, char *line)
 {
-	char *trimed;
+	char	*trimed;
 
 	trimed = ft_strtrim(line, "\f\t\n\r\v ");
 	if (!trimed[0])
@@ -105,7 +106,7 @@ t_list	*ft_read_lines(int fd, t_parsing *pars)
 
 int	ft_check_trap(t_parsing *pars, char *line, t_list **list_tmp)
 {
-	int line_type;
+	int	line_type;
 
 	if (!line[0] && *list_tmp == NULL)
 		return (GOOD);
@@ -114,16 +115,16 @@ int	ft_check_trap(t_parsing *pars, char *line, t_list **list_tmp)
 		return (BAD);
 	if (line_type != LINE_MAP && line_type != LINE_EMPTY)
 		return (GOOD);
-	if (pars->hasMap == 0 && line_type == LINE_MAP)
+	if (pars->has_map == 0 && line_type == LINE_MAP)
 	{
-		pars->hasMap = 1;
-		if (pars->hasFloor == 0 || pars->hasCeiling == 0)
+		pars->has_map = 1;
+		if (pars->has_floor == 0 || pars->has_ceiling == 0)
 		{
 			ft_print("Your map is missing or wrongly placed ;o");
 			return (BAD);
 		}
 	}
-	if (pars->hasMap)
+	if (pars->has_map)
 		ft_add_to_map(line, list_tmp, pars);
 	return (GOOD);
 }

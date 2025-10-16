@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/07 11:07:03 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/15 23:59:06 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/16 21:35:37 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ t_player	*create_player(int x, int y, char dir)
 
 int	ft_has_a_player(t_value *value)
 {
-	int	y;
-	int	x;
+	int			y;
+	int			x;
 	t_player	*tmp_player;
 
 	y = -1;

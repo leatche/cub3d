@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/16 21:28:55 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/16 21:46:12 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,18 @@ void	ft_make_cub(t_value *value)
 
 int	load_textures(t_value *value, t_render3d *r)
 {
-	r->texture_north.img_ptr = mlx_xpm_file_to_image(value->mlx, value->parsing->textures[NORTH], &r->texture_north.width, &r->texture_north.height);
-	r->texture_south.img_ptr = mlx_xpm_file_to_image(value->mlx, value->parsing->textures[SOUTH], &r->texture_south.width, &r->texture_south.height);
-	r->texture_east.img_ptr = mlx_xpm_file_to_image(value->mlx, value->parsing->textures[EAST], &r->texture_east.width, &r->texture_east.height);
-	r->texture_west.img_ptr = mlx_xpm_file_to_image(value->mlx, value->parsing->textures[WEST], &r->texture_west.width, &r->texture_west.height);
+	r->texture_north.img_ptr = mlx_xpm_file_to_image(value->mlx,
+			value->parsing->textures[NORTH],
+			&r->texture_north.width, &r->texture_north.height);
+	r->texture_south.img_ptr = mlx_xpm_file_to_image(value->mlx,
+			value->parsing->textures[SOUTH],
+			&r->texture_south.width, &r->texture_south.height);
+	r->texture_east.img_ptr = mlx_xpm_file_to_image(value->mlx,
+			value->parsing->textures[EAST],
+			&r->texture_east.width, &r->texture_east.height);
+	r->texture_west.img_ptr = mlx_xpm_file_to_image(value->mlx,
+			value->parsing->textures[WEST],
+			&r->texture_west.width, &r->texture_west.height);
 	if (!r->texture_north.img_ptr || !r->texture_south.img_ptr
 		|| !r->texture_east.img_ptr || !r->texture_west.img_ptr)
 	{
@@ -137,9 +145,8 @@ int	ft_init(t_value *value)
 	value->first_mouse = 1;
 	mlx_hook(value->window, 6, 1L << 6, mouse_move, value);
 	mlx_hook(value->window, 33, 1L << 17, mlx_loop_end, value->mlx);
-	mlx_hook(value->window, KEY_PRESS_ID, KEY_PRESS_MASK, key_press, value);
-	mlx_hook(value->window, KEY_RELEASE_ID,
-		KEY_RELEASE_MASK, key_release, value);
+	mlx_hook(value->window, KEY_PRESS_ID, (1L<<0), key_press, value);
+	mlx_hook(value->window, KEY_RELEASE_ID, (1L<<1), key_release, value);
 	mlx_loop_hook(value->mlx, ft_loop, value);
 	mlx_mouse_hide(value->mlx, value->window);
 	mlx_mouse_move(value->mlx, value->window, value->window_center_x, value->window_center_y);

@@ -6,31 +6,31 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:20:09 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/16 20:39:26 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/16 21:37:49 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int ft_pars_color(char *line, t_parsing *pars)
+int	ft_pars_color(char *line, t_parsing *pars)
 {
 	if (line[0] == 'F')
 	{
-		if (pars->hasFloor || ft_norm_color(line, &pars->floor) == -1)
+		if (pars->has_floor || ft_norm_color(line, &pars->floor) == -1)
 		{
 			ft_print("Check again your floor definition");
 			return (free(line), LINE_ERROR);
 		}
-		pars->hasFloor = 1;
+		pars->has_floor = 1;
 	}
 	else
 	{
-		if (pars->hasCeiling || ft_norm_color(line, &pars->ceiling) == -1)
+		if (pars->has_ceiling || ft_norm_color(line, &pars->ceiling) == -1)
 		{
 			ft_print("Check again your ceiling definition");
 			return (free(line), LINE_ERROR);
 		}
-		pars->hasCeiling = 1;
+		pars->has_ceiling = 1;
 	}
 	free(line);
 	return (LINE_INFO);

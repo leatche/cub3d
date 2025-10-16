@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:03:31 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/16 20:47:05 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/16 21:37:49 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	ft_parsing(t_value *value)
 
 t_parsing	*pars_file(char *file)
 {
-	int	fd;
-	int	a;
-	t_parsing *parsing;
+	int			fd;
+	int			a;
+	t_parsing	*parsing;
 
 	if (ft_extension(file) == BAD)
 		return (NULL);
@@ -50,20 +50,20 @@ void	ft_initialize_pars(t_parsing *pars)
 {
 	pars->map = NULL;
 	pars->size_line = 0;
-	pars->hasCeiling = 0;
-	pars->hasFloor = 0;
+	pars->has_ceiling = 0;
+	pars->has_floor = 0;
 }
 
 int	ft_here(t_parsing *pars)
 {
-	int i;
+	int	i;
 
-	if (pars->hasFloor == 0)
+	if (pars->has_floor == 0)
 	{
 		ft_print("there is no floor color :)");
 		return (BAD);
 	}
-	if (pars->hasCeiling == 0)
+	if (pars->has_ceiling == 0)
 	{
 		ft_print("there is no ceiling color :(");
 		return (BAD);
@@ -85,7 +85,6 @@ int	ft_final_pars_map(t_parsing *pars, int a)
 {
 	if (a == -1)
 		return (BAD);
-	// présence de tout
 	if (ft_here(pars) == BAD)
 		return (BAD);
 	return (GOOD);
