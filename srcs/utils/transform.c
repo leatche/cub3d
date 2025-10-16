@@ -36,12 +36,15 @@ char	**ft_list_to_tab(t_list *list_tmp, t_parsing *pars)
 char	*ft_strdup_space(char *s, int size_line)
 {
 	char	*result;
+	char	*tmp;
 
 	if (!s)
 		return (NULL);
+	tmp = ft_strtrim(s, "\n\r");
 	result = malloc(size_line + 1);
-	ft_memcpy(result, s, ft_strlen(s));
-	ft_memset(result + ft_strlen(s), ' ', size_line - ft_strlen(s));
+	ft_memcpy(result, tmp, ft_strlen(tmp));
+	ft_memset(result + ft_strlen(tmp), ' ', size_line - ft_strlen(tmp));
 	result[size_line] = '\0';
+	free(tmp);
 	return (result);
 }

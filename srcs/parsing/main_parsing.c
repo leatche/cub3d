@@ -3,46 +3,49 @@
 /*                                                        :::      ::::::::   */
 /*   main_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:03:31 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/13 14:04:04 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/15 23:59:31 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	ft_parsing(t_value *value, t_parsing *pars)
+int	ft_parsing(t_value *value)
 {
-	if (ft_has_a_player(value, pars) == BAD)
+	if (ft_has_a_player(value) == BAD)
 	{
 		ft_print("there is too much or no player in the map !!");
 		return (-1);
 	}
-	if (ft_conform_map(pars->map) == -1)
+	if (ft_conform_map(value->parsing->map) == -1)
 		return (-1);
 	return (0);
 }
 
-int	ft_open(char *file, t_parsing *parsing)
+t_parsing	*pars_file(char *file)
 {
 	int	fd;
 	int	a;
+	t_parsing *parsing;
 
+	if (ft_extension(file) == BAD)
+		return (NULL);
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-		return (BAD);
+		return (NULL);
+	parsing = ft_calloc(1, sizeof(t_parsing));
 	ft_initialize_pars(parsing);
 	a = ft_transfer_map(fd, parsing);
 	if (ft_final_pars_map(parsing, a) == BAD)
-		return (BAD);
-	return (GOOD);
+		return (NULL);
+	return (parsing);
 }
 
 void	ft_initialize_pars(t_parsing *pars)
 {
 	pars->map = NULL;
-	pars->start = 0;
 	pars->size_line = 0;
 	pars->hasCeiling = 0;
 	pars->hasFloor = 0;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 01:58:54 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/13 16:58:03 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/16 00:07:56 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_conform_map(char **tmp)
 	i = 0;
 	while (tmp && tmp[i])
 	{
-		if (ft_checker_wall(tmp) == -1 || ft_good_characters(tmp[i]) == -1)
+		if (ft_good_characters(tmp[i]) == -1 || ft_checker_wall(tmp) == -1)
 			return (-1);
 		i++;
 	}
@@ -51,16 +51,6 @@ int	ft_conform_map(char **tmp)
 	{
 		ft_print("there is an empty line in the map ");
 		return (-1);
-	}
-	return (GOOD);
-}
-
-int	ft_map_start(t_parsing *pars)
-{
-	if (pars->start == -1)
-	{
-		ft_print("your map is at the start ... that is a problem ...");
-		return (BAD);
 	}
 	return (GOOD);
 }

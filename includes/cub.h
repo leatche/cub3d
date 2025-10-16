@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/13 16:56:11 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/15 23:59:15 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@
 # define BAD -1
 # define YES 1
 # define NO -1
+
+# define LINE_INFO 0
+# define LINE_MAP 1
+# define LINE_EMPTY 2
+# define LINE_ERROR 3
 
 # define GRID_SIZE 150
 
@@ -89,12 +94,12 @@ typedef struct s_player
 
 typedef struct s_parsing
 {
-	int					start;
 	int					space;
 	char				**map;
 	long unsigned int	size_line;
 	t_color				floor;
 	t_color				ceiling;
+	int					hasMap;
 	int					hasFloor;
 	int					hasCeiling;
 	t_player			*player;
@@ -269,27 +274,26 @@ int		ft_check_wall(char **tmp);
 int		ft_conform_map(char **tmp);
 int		ft_checker_wall(char **tmp);
 int		ft_free_error(t_value *value);
-int		ft_map_start(t_parsing *pars);
 int		ft_check_wall_top(char *line);
 int		ft_check_side_wall(char *line);
 int		ft_good_characters(char *line);
 int		ft_free_parsing(t_parsing *pars);
 int		ft_check_sides(char **tmp, int size);
 int		key_press(int keycode, t_value *value);
-int		ft_open(char *file, t_parsing *parsing);
+t_parsing	*pars_file(char *file);
 int		ft_check_zero(char **tmp, int i, int j);
 int		key_release(int keycode, t_value *value);
 int		ft_transfer_map(int fd, t_parsing *pars);
 int		ft_norm_color(char *line, t_color *color);
 int 	ft_final_pars_map(t_parsing *pars, int a);
-int		ft_parsing(t_value *value, t_parsing *pars);
-int		ft_has_a_player(t_value *value, t_parsing *pars);
+int		ft_parsing(t_value *value);
+int		ft_has_a_player(t_value *value);
 int		ft_value_color(char *line, unsigned char *color);
-int		ft_check_trap(t_parsing *pars, char	*a, char *line, t_list *list_tmp);
+int		ft_check_trap(t_parsing *pars, char *line, t_list **list_tmp);
 
 char	*ft_strdup_space(char *s, int size_line);
-char	*ft_pars_the_line(t_parsing *pars, char *line);
-char	*ft_pars_color(char *line, t_parsing *pars);
+int		ft_pars_the_line(t_parsing *pars, char *line);
+int		ft_pars_color(char *line, t_parsing *pars);
 
 char	**ft_list_to_tab(t_list *list_tmp, t_parsing *pars);
 

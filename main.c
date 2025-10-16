@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/13 15:37:10 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/16 00:05:34 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,19 @@ int	main(int ac, char **av)
 		ft_print("Check again the number of arguments !");
 		return (-1);
 	}
-	value = calloc(1, sizeof(t_value));
-	value->parsing = calloc(1, sizeof(t_parsing));
-	if (ft_extension(av[1]) == GOOD && (ft_open(av[1], value->parsing) != -1))
+	value = ft_calloc(1, sizeof(t_value));
+	value->parsing = pars_file(av[1]);
+	if (!value->parsing)
 	{
-		if (ft_parsing(value, value->parsing) == -1)
-			return (ft_free_error(value));
-		ft_make_cub(value);
+		free(value);
+		return (1);
 	}
-	else
-		return (ft_free_error(value));
+	if (ft_parsing(value) == -1)
+	{
+		ft_free_error(value);
+		return (0);
+	}
+	ft_make_cub(value);
 	ft_free_parsing(value->parsing);
 	ft_free_value(value);
 	return (0);

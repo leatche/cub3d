@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   color.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:20:09 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/13 14:17:16 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/15 23:43:48 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-char	*ft_pars_color(char *line, t_parsing *pars)
+int ft_pars_color(char *line, t_parsing *pars)
 {
 	t_color	*tmp;
 
@@ -23,13 +23,15 @@ char	*ft_pars_color(char *line, t_parsing *pars)
 	if (ft_norm_color(line, tmp) == -1)
 	{
 		ft_print("Check again your definition of color... where are we ?");
-		return ("-1");
+		free(line);
+		return (LINE_ERROR);
 	}
 	if (line[0] == 'F')
 		pars->hasFloor = 1;
 	else
 		pars->hasCeiling = 1;
-	return ("-3");
+	free(line);
+	return (LINE_INFO);
 }
 
 int	ft_norm_color(char *line, t_color *tmp)

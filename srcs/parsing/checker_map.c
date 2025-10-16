@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   checker_map.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:24:11 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/13 14:06:38 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/16 00:01:54 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_checker_wall(char **tmp)
 	result = ft_check_sides(tmp, ft_size_tab(tmp));
 	if (result == -1)
 	{
-		ft_print("there is a hole in your map...");
+		ft_print("there is a hole in the side your map...");
 		return (-1);
 	}
 	result = ft_check_wall(tmp);
@@ -44,9 +44,9 @@ int	ft_check_sides(char **tmp, int size)
 			result = ft_check_wall_top(tmp[i]);
 		else
 			result = ft_check_side_wall(tmp[i]);
-		i++;
 		if (result == -1)
 			return (result);
+		i++;
 	}
 	return (result);
 }

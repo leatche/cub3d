@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 18:04:17 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/13 00:51:11 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/16 00:07:43 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,7 @@ int	ft_good_characters(char *line)
 	i = 0;
 	while (line[i])
 	{
-		if (line[i] != '1' && line[i] != '0' && line[i] != 'N'
-			&& line[i] != 'W' && line[i] != 'E' && line[i] != 'S'
-			&& line[i] != ' ')
+		if (ft_strchr("NSEW10 ", line[i]) == 0)
 		{
 			ft_print("Be careful, there is a wrong chacracter !");
 			return (BAD);
