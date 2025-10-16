@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/15 23:59:15 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/16 21:07:10 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,11 @@
 # define LINE_MAP 1
 # define LINE_EMPTY 2
 # define LINE_ERROR 3
+
+# define NORTH 0
+# define EAST 1
+# define SOUTH 2
+# define WEST 3
 
 # define GRID_SIZE 150
 
@@ -99,10 +104,12 @@ typedef struct s_parsing
 	long unsigned int	size_line;
 	t_color				floor;
 	t_color				ceiling;
+	int					lastLineType;
 	int					hasMap;
 	int					hasFloor;
 	int					hasCeiling;
 	t_player			*player;
+	char				*textures[4];
 }				t_parsing;
 
 typedef struct s_key
@@ -243,7 +250,7 @@ void	draw_one_minimap_cell(t_value *value, t_minimap *minimap, int x, int y);
 void	ft_draw_walls(t_value *value);
 void	ft_draw_v_line(t_value *v, t_setup *set);
 void	ft_print(char *a);
-void	ft_init(t_value *value);
+int	ft_init(t_value *value);
 void	ft_free_tab(char **tab);
 void	ft_dda_init_x(t_dda *param);
 void	ft_dda_init_y(t_dda *param);
@@ -280,6 +287,7 @@ int		ft_good_characters(char *line);
 int		ft_free_parsing(t_parsing *pars);
 int		ft_check_sides(char **tmp, int size);
 int		key_press(int keycode, t_value *value);
+int 	ft_map_has_empty_line(t_list *map);
 t_parsing	*pars_file(char *file);
 int		ft_check_zero(char **tmp, int i, int j);
 int		key_release(int keycode, t_value *value);

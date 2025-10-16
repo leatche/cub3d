@@ -1,0 +1,19 @@
+NO ./maps/test_maps/sprites/basic.xpm
+SO ./maps/test_maps/sprites/basic.xpm
+WE ./maps/test_maps/sprites/basic.xpm
+EA ./maps/test_maps/sprites/basic.xpm
+
+C 26,161,199
+
+
+11111111111
+10000000001
+10000000001
+10000000001
+10000000001
+10000N00001
+10000000001
+10000000001
+10000000001
+10000000001
+11111111111

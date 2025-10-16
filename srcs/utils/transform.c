@@ -12,6 +12,34 @@
 
 #include "cub.h"
 
+int	isEmptyLine(char *line)
+{
+	while (*line && ft_strchr("\f\t\n\r\v ", *line) != 0)
+		line++;
+	return (*line == 0);
+}
+
+int ft_map_has_empty_line(t_list *map)
+{
+	int hasEmptyLine;
+	int	isEmpty;
+
+	hasEmptyLine = 0;
+	if (!map)
+		return (GOOD);
+	while (map)
+	{
+		((char *)map->content)[strlen(map->content) - 1] = '\0';
+		isEmpty = isEmptyLine(map->content);
+		if (!isEmpty && hasEmptyLine == 1)
+			return (BAD);
+		if (isEmpty)
+			hasEmptyLine = 1;
+		map = map->next;
+	}
+	return (GOOD);
+}
+
 char	**ft_list_to_tab(t_list *list_tmp, t_parsing *pars)
 {
 	int		i;
@@ -25,9 +53,12 @@ char	**ft_list_to_tab(t_list *list_tmp, t_parsing *pars)
 	move = list_tmp;
 	while (move)
 	{
-		tmp[i] = ft_strdup_space(move->content, pars->size_line);
+		if (!isEmptyLine(move->content))
+		{
+			tmp[i] = ft_strdup_space(move->content, pars->size_line);
+			i++;
+		}
 		move = move->next;
-		i++;
 	}
 	tmp[i] = NULL;
 	return (tmp);

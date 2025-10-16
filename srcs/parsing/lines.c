@@ -6,15 +6,36 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:00:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/16 00:03:17 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/16 21:12:20 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub.h"
 
-int	ft_pars_texture(t_parsing *pars, char *line)
+int	ft_pars_texture(t_parsing *pars, char *line, int direction)
 {
-	(void)pars;
+	int i = 2;
+
+	if (pars->textures[direction] != NULL)
+	{
+		ft_print("At least one texture is defined twice");
+		return (free(line), LINE_ERROR); // Print?
+	}
+	while (line[i] == ' ')
+		i++;
+	if (line[i] == '\0')
+	{
+		ft_print("No file found after texture identifier");
+		return (free(line), LINE_ERROR); // Print?
+	}
+	pars->textures[direction] = ft_strdup(line + i);
+	while (line[i] && line[i] != ' ')
+		i++;
+	if (line[i])
+	{
+		printf("Error\nText found after texture definition: '%s'\n", line + i);
+		return (free(line), LINE_ERROR);
+	}
 	free(line);
 	return (LINE_INFO);
 }
@@ -32,13 +53,13 @@ int ft_pars_the_line(t_parsing *pars, char *line)
 	if (((trimed[0] == 'F' ) || (trimed[0] == 'C')) && ft_is_a_space(trimed[1]))
 		return (ft_pars_color(trimed, pars));
 	if ((ft_strncmp(trimed, "NO", 2) == 0) && ft_is_a_space(trimed[2]))
-		return (ft_pars_texture(pars, trimed));
+		return (ft_pars_texture(pars, trimed, NORTH));
 	if ((ft_strncmp(trimed, "SO", 2) == 0) && ft_is_a_space(trimed[2]))
-		return (ft_pars_texture(pars, trimed));
+		return (ft_pars_texture(pars, trimed, SOUTH));
 	if ((ft_strncmp(trimed, "WE", 2) == 0) && ft_is_a_space(trimed[2]))
-		return (ft_pars_texture(pars, trimed));
+		return (ft_pars_texture(pars, trimed, WEST));
 	if ((ft_strncmp(trimed, "EA", 2) == 0) && ft_is_a_space(trimed[2]))
-		return (ft_pars_texture(pars, trimed));
+		return (ft_pars_texture(pars, trimed, EAST));
 	free(trimed);
 	return (LINE_MAP);
 }
@@ -50,6 +71,12 @@ int	ft_transfer_map(int fd, t_parsing *pars)
 	list_tmp = ft_read_lines(fd, pars);
 	if (!list_tmp || list_tmp == NULL)
 		return (-1);
+	if (ft_map_has_empty_line(list_tmp) == BAD)
+	{
+		ft_print("Map has empty line in its definition");
+		ft_lstclear(&list_tmp, free);
+		return (-1);
+	}
 	pars->map = ft_list_to_tab(list_tmp, pars);
 	ft_lstclear(&list_tmp, free);
 	return (0);
@@ -85,14 +112,9 @@ int	ft_check_trap(t_parsing *pars, char *line, t_list **list_tmp)
 	line_type = ft_pars_the_line(pars, line);
 	if (line_type == LINE_ERROR)
 		return (BAD);
-	if (line_type == LINE_EMPTY && pars->hasMap)
-	{
-		ft_print("There are a some empty lines in your map ;)");
-		return (BAD);
-	}
-	if (line_type != LINE_MAP)
+	if (line_type != LINE_MAP && line_type != LINE_EMPTY)
 		return (GOOD);
-	if (pars->hasMap == 0)
+	if (pars->hasMap == 0 && line_type == LINE_MAP)
 	{
 		pars->hasMap = 1;
 		if (pars->hasFloor == 0 || pars->hasCeiling == 0)
@@ -101,6 +123,7 @@ int	ft_check_trap(t_parsing *pars, char *line, t_list **list_tmp)
 			return (BAD);
 		}
 	}
-	ft_add_to_map(line, list_tmp, pars);
+	if (pars->hasMap)
+		ft_add_to_map(line, list_tmp, pars);
 	return (GOOD);
 }

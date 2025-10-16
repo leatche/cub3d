@@ -1,0 +1,20 @@
+NO ./maps/test_maps/sprites/basic.xpm
+SO ./maps/test_maps/sprites/zouindowsXP.xpm
+WE ./maps/test_maps/sprites/helian_floor.xpm
+EA ./maps/test_maps/sprites/hq_ice.xpm
+
+C 26, ,199
+F 107,75,85
+
+
+11111111111
+10000000001
+10000000001
+10000000001
+10000000001
+10000N00001
+10000000001
+10000000001
+10000000001
+10000000001
+11111111111

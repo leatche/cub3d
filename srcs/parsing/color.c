@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/20 13:20:09 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/15 23:43:48 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/16 20:39:26 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,24 @@
 
 int ft_pars_color(char *line, t_parsing *pars)
 {
-	t_color	*tmp;
-
 	if (line[0] == 'F')
-		tmp = &pars->floor;
-	else
-		tmp = &pars->ceiling;
-	if (ft_norm_color(line, tmp) == -1)
 	{
-		ft_print("Check again your definition of color... where are we ?");
-		free(line);
-		return (LINE_ERROR);
-	}
-	if (line[0] == 'F')
+		if (pars->hasFloor || ft_norm_color(line, &pars->floor) == -1)
+		{
+			ft_print("Check again your floor definition");
+			return (free(line), LINE_ERROR);
+		}
 		pars->hasFloor = 1;
+	}
 	else
+	{
+		if (pars->hasCeiling || ft_norm_color(line, &pars->ceiling) == -1)
+		{
+			ft_print("Check again your ceiling definition");
+			return (free(line), LINE_ERROR);
+		}
 		pars->hasCeiling = 1;
+	}
 	free(line);
 	return (LINE_INFO);
 }

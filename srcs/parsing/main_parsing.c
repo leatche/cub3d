@@ -6,7 +6,7 @@
 /*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:03:31 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/15 23:59:31 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/16 20:47:05 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ t_parsing	*pars_file(char *file)
 	ft_initialize_pars(parsing);
 	a = ft_transfer_map(fd, parsing);
 	if (ft_final_pars_map(parsing, a) == BAD)
+	{
+		ft_free_parsing(parsing);
 		return (NULL);
+	}
 	return (parsing);
 }
 
@@ -53,6 +56,8 @@ void	ft_initialize_pars(t_parsing *pars)
 
 int	ft_here(t_parsing *pars)
 {
+	int i;
+
 	if (pars->hasFloor == 0)
 	{
 		ft_print("there is no floor color :)");
@@ -62,6 +67,16 @@ int	ft_here(t_parsing *pars)
 	{
 		ft_print("there is no ceiling color :(");
 		return (BAD);
+	}
+	i = 0;
+	while (i < 4)
+	{
+		if (!pars->textures[i])
+		{
+			ft_print("Missing at least one texture definition");
+			return (BAD);
+		}
+		i++;
 	}
 	return (GOOD);
 }

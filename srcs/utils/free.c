@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/16 23:10:35 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/13 14:21:52 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/16 21:07:54 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,10 @@ int	ft_free_parsing(t_parsing *pars)
 	if (pars->map)
 		ft_free_tab(pars->map);
 	free(pars->player);
+	free(pars->textures[NORTH]);
+	free(pars->textures[SOUTH]);
+	free(pars->textures[EAST]);
+	free(pars->textures[WEST]);
 	free(pars);
 	return (-1);
 }
@@ -50,10 +54,14 @@ void	ft_free_value(t_value *value)
 {
 	mlx_do_key_autorepeaton(value->mlx);
 	mlx_destroy_image(value->mlx, value->img);
-	mlx_destroy_image(value->mlx, value->render3d.texture_north.img_ptr);
-	mlx_destroy_image(value->mlx, value->render3d.texture_south.img_ptr);
-	mlx_destroy_image(value->mlx, value->render3d.texture_east.img_ptr);
-	mlx_destroy_image(value->mlx, value->render3d.texture_west.img_ptr);
+	if (value->render3d.texture_north.img_ptr)
+		mlx_destroy_image(value->mlx, value->render3d.texture_north.img_ptr);
+	if (value->render3d.texture_south.img_ptr)
+		mlx_destroy_image(value->mlx, value->render3d.texture_south.img_ptr);
+	if (value->render3d.texture_east.img_ptr)
+		mlx_destroy_image(value->mlx, value->render3d.texture_east.img_ptr);
+	if (value->render3d.texture_west.img_ptr)
+		mlx_destroy_image(value->mlx, value->render3d.texture_west.img_ptr);
 	mlx_destroy_window(value->mlx, value->window);
 	mlx_destroy_display(value->mlx);
 	free(value->mlx);

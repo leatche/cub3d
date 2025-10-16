@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+         #
+#    By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/04 16:21:20 by tcherepoff        #+#    #+#              #
-#    Updated: 2025/10/13 14:11:57 by sbehar           ###   ########.fr        #
+#    Updated: 2025/10/16 20:18:45 by tcherepoff       ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
