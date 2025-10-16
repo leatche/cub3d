@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/14 17:23:43 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/16 19:24:46 by tcherepoff       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,20 +75,12 @@ int	mouse_hook(int button, int x, int y, void *param)
 
 void	update_player_orientation(t_value *value, int xoffset)
 {
-	float	sensitivity;
-	float	rotation;
+	double	sensitivity;
+	double	rotation;
 
-	sensitivity = 0.1f;
+	sensitivity = 0.01f;
 	rotation = xoffset * sensitivity;
 	value->player->orientation += rotation;
-	if (value->player->orientation < 0)
-		value->player->orientation += 2 * PI;
-	else if (value->player->orientation > 2 * PI)
-		value->player->orientation -= 2 * PI;
-	value->player->dir.x = cos(value->player->orientation);
-	value->player->dir.y = sin (value->player->orientation);
-	value->player->plane.x = -sin(value->player->orientation) * FOV;
-	value->player->plane.y = cos(value->player->orientation) * FOV;
 }
 
 int	mouse_move(int x, int y, t_value *value)
@@ -98,18 +90,10 @@ int	mouse_move(int x, int y, t_value *value)
 	(void)y;
 	if (!value->mouse_on)
 		return (0);
-	if (value->first_mouse)
-	{
-		value->last_mouse_x = x;
-		value->first_mouse = 0;
-		return (0);
-	}
-	offset = x - value->last_mouse_x;
-	value->last_mouse_x = x;
+	offset = x - value->window_center_x;
 	if (offset != 0)
 		update_player_orientation(value, offset);
 	mlx_mouse_move(value->mlx, value->window, value->window_center_x, value->window_center_y);
-	value->last_mouse_x = value->window_center_x;
 	return (0);
 }
 
