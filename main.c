@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
+/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/16 21:46:12 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/17 17:41:25 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,10 @@ int	mouse_move(int x, int y, t_value *value)
 
 	(void)y;
 	if (!value->mouse_on)
+	{
+		mlx_mouse_show(value->mlx, value->window);
 		return (0);
+	}
 	offset = x - value->window_center_x;
 	if (offset != 0)
 		update_player_orientation(value, offset);
