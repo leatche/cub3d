@@ -1,16 +1,19 @@
 FAIT - Fixer le compas de la minimap
 
 Gérer la souris :
-- mettre le curseur au centre (fonction mlx) pour pouvoir bouger en sortant de lecran (mlx_mouse_move)
-- desafficher le curseur (mlx_mouse_show)
-- bind une touche pour desactiver la souris
+FAIT - mettre le curseur au centre (fonction mlx) pour pouvoir bouger en sortant de lecran (mlx_mouse_move)
+FAIT - desafficher le curseur (mlx_mouse_show)
+FAIT - bind une touche pour desactiver la souris
 
 Gérer les textures :
-- Ne plus afficher les textures par rapport a la hauteur de l'ecran
+FAIT - Ne plus afficher les textures par rapport a la hauteur de l'ecran
 mais par rapport a la hauteur du mur (faire pareil a l'horizontale)
 
 NORMER LES FICHIERS
-(séparer les ft mouse)
+FAIT - (séparer les ft mouse)
+- normer load_textures (sep en 2)
+
+!!!!!!!! REGARDER PAR RAPPORT A MAP SUJET !!!!!!!!!!
 
 EXTRA SI TIME : 
 - Faire des sprites (4 ou 6) et les animer

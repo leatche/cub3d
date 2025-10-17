@@ -6,7 +6,7 @@
 /*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/17 18:14:46 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/17 18:30:18 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,8 +175,8 @@ typedef struct s_value
 {
 	int			height;
 	int			width;
-	int			window_center_x;
-	int			window_center_y;
+	int			win_cx;
+	int			win_cy;
 	void		*mlx;
 	void		*window;
 	void		*img;
@@ -238,7 +238,6 @@ typedef struct s_vec2
 	float	y;
 }	t_vec2;
 
-
 void		ft_print(char *a);
 void		ft_free_tab(char **tab);
 void		ft_draw_map(t_value *v);
@@ -251,7 +250,9 @@ void		ft_print_player(t_value *v);
 void		ft_dda_init_x(t_dda *param);
 void		ft_dda_init_y(t_dda *param);
 void		ft_init_mouse(t_value *value);
+void		ft_calc_ray_params(t_draw *d);
 void		ft_handle_rotation(t_value *v);
+void		ft_calc_draw_params(t_draw *d);
 void		ft_handle_up_and_down(t_value *v);
 void		ft_initialize_pars(t_parsing *pars);
 void		ft_handle_right_and_left(t_value *v);
@@ -273,8 +274,10 @@ void		ft_put_circle(t_value *v, t_point pos, int size, t_color color);
 void		ft_draw_minimap_circle(t_value *v, t_minimap *minimap, int color);
 void		ft_put_line(t_value *v, t_point start, t_point end, t_color color);
 void		ft_draw_one_minimap_cell(t_value *v, t_minimap *map, int x, int y);
-void		ft_calc_draw_lim(t_render3d *r, double c_dst, int *draw_s, int *draw_e);
+void		ft_calc_draw_lim(t_render3d *r, double c_dst,
+				int *draw_s, int *draw_e);
 
+int			ft_load_textures(t_value *value, t_render3d *r);
 int			ft_is_a_space(char a);
 int			ft_loop(t_value *v);
 int			ft_size_tab(char **tab);
@@ -315,7 +318,8 @@ double		ft_calc_ray_angle(t_render3d *r, int i);
 double		ft_dda_ray(t_value *va, double ray_angle, t_rayhit *res);
 double		ft_cast_ray(t_value *v, double ray_angle, t_rayhit *hit);
 double		ft_ray_angle(double orientation, double fov, int rays, int i);
-double		ft_calc_corr_dist(double dist, double ray_angle_rad, double player_ang);
+double		ft_calc_corr_dist(double dist, double ray_angle_rad,
+				double player_ang);
 
 t_color		green(void);
 t_color		yellow(void);

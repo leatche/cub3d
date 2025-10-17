@@ -12,15 +12,6 @@
 
 #include "cub.h"
 
-double	ft_calc_ray_angle(t_render3d *r, int i);
-double	ft_calc_corr_dist(double dist, double ray_angle_rad, double player_ang);
-void	ft_calc_draw_lim(t_render3d *r, double c_dst, int *draw_s, int *draw_e);
-double	ft_cast_ray(t_value *v, double ray_angle, t_rayhit *hit);
-void	ft_select_texture(t_render3d *r, double ray_an, int side, t_texture *t);
-void	ft_calc_draw_params(t_draw *d);
-void	ft_calc_ray_params(t_draw *d);
-int		ft_calc_tex_x(t_render3d *r, t_rayhit *hit);
-
 t_color	int_to_t_color(int rgb)
 {
 	t_color	color;

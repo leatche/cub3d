@@ -12,8 +12,6 @@
 
 #include "cub.h"
 
-double	ft_cast_ray(t_value *v, double ray_angle, t_rayhit *hit);
-
 double	ft_ray_angle(double player_orientation, double fov, int rays, int i)
 {
 	double	start_angle;

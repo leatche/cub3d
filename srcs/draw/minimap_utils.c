@@ -6,7 +6,7 @@
 /*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:05:58 by sbehar            #+#    #+#             */
-/*   Updated: 2025/10/17 18:07:19 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/17 18:19:23 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,10 @@ void	ft_update_map_size(t_minimap *minimap, char **map)
 		minimap->map_width = 0;
 }
 
-void	ft_update_map_pos(t_player *player, t_minimap *mmap, int off_x, int off_y)
+void	ft_update_map_pos(t_player *p, t_minimap *mmap, int off_x, int off_y)
 {
-	mmap->px = (int)(player->pos.x + off_x / (float)mmap->scale);
-	mmap->py = (int)(player->pos.y + off_y / (float)mmap->scale);
+	mmap->px = (int)(p->pos.x + off_x / (float)mmap->scale);
+	mmap->py = (int)(p->pos.y + off_y / (float)mmap->scale);
 }
 
 t_color	ft_get_minimap_cell_color(t_value *value, char c)

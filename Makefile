@@ -6,7 +6,7 @@
 #    By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/04 16:21:20 by tcherepoff        #+#    #+#              #
-#    Updated: 2025/10/17 17:51:03 by sbehar           ###   ########.fr        #
+#    Updated: 2025/10/17 18:21:48 by sbehar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS_PARSING	=	srcs/parsing/map.c				\
 					srcs/parsing/color.c			\
 					srcs/parsing/loop.c				\
 					srcs/parsing/checker_map.c		\
+					srcs/parsing/checker_zero.c		\
 
 SRCS_DRAW		=	srcs/draw/pixel.c				\
 					srcs/draw/map.c					\
