@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
+/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/16 21:44:22 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/17 18:14:46 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,38 +238,42 @@ typedef struct s_vec2
 	float	y;
 }	t_vec2;
 
-void		draw_minimap_circle(t_value *v, t_minimap *minimap, int color);
-void		draw_minimap_map(t_value *v, t_minimap *minimap);
-void		draw_minimap_compass(t_value *v, t_minimap *minimap);
-void		update_map_size(t_minimap *minimap, char **map);
-void		minimap_zoom_in(t_minimap *minimap);
-void		minimap_zoom_out(t_minimap *minimap);
-void		update_map_pos(t_player *p, t_minimap *map, int x, int y);
-void		draw_one_minimap_cell(t_value *v, t_minimap *map, int x, int y);
-void		ft_draw_walls(t_value *v);
-void		ft_draw_v_line(t_value *v, t_setup *set);
+
 void		ft_print(char *a);
 void		ft_free_tab(char **tab);
-void		ft_dda_init_x(t_dda *param);
-void		ft_dda_init_y(t_dda *param);
 void		ft_draw_map(t_value *v);
 void		ft_make_cub(t_value *v);
 void		ft_draw_rays(t_value *v);
 void		ft_print_map(t_value *v);
 void		ft_free_value(t_value *v);
+void		ft_draw_walls(t_value *v);
 void		ft_print_player(t_value *v);
+void		ft_dda_init_x(t_dda *param);
+void		ft_dda_init_y(t_dda *param);
+void		ft_init_mouse(t_value *value);
 void		ft_handle_rotation(t_value *v);
-void		ft_initialize_pars(t_parsing *pars);
 void		ft_handle_up_and_down(t_value *v);
+void		ft_initialize_pars(t_parsing *pars);
 void		ft_handle_right_and_left(t_value *v);
+void		ft_minimap_zoom_in(t_minimap *minimap);
+void		ft_minimap_zoom_out(t_minimap *minimap);
+void		ft_draw_v_line(t_value *v, t_setup *set);
 void		ft_setup_render3d(t_value *v, t_render3d *r);
+void		ft_update_map_size(t_minimap *minimap, char **map);
+void		ft_draw_minimap_map(t_value *v, t_minimap *minimap);
 void		ft_put_pixel(t_value *v, t_point pos, t_color color);
-void		ft_add_to_map(char *a, t_list **list_tmp, t_parsing *pars);
 void		ft_dda_init(t_value *v, double ray_angle, t_dda *param);
+void		ft_draw_minimap_compass(t_value *v, t_minimap *minimap);
+void		ft_update_player_orientation(t_value *value, int xoffset);
+void		ft_add_to_map(char *a, t_list **list_tmp, t_parsing *pars);
 void		ft_move_player(t_value *v, double delta_x, double delta_y);
+void		ft_update_map_pos(t_player *p, t_minimap *map, int x, int y);
 void		ft_put_square(t_value *v, t_point pos, int size, t_color color);
 void		ft_put_circle(t_value *v, t_point pos, int size, t_color color);
+void		ft_draw_minimap_circle(t_value *v, t_minimap *minimap, int color);
 void		ft_put_line(t_value *v, t_point start, t_point end, t_color color);
+void		ft_draw_one_minimap_cell(t_value *v, t_minimap *map, int x, int y);
+void		ft_calc_draw_lim(t_render3d *r, double c_dst, int *draw_s, int *draw_e);
 
 int			ft_is_a_space(char a);
 int			ft_loop(t_value *v);
@@ -294,9 +298,11 @@ int			ft_final_pars_map(t_parsing *pars, int a);
 int			ft_parsing(t_value *v);
 int			ft_has_a_player(t_value *v);
 int			ft_value_color(char *line, unsigned char *color);
+int			ft_mouse_move(int x, int y, t_value *value);
 int			ft_check_trap(t_parsing *pars, char *line, t_list **list_tmp);
 int			ft_pars_the_line(t_parsing *pars, char *line);
 int			ft_pars_color(char *line, t_parsing *pars);
+int			ft_mouse_hook(int button, int x, int y, void *param);
 int			ft_init(t_value *v);
 
 char		*ft_strdup_space(char *s, int size_line);
@@ -304,13 +310,17 @@ char		*ft_strdup_space(char *s, int size_line);
 char		**ft_list_to_tab(t_list *list_tmp, t_parsing *pars);
 
 double		ft_deg_to_rad(double angle_deg);
-double		ft_ray_angle(double orientation, double fov, int rays, int i);
+double		ft_normalize_angle(double angle_deg);
+double		ft_calc_ray_angle(t_render3d *r, int i);
 double		ft_dda_ray(t_value *va, double ray_angle, t_rayhit *res);
+double		ft_cast_ray(t_value *v, double ray_angle, t_rayhit *hit);
+double		ft_ray_angle(double orientation, double fov, int rays, int i);
+double		ft_calc_corr_dist(double dist, double ray_angle_rad, double player_ang);
 
 t_color		green(void);
 t_color		yellow(void);
 t_color		color(int r, int g, int b);
-t_color		get_minimap_cell_color(t_value *v, char c);
+t_color		ft_get_minimap_cell_color(t_value *v, char c);
 t_color		int_to_t_color(int rgb);
 
 t_list		*ft_read_lines(int fd, t_parsing *pars);

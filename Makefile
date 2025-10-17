@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+         #
+#    By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/04 16:21:20 by tcherepoff        #+#    #+#              #
-#    Updated: 2025/10/16 21:30:10 by tcherepoff       ###   ########.fr        #
+#    Updated: 2025/10/17 17:51:03 by sbehar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,7 @@ SRCS_DRAW		=	srcs/draw/pixel.c				\
 					srcs/draw/minimap.c				\
 					srcs/draw/minimap_utils.c		\
 					srcs/draw/minimap_setup.c		\
+					srcs/draw/mouse.c				\
 
 SRCS_UTILS		=	srcs/utils/calculate.c			\
 					srcs/utils/check.c				\
@@ -47,7 +48,7 @@ SRCS = $(SRCS_PARSING) $(SRCS_UTILS) $(SRCS_DRAW)
 OBJS = $(SRCS:.c=.o)
 LDFLAGS	= -L./extern_files/mlx -lbsd -lmlx -lXext -lm -lX11
 LDFLAG = ./extern_files/libft/libft.a
-FLAG = -Wall -Werror -Wextra -Ilibft -Iincludes -Imlx -Ilibft/get_next_line -I. -Ofast #-fsanitize=address -g3 
+FLAG = -Wall -Werror -Wextra -Ilibft -Iincludes -Imlx -Ilibft/get_next_line -I. -Ofast -fsanitize=address -g3 
 # -Ofast
 RM = @rm -f
 AR = ar rcs

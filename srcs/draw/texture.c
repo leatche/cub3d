@@ -12,11 +12,32 @@
 
 #include "cub.h"
 
-double	ft_calc_ray_angle(t_render3d *r, int i);
-double	ft_calc_corr_dist(double dist, double ray_angle_rad, double player_ang);
-void	ft_calc_draw_lim(t_render3d *r, double c_dst, int *draw_s, int *draw_e);
-double	ft_cast_ray(t_value *v, double ray_angle, t_rayhit *hit);
-double	ft_normalize_angle(double angle_deg);
+int	ft_load_textures(t_value *value, t_render3d *r)
+{
+	r->texture_north.img_ptr = mlx_xpm_file_to_image(value->mlx,
+			value->parsing->textures[NORTH],
+			&r->texture_north.width, &r->texture_north.height);
+	r->texture_south.img_ptr = mlx_xpm_file_to_image(value->mlx,
+			value->parsing->textures[SOUTH],
+			&r->texture_south.width, &r->texture_south.height);
+	r->texture_east.img_ptr = mlx_xpm_file_to_image(value->mlx,
+			value->parsing->textures[EAST],
+			&r->texture_east.width, &r->texture_east.height);
+	r->texture_west.img_ptr = mlx_xpm_file_to_image(value->mlx,
+			value->parsing->textures[WEST],
+			&r->texture_west.width, &r->texture_west.height);
+	if (!r->texture_north.img_ptr || !r->texture_south.img_ptr
+		|| !r->texture_east.img_ptr || !r->texture_west.img_ptr)
+	{
+		ft_print("At least one texture is wrongly formated");
+		return (BAD);
+	}
+	r->texture_north.data = (int *)mlx_get_data_addr(r->texture_north.img_ptr, &r->texture_north.bpp, &r->texture_north.size_line, &r->texture_north.endian);
+	r->texture_south.data = (int *)mlx_get_data_addr(r->texture_south.img_ptr, &r->texture_south.bpp, &r->texture_south.size_line, &r->texture_south.endian);
+	r->texture_east.data = (int *)mlx_get_data_addr(r->texture_east.img_ptr, &r->texture_east.bpp, &r->texture_east.size_line, &r->texture_east.endian);
+	r->texture_west.data = (int *)mlx_get_data_addr(r->texture_west.img_ptr, &r->texture_west.bpp, &r->texture_west.size_line, &r->texture_west.endian);
+	return (GOOD);
+}
 
 int	ft_calc_tex_x(t_texture *texture, t_rayhit *hit)
 {

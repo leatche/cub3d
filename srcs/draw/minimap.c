@@ -12,7 +12,7 @@
 
 #include "cub.h"
 
-void	draw_minimap_circle(t_value *value, t_minimap *minimap, int color)
+void	ft_draw_minimap_circle(t_value *value, t_minimap *minimap, int color)
 {
 	t_color	c_color;
 	int		x;
@@ -36,7 +36,7 @@ void	draw_minimap_circle(t_value *value, t_minimap *minimap, int color)
 	}
 }
 
-void	draw_minimap_player(t_value *value, t_minimap *minimap)
+void	ft_draw_minimap_player(t_value *value, t_minimap *minimap)
 {
 	int		dx;
 	int		dy;
@@ -58,7 +58,7 @@ void	draw_minimap_player(t_value *value, t_minimap *minimap)
 	}
 }
 
-void	draw_minimap_cells(t_value *value, t_minimap *minimap)
+void	ft_draw_minimap_cells(t_value *value, t_minimap *minimap)
 {
 	int	x;
 	int	y;
@@ -72,20 +72,20 @@ void	draw_minimap_cells(t_value *value, t_minimap *minimap)
 		while (x <= r)
 		{
 			if (x * x + y * y <= r * r)
-				draw_one_minimap_cell(value, minimap, x, y);
+				ft_draw_one_minimap_cell(value, minimap, x, y);
 			x++;
 		}
 		y++;
 	}
 }
 
-void	draw_minimap_map(t_value *value, t_minimap *minimap)
+void	ft_draw_minimap_map(t_value *value, t_minimap *minimap)
 {
-	draw_minimap_cells(value, minimap);
-	draw_minimap_player(value, minimap);
+	ft_draw_minimap_cells(value, minimap);
+	ft_draw_minimap_player(value, minimap);
 }
 
-void	draw_minimap_compass(t_value *value, t_minimap *minimap)
+void	ft_draw_minimap_compass(t_value *value, t_minimap *minimap)
 {
 	int		cx;
 	int		cy;
