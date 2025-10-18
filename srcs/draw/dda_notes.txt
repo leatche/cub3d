@@ -1,7 +1,0 @@
-dda_init :
-- si un rayon est vertical ou horizontal
-on ne peut pas diviser par 1 donc on donne
-une valeur grande (1 exp 30) pour ne pas
-bloquer la prog
-
-- fabs() -> ft qui donne la valeur abs d'un double
