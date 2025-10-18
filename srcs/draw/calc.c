@@ -12,6 +12,23 @@
 
 #include "cub.h"
 
+int	ft_calc_tex_x(t_texture *texture, t_rayhit *hit)
+{
+	double	wall_hit;
+	int		tex_x;
+
+	if (hit->side == 0)
+		wall_hit = hit->y - floor(hit->y);
+	else
+		wall_hit = hit->x - floor(hit->x);
+	tex_x = (int)(wall_hit * texture->width);
+	if (tex_x < 0)
+		tex_x = 0;
+	if (tex_x >= texture->width)
+		tex_x = texture->width - 1;
+	return (tex_x);
+}
+
 double	ft_calc_ray_angle(t_render3d *r, int i)
 {
 	return (r->start_angle + ((double)i / (r->rays - 1)) * r->fov);

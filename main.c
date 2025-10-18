@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:20:37 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/17 18:25:55 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/18 09:01:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,5 +73,13 @@ int	ft_init(t_value *value)
 	mlx_loop_hook(value->mlx, ft_loop, value);
 	mlx_mouse_hide(value->mlx, value->window);
 	mlx_mouse_move(value->mlx, value->window, value->win_cx, value->win_cy);
+	return (GOOD);
+}
+
+int	ft_load_textures(t_value *v, t_render3d *r)
+{
+	if (ft_load_textures_img(v, r) == BAD)
+		return (BAD);
+	ft_load_textures_data(r);
 	return (GOOD);
 }

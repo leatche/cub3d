@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/17 18:30:18 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/18 09:00:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -256,6 +256,7 @@ void		ft_calc_draw_params(t_draw *d);
 void		ft_handle_up_and_down(t_value *v);
 void		ft_initialize_pars(t_parsing *pars);
 void		ft_handle_right_and_left(t_value *v);
+void		ft_load_textures_data(t_render3d *r);
 void		ft_minimap_zoom_in(t_minimap *minimap);
 void		ft_minimap_zoom_out(t_minimap *minimap);
 void		ft_draw_v_line(t_value *v, t_setup *set);
@@ -277,36 +278,38 @@ void		ft_draw_one_minimap_cell(t_value *v, t_minimap *map, int x, int y);
 void		ft_calc_draw_lim(t_render3d *r, double c_dst,
 				int *draw_s, int *draw_e);
 
-int			ft_load_textures(t_value *value, t_render3d *r);
-int			ft_is_a_space(char a);
 int			ft_loop(t_value *v);
+int			ft_init(t_value *v);
+int			ft_is_a_space(char a);
+int			ft_parsing(t_value *v);
 int			ft_size_tab(char **tab);
 int			ft_extension(char *file);
+int			ft_free_error(t_value *v);
 int			ft_check_wall(char **tmp);
 int			ft_conform_map(char **tmp);
 int			ft_checker_wall(char **tmp);
-int			ft_free_error(t_value *v);
+int			ft_has_a_player(t_value *v);
 int			ft_check_wall_top(char *line);
 int			ft_check_side_wall(char *line);
 int			ft_good_characters(char *line);
 int			ft_free_parsing(t_parsing *pars);
-int			ft_check_sides(char **tmp, int size);
 int			key_press(int keycode, t_value *v);
 int			ft_map_has_empty_line(t_list *map);
-int			ft_check_zero(char **tmp, int i, int j);
+int			ft_check_sides(char **tmp, int size);
 int			key_release(int keycode, t_value *v);
+int			ft_check_zero(char **tmp, int i, int j);
 int			ft_transfer_map(int fd, t_parsing *pars);
 int			ft_norm_color(char *line, t_color *color);
 int			ft_final_pars_map(t_parsing *pars, int a);
-int			ft_parsing(t_value *v);
-int			ft_has_a_player(t_value *v);
-int			ft_value_color(char *line, unsigned char *color);
-int			ft_mouse_move(int x, int y, t_value *value);
-int			ft_check_trap(t_parsing *pars, char *line, t_list **list_tmp);
-int			ft_pars_the_line(t_parsing *pars, char *line);
 int			ft_pars_color(char *line, t_parsing *pars);
+int			ft_mouse_move(int x, int y, t_value *value);
+int			ft_pars_the_line(t_parsing *pars, char *line);
+int			ft_load_textures(t_value *value, t_render3d *r);
+int			ft_calc_tex_x(t_texture *texture, t_rayhit *hit);
+int			ft_value_color(char *line, unsigned char *color);
+int			ft_load_textures_img(t_value *value, t_render3d *r);
 int			ft_mouse_hook(int button, int x, int y, void *param);
-int			ft_init(t_value *v);
+int			ft_check_trap(t_parsing *pars, char *line, t_list **list_tmp);
 
 char		*ft_strdup_space(char *s, int size_line);
 

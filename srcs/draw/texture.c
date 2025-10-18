@@ -12,7 +12,7 @@
 
 #include "cub.h"
 
-int	ft_load_textures(t_value *value, t_render3d *r)
+int	ft_load_textures_img(t_value *value, t_render3d *r)
 {
 	r->texture_north.img_ptr = mlx_xpm_file_to_image(value->mlx,
 			value->parsing->textures[NORTH],
@@ -32,28 +32,23 @@ int	ft_load_textures(t_value *value, t_render3d *r)
 		ft_print("At least one texture is wrongly formated");
 		return (BAD);
 	}
-	r->texture_north.data = (int *)mlx_get_data_addr(r->texture_north.img_ptr, &r->texture_north.bpp, &r->texture_north.size_line, &r->texture_north.endian);
-	r->texture_south.data = (int *)mlx_get_data_addr(r->texture_south.img_ptr, &r->texture_south.bpp, &r->texture_south.size_line, &r->texture_south.endian);
-	r->texture_east.data = (int *)mlx_get_data_addr(r->texture_east.img_ptr, &r->texture_east.bpp, &r->texture_east.size_line, &r->texture_east.endian);
-	r->texture_west.data = (int *)mlx_get_data_addr(r->texture_west.img_ptr, &r->texture_west.bpp, &r->texture_west.size_line, &r->texture_west.endian);
 	return (GOOD);
 }
 
-int	ft_calc_tex_x(t_texture *texture, t_rayhit *hit)
+void	ft_load_textures_data(t_render3d *r)
 {
-	double	wall_hit;
-	int		tex_x;
-
-	if (hit->side == 0)
-		wall_hit = hit->y - floor(hit->y);
-	else
-		wall_hit = hit->x - floor(hit->x);
-	tex_x = (int)(wall_hit * texture->width);
-	if (tex_x < 0)
-		tex_x = 0;
-	if (tex_x >= texture->width)
-		tex_x = texture->width - 1;
-	return (tex_x);
+	r->texture_north.data = (int *)mlx_get_data_addr(r->texture_north.img_ptr,
+			&r->texture_north.bpp, &r->texture_north.size_line,
+			&r->texture_north.endian);
+	r->texture_south.data = (int *)mlx_get_data_addr(r->texture_south.img_ptr,
+			&r->texture_south.bpp, &r->texture_south.size_line,
+			&r->texture_south.endian);
+	r->texture_east.data = (int *)mlx_get_data_addr(r->texture_east.img_ptr,
+			&r->texture_east.bpp, &r->texture_east.size_line,
+			&r->texture_east.endian);
+	r->texture_west.data = (int *)mlx_get_data_addr(r->texture_west.img_ptr,
+			&r->texture_west.bpp, &r->texture_west.size_line,
+			&r->texture_west.endian);
 }
 
 void	ft_select_texture(t_render3d *r, double ray_an, int side, t_texture *t)
