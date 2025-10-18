@@ -6,7 +6,7 @@
 #    By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/08/04 16:21:20 by tcherepoff        #+#    #+#              #
-#    Updated: 2025/10/17 18:21:48 by sbehar           ###   ########.fr        #
+#    Updated: 2025/10/18 10:46:19 by sbehar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ SRCS = $(SRCS_PARSING) $(SRCS_UTILS) $(SRCS_DRAW)
 OBJS = $(SRCS:.c=.o)
 LDFLAGS	= -L./extern_files/mlx -lbsd -lmlx -lXext -lm -lX11
 LDFLAG = ./extern_files/libft/libft.a
-FLAG = -Wall -Werror -Wextra -Ilibft -Iincludes -Imlx -Ilibft/get_next_line -I. -Ofast -fsanitize=address -g3 
+FLAG = -Wall -Werror -Wextra -Ilibft -Iincludes -Imlx -Ilibft/get_next_line -I.
 # -Ofast
 RM = @rm -f
 AR = ar rcs
