@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 16:23:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/18 09:00:30 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/23 14:16:09 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -246,6 +246,7 @@ void		ft_draw_rays(t_value *v);
 void		ft_print_map(t_value *v);
 void		ft_free_value(t_value *v);
 void		ft_draw_walls(t_value *v);
+void		ft_finish_reading(int fd);
 void		ft_print_player(t_value *v);
 void		ft_dda_init_x(t_dda *param);
 void		ft_dda_init_y(t_dda *param);

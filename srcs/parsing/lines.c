@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lines.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tcherepoff <tcherepoff@student.42.fr>      +#+  +:+       +#+        */
+/*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/10 02:00:47 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/16 21:37:49 by tcherepoff       ###   ########.fr       */
+/*   Updated: 2025/10/23 14:17:05 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,10 @@ t_list	*ft_read_lines(int fd, t_parsing *pars)
 		if (!line)
 			break ;
 		if (ft_check_trap(pars, line, &list_tmp) == BAD)
+		{
+			ft_finish_reading(fd);
 			return (ft_lstclear(&list_tmp, free), free(line), NULL);
+		}
 		free(line);
 	}
 	if (list_tmp == NULL)

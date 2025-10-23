@@ -6,7 +6,7 @@
 /*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/08/04 17:32:36 by tcherepoff        #+#    #+#             */
-/*   Updated: 2025/10/17 18:22:57 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/23 14:30:16 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,4 +24,16 @@ t_point	point(int x, int y)
 	dest.x = x;
 	dest.y = y;
 	return (dest);
+}
+
+void	ft_finish_reading(int fd)
+{
+	char	*line;
+
+	line = "finish the reading plz";
+	while (line)
+	{
+		line = get_next_line(fd);
+		free(line);
+	}
 }

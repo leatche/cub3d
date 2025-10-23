@@ -6,7 +6,7 @@
 /*   By: sbehar <sbehar@student.42nice.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/17 17:49:52 by sbehar            #+#    #+#             */
-/*   Updated: 2025/10/17 18:26:57 by sbehar           ###   ########.fr       */
+/*   Updated: 2025/10/23 14:29:54 by sbehar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,7 @@ int	ft_mouse_move(int x, int y, t_value *value)
 
 	(void)y;
 	if (!value->mouse_on)
-	{
-		mlx_mouse_show(value->mlx, value->window);
 		return (0);
-	}
 	offset = x - value->win_cx;
 	if (offset != 0)
 		ft_update_player_orientation(value, offset);
